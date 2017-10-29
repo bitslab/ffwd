@@ -5,7 +5,7 @@ cd -
 
 NPROC=`nproc`
 cd memcached/memcached-1.4.6-ffwd/
-./configure 'CFLAGS=-g -O3 -mcmodel=large -DT$(NPROC) -DFFWD -lrt -lnuma -lpthread -I../../include -Wno-error'
+./configure 'CFLAGS=-g -O3 -mcmodel=large -DT$(NPROC) -DFFWD -lrt -lnuma -lpthread -I../../libffwd -Wno-error'
 cd -
 
 cd memcached/memcached-1.4.6-patched/

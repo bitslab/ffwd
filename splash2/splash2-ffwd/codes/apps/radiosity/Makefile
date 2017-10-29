@@ -7,7 +7,7 @@ HS = model.h parallel.h patch.h radiosity.h task.h
 include ../../Makefile.config
 
 ROOT := ../../../../..
-LIB_FFWD = $(ROOT)/include
+LIB_FFWD = $(ROOT)/libffwd
 ## +EDIT
 #CFLAGS := $(CFLAGS) -I./glibdumb -I./glibps
 NPROC=$(shell nproc)

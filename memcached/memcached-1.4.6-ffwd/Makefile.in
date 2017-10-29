@@ -818,8 +818,8 @@ memcached_debug-sasl_defs.o: sasl_defs.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(memcached_debug_CFLAGS) $(CFLAGS) -c -o memcached_debug-sasl_defs.o `test -f 'sasl_defs.c' || echo '$(srcdir)/'`sasl_defs.c
 
-libffwd.o: ../../include/libffwd.c
-	$(CC) -g -O3 -mcmodel=large  -DT$(NPROC) -DFFWD  -lrt -lnuma -lpthread -I../../include -c ../../include/libffwd.c -o libffwd.o
+libffwd.o: ../../libffwd/libffwd.c
+	$(CC) -g -O3 -mcmodel=large  -DT$(NPROC) -DFFWD  -lrt -lnuma -lpthread -I../../libffwd -c ../../libffwd/libffwd.c -o libffwd.o
 
 memcached_debug-sasl_defs.obj: sasl_defs.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(memcached_debug_CFLAGS) $(CFLAGS) -MT memcached_debug-sasl_defs.obj -MD -MP -MF $(DEPDIR)/memcached_debug-sasl_defs.Tpo -c -o memcached_debug-sasl_defs.obj `if test -f 'sasl_defs.c'; then $(CYGPATH_W) 'sasl_defs.c'; else $(CYGPATH_W) '$(srcdir)/sasl_defs.c'; fi`

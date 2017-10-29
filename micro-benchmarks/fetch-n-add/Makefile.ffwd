@@ -31,7 +31,7 @@ endif
 
 BINDIR = ./bin
 BUILDDIR = ./build
-LIB_FFWD = $(ROOT)/include
+LIB_FFWD = $(ROOT)/libffwd
 MCMODEL = -mcmodel=large
 LIBS = -lnuma -lpthread
 NPROC=$(shell nproc)

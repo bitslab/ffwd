@@ -36,7 +36,7 @@ HASHCLIENTDIR = $(ROOT)/synchrobench/c-cpp/src/hashtables/lockbased-ht
 SIMPLELISTDIR = $(ROOT)/synchrobench/c-cpp/src/linkedlists/simple-list
 LIBAO_INC = $(ROOT)/synchrobench/c-cpp/src/atomic_ops
 SYNCHRO_DIR = $(ROOT)/synchrobench/c-cpp/include
-LIB_FFWD = $(ROOT)/include
+LIB_FFWD = $(ROOT)/libffwd
 MCMODEL = -mcmodel=large
 LIBS = -lnuma -lpthread
 NPROC=$(shell nproc)

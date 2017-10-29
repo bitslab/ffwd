@@ -36,7 +36,7 @@ ifeq ($(CORE_NUM), 128)
 		CFLAGS += -DCORES_128
 endif
 
-PLATFORM = $(shell $(ROOT)/include/platform.sh)
+PLATFORM = $(shell $(ROOT)/libffwd/platform.sh)
 ifeq ($(PLATFORM), XEON)
   CFLAGS += -DXEON
 else ifeq ($(PLATFORM), AMD)
