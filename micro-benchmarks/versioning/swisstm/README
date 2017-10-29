@@ -1,0 +1,21 @@
+SwissTM requires atomic_ops library that can be downloaded
+from http://hplabs.hp.com/research/linux/atomic_ops/.
+
+To build the library perform the following steps:
+
+1) Change Makefile.in according to local configuration.
+
+2) Run make.
+
+To build the visible reads SwissTM the second step should be
+changed to:
+
+2) Run 'make STM=epochstm'.
+
+As a result, static library and include files will be generated.
+Also intset-rbtree executable will be created. This executable
+contains red black tree microbenchmark.
+
+
+Aleksandar Dragojevic aleksandar.dragojevic@epfl.ch
+

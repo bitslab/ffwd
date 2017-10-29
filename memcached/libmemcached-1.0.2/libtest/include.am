@@ -1,0 +1,215 @@
+# vim:ft=automake
+# Copyright (C) 2011 Data Differential, http://datadifferential.com/
+# All rights reserved.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+#
+# included from Top Level Makefile.am
+# All paths should be given relative to the root
+# 
+
+LIBTOOL_COMMAND= ${abs_top_builddir}/libtool --mode=execute
+VALGRIND_COMMAND= $(LIBTOOL_COMMAND) valgrind --error-exitcode=1 --leak-check=yes --show-reachable=yes --track-fds=yes --malloc-fill=A5 --free-fill=DE
+HELGRIND_COMMAND= $(LIBTOOL_COMMAND) valgrind --tool=helgrind --read-var-info=yes --error-exitcode=1 --read-var-info=yes
+DRD_COMMAND= $(LIBTOOL_COMMAND) valgrind --tool=drd
+GDB_COMMAND= $(LIBTOOL_COMMAND) gdb -f -x libtest/run.gdb
+
+export LIBTOOL_COMMAND
+export VALGRIND_COMMAND
+export HELGRIND_COMMAND
+export DRD_COMMAND
+export GDB_COMMAND
+
+valgrind:
+	@echo make check TESTS_ENVIRONMENT="\"$(VALGRIND_COMMAND)\""
+
+helgrind:
+	@echo make check TESTS_ENVIRONMENT="\"$(HELGRIND_COMMAND)\""
+
+drd:
+	@echo make check TESTS_ENVIRONMENT="\"$(DRD_COMMAND)\""
+
+EXTRA_DIST+= libtest/run.gdb
+
+CLEANFILES+= \
+	     tmp_chroot/var/log/* \
+	     tmp_chroot/var/run/* \
+	     tmp_chroot/var/tmp/*
+
+.PHONY: distclean-libtest-check
+distclean-libtest-check:
+	-rm -rf tmp_chroot
+
+noinst_HEADERS+= \
+		 libtest/binaries.h \
+		 libtest/blobslap_worker.h \
+		 libtest/callbacks.h \
+		 libtest/cmdline.h \
+		 libtest/collection.h \
+		 libtest/common.h \
+		 libtest/comparison.hpp \
+		 libtest/core.h \
+		 libtest/error.h \
+		 libtest/failed.h \
+		 libtest/framework.h \
+		 libtest/gearmand.h \
+		 libtest/get.h \
+		 libtest/is_pid.hpp \
+		 libtest/is_local.hpp \
+		 libtest/killpid.h \
+		 libtest/libtool.hpp \
+		 libtest/memcached.h \
+		 libtest/runner.h \
+		 libtest/port.h \
+		 libtest/server.h \
+		 libtest/server_container.h \
+		 libtest/signal.h \
+		 libtest/socket.hpp \
+		 libtest/stats.h \
+		 libtest/stream.h \
+		 libtest/strerror.h \
+		 libtest/string.hpp \
+		 libtest/test.h \
+		 libtest/test.hpp \
+		 libtest/visibility.h \
+		 libtest/wait.h
+
+noinst_LTLIBRARIES+= libtest/libtest.la
+libtest_libtest_la_SOURCES= \
+			    libtest/binaries.cc \
+			    libtest/cmdline.cc \
+			    libtest/core.cc \
+			    libtest/framework.cc \
+			    libtest/is_local.cc \
+			    libtest/killpid.cc \
+			    libtest/libtool.cc \
+			    libtest/port.cc \
+			    libtest/runner.cc \
+			    libtest/server.cc \
+			    libtest/server_container.cc \
+			    libtest/signal.cc \
+			    libtest/socket.cc \
+			    libtest/strerror.cc \
+			    libtest/test.cc
+
+libtest_libtest_la_CXXFLAGS= ${AM_CXXFLAGS}
+libtest_libtest_la_CXXFLAGS+= ${NO_CONVERSION}
+libtest_libtest_la_CXXFLAGS+= -DBUILDING_LIBTEST
+libtest_libtest_la_CXXFLAGS+= $(PTHREAD_CFLAGS)
+libtest_libtest_la_CXXFLAGS+= -DLIBTEST_TEMP="\"tmp_chroot\""
+libtest_libtest_la_LIBADD=
+libtest_libtest_la_LIBADD+= $(PTHREAD_LIBS)
+libtest_libtest_la_DEPENDENCIES= libtest_tmp_dir
+
+# Declare unittest so that we can append to it
+libtest_unittest_CXXFLAGS=
+libtest_unittest_LDADD=
+libtest_unittest_DEPENDENCIES=
+
+# We are either building in tree, or with
+if BUILDING_LIBMEMCACHED
+libtest_libtest_la_DEPENDENCIES+= libmemcached/libmemcached.la
+libtest_libtest_la_DEPENDENCIES+= libmemcached/libmemcachedutil.la
+libtest_libtest_la_LIBADD+= libmemcached/libmemcached.la
+libtest_libtest_la_LIBADD+= libmemcached/libmemcachedutil.la
+libtest_libtest_la_SOURCES+= libtest/memcached.cc
+libtest_libtest_la_CXXFLAGS+= -DHAVE_LIBMEMCACHED
+
+libtest_unittest_CXXFLAGS+= -DHAVE_LIBMEMCACHED
+libtest_unittest_LDADD+= libmemcached/libmemcached.la
+libtest_unittest_LDADD+= libmemcached/libmemcachedutil.la
+libtest_unittest_DEPENDENCIES+= libmemcached/libmemcached.la
+libtest_unittest_DEPENDENCIES+= libmemcached/libmemcachedutil.la
+else
+if HAVE_LIBMEMCACHED
+libtest_libtest_la_LIBADD+= $(libmemcached_LIBS)
+libtest_libtest_la_SOURCES+= libtest/memcached.cc
+else
+libtest_libtest_la_CXXFLAGS+= -DHAVE_LIBMEMCACHED=0
+libtest_unittest_CXXFLAGS+= -DHAVE_LIBMEMCACHED=0
+endif
+endif
+
+if BUILDING_GEARMAN
+libtest_libtest_la_DEPENDENCIES+= libgearman/libgearman.la
+libtest_libtest_la_LIBADD+= libgearman/libgearman.la
+libtest_libtest_la_SOURCES+= libtest/blobslap_worker.cc
+libtest_libtest_la_SOURCES+= libtest/gearmand.cc
+libtest_libtest_la_SOURCES+= util/instance.cc
+libtest_libtest_la_SOURCES+= util/operation.cc
+libtest_libtest_la_CXXFLAGS+= -DGEARMAND_BLOBSLAP_WORKER="\"${abs_top_builddir}/benchmark/blobslap_worker\""
+
+libtest_unittest_LDADD+= libgearman/libgearman.la
+libtest_unittest_DEPENDENCIES+= libgearman/libgearman.la
+else
+if HAVE_LIBGEARMAN
+libtest_libtest_la_DEPENDENCIES+= libgearman/libgearman.la
+libtest_libtest_la_LIBADD+= $(libgearman_LIBS)
+libtest_libtest_la_SOURCES+= libtest/blobslap_worker.cc
+libtest_libtest_la_SOURCES+= libtest/gearmand.cc
+libtest_libtest_la_SOURCES+= util/instance.cc
+libtest_libtest_la_SOURCES+= util/operation.cc
+libtest_libtest_la_CXXFLAGS+= -DGEARMAND_BLOBSLAP_WORKER=0
+else
+libtest_libtest_la_CXXFLAGS+= -DGEARMAND_BLOBSLAP_WORKER=0
+endif
+endif
+
+libtest_tmp_dir: tmp_chroot/var/log tmp_chroot/var/tmp tmp_chroot/var/run
+
+tmp_chroot:
+	@$(mkdir_p) tmp_chroot
+
+tmp_chroot/var: tmp_chroot
+	@$(mkdir_p) tmp_chroot/var
+
+tmp_chroot/var/log: tmp_chroot/var
+	@$(mkdir_p) tmp_chroot/var/log
+
+tmp_chroot/var/tmp: tmp_chroot/var
+	@$(mkdir_p) tmp_chroot/var/tmp
+
+tmp_chroot/var/run: tmp_chroot/var
+	@$(mkdir_p) tmp_chroot/var/run
+
+
+libtest_unittest_CXXFLAGS+= ${AM_CXXFLAGS}
+libtest_unittest_DEPENDENCIES+= libtest/libtest.la libtest_tmp_dir
+libtest_unittest_LDADD+= libtest/libtest.la
+libtest_unittest_SOURCES= libtest/unittest.cc
+check_PROGRAMS+= libtest/unittest
+noinst_PROGRAMS+= libtest/unittest
+test-unittest: libtest/unittest
+	@libtest/unittest
+
+valgrind-unittest: libtest/unittest
+	@$(VALGRIND_COMMAND) libtest/unittest
+
+gdb-unittest: libtest/unittest
+	@$(GDB_COMMAND) libtest/unittest
+
+helgrind-unittest: libtest/unittest
+	@$(HELGRIND_COMMAND) libtest/unittest
+
+drd-unittest: libtest/unittest
+	@$(DRD_COMMAND) libtest/unittest
+
+libtest_skiptest_LDADD= libtest/libtest.la
+libtest_skiptest_SOURCES= libtest/skiptest.cc
+check_PROGRAMS+= libtest/skiptest
+noinst_PROGRAMS+= libtest/skiptest
+
+libtest_wait_SOURCES= libtest/wait.cc
+noinst_PROGRAMS+= libtest/wait

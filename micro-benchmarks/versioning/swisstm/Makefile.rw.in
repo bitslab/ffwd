@@ -1,0 +1,12 @@
+########################################
+# contention manager
+CM_CPPFLAGS_timid = -D CM_TIMID
+CM_CPPFLAGS_greedy = -D CM_GREEDY
+
+ifeq ($(CM), )
+	CM = greedy
+endif
+
+CPPFLAGS += $(CM_CPPFLAGS_${CM})
+
+

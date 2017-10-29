@@ -1,0 +1,52 @@
+10
+
+dir
+4696
+svn+ssh://jplozi@scm.gforge.inria.fr/svnroot/margaux/rcl/splash2-base/codes/apps
+svn+ssh://jplozi@scm.gforge.inria.fr/svnroot/margaux
+
+
+
+2012-11-15T13:29:19.143264Z
+4050
+jplozi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+87d3af73-c78c-4235-839f-27bfabd33f98
+
+fmm
+dir
+
+water-nsquared
+dir
+
+ocean
+dir
+
+radiosity
+dir
+
+volrend
+dir
+
+barnes
+dir
+
+raytrace
+dir
+
+water-spatial
+dir
+

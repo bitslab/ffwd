@@ -1,0 +1,468 @@
+TIMING:
+46	16384	1.00e-06	5
+Time Step 0
+Processor 0
+	Total Time = 23524
+Processor 1
+	Total Time = 23387
+Processor 2
+	Total Time = 23212
+Processor 3
+	Total Time = 23180
+Processor 4
+	Total Time = 23097
+Processor 5
+	Total Time = 23251
+Processor 6
+	Total Time = 23344
+Processor 7
+	Total Time = 23108
+Processor 8
+	Total Time = 23262
+Processor 9
+	Total Time = 23112
+Processor 10
+	Total Time = 23305
+Processor 11
+	Total Time = 23176
+Processor 12
+	Total Time = 23120
+Processor 13
+	Total Time = 23215
+Processor 14
+	Total Time = 23273
+Processor 15
+	Total Time = 23182
+Processor 16
+	Total Time = 23210
+Processor 17
+	Total Time = 22958
+Processor 18
+	Total Time = 23216
+Processor 19
+	Total Time = 23279
+Processor 20
+	Total Time = 23409
+Processor 21
+	Total Time = 23206
+Processor 22
+	Total Time = 23113
+Processor 23
+	Total Time = 23217
+Processor 24
+	Total Time = 23193
+Processor 25
+	Total Time = 23166
+Processor 26
+	Total Time = 23173
+Processor 27
+	Total Time = 23095
+Processor 28
+	Total Time = 23168
+Processor 29
+	Total Time = 23122
+Processor 30
+	Total Time = 23210
+Processor 31
+	Total Time = 23026
+Processor 32
+	Total Time = 23165
+Processor 33
+	Total Time = 23211
+Processor 34
+	Total Time = 23049
+Processor 35
+	Total Time = 23104
+Processor 36
+	Total Time = 22931
+Processor 37
+	Total Time = 23100
+Processor 38
+	Total Time = 23111
+Processor 39
+	Total Time = 22886
+Processor 40
+	Total Time = 23169
+Processor 41
+	Total Time = 23175
+Processor 42
+	Total Time = 23480
+Processor 43
+	Total Time = 23259
+Processor 44
+	Total Time = 23155
+Processor 45
+	Total Time = 23263
+Time Step 1
+Processor 0
+	Total Time = 10658
+Processor 1
+	Total Time = 10961
+Processor 2
+	Total Time = 11266
+Processor 3
+	Total Time = 11284
+Processor 4
+	Total Time = 11328
+Processor 5
+	Total Time = 11228
+Processor 6
+	Total Time = 11096
+Processor 7
+	Total Time = 11348
+Processor 8
+	Total Time = 11256
+Processor 9
+	Total Time = 11422
+Processor 10
+	Total Time = 10972
+Processor 11
+	Total Time = 11250
+Processor 12
+	Total Time = 11370
+Processor 13
+	Total Time = 11223
+Processor 14
+	Total Time = 11245
+Processor 15
+	Total Time = 11298
+Processor 16
+	Total Time = 11228
+Processor 17
+	Total Time = 11337
+Processor 18
+	Total Time = 11112
+Processor 19
+	Total Time = 10810
+Processor 20
+	Total Time = 10526
+Processor 21
+	Total Time = 10964
+Processor 22
+	Total Time = 11023
+Processor 23
+	Total Time = 11120
+Processor 24
+	Total Time = 11070
+Processor 25
+	Total Time = 11017
+Processor 26
+	Total Time = 10973
+Processor 27
+	Total Time = 11134
+Processor 28
+	Total Time = 11279
+Processor 29
+	Total Time = 11268
+Processor 30
+	Total Time = 10908
+Processor 31
+	Total Time = 11337
+Processor 32
+	Total Time = 10824
+Processor 33
+	Total Time = 11177
+Processor 34
+	Total Time = 11173
+Processor 35
+	Total Time = 11176
+Processor 36
+	Total Time = 11193
+Processor 37
+	Total Time = 11067
+Processor 38
+	Total Time = 11078
+Processor 39
+	Total Time = 11242
+Processor 40
+	Total Time = 10782
+Processor 41
+	Total Time = 11016
+Processor 42
+	Total Time = 10854
+Processor 43
+	Total Time = 10958
+Processor 44
+	Total Time = 11071
+Processor 45
+	Total Time = 10968
+Time Step 2
+Processor 0
+	Total Time = 11061
+Processor 1
+	Total Time = 10962
+Processor 2
+	Total Time = 10927
+Processor 3
+	Total Time = 10966
+Processor 4
+	Total Time = 11108
+Processor 5
+	Total Time = 11069
+Processor 6
+	Total Time = 11055
+Processor 7
+	Total Time = 10972
+Processor 8
+	Total Time = 10972
+Processor 9
+	Total Time = 10928
+Processor 10
+	Total Time = 11028
+Processor 11
+	Total Time = 11013
+Processor 12
+	Total Time = 10881
+Processor 13
+	Total Time = 10869
+Processor 14
+	Total Time = 11056
+Processor 15
+	Total Time = 10998
+Processor 16
+	Total Time = 11004
+Processor 17
+	Total Time = 11111
+Processor 18
+	Total Time = 11106
+Processor 19
+	Total Time = 11071
+Processor 20
+	Total Time = 11112
+Processor 21
+	Total Time = 11192
+Processor 22
+	Total Time = 10951
+Processor 23
+	Total Time = 10733
+Processor 24
+	Total Time = 10891
+Processor 25
+	Total Time = 11095
+Processor 26
+	Total Time = 11063
+Processor 27
+	Total Time = 11114
+Processor 28
+	Total Time = 10820
+Processor 29
+	Total Time = 10961
+Processor 30
+	Total Time = 11258
+Processor 31
+	Total Time = 10629
+Processor 32
+	Total Time = 10932
+Processor 33
+	Total Time = 10762
+Processor 34
+	Total Time = 10885
+Processor 35
+	Total Time = 10840
+Processor 36
+	Total Time = 10975
+Processor 37
+	Total Time = 11024
+Processor 38
+	Total Time = 11086
+Processor 39
+	Total Time = 11101
+Processor 40
+	Total Time = 11194
+Processor 41
+	Total Time = 11080
+Processor 42
+	Total Time = 10999
+Processor 43
+	Total Time = 10856
+Processor 44
+	Total Time = 10876
+Processor 45
+	Total Time = 10997
+Time Step 3
+Processor 0
+	Total Time = 9869
+Processor 1
+	Total Time = 9702
+Processor 2
+	Total Time = 9857
+Processor 3
+	Total Time = 9697
+Processor 4
+	Total Time = 9645
+Processor 5
+	Total Time = 9600
+Processor 6
+	Total Time = 9692
+Processor 7
+	Total Time = 9876
+Processor 8
+	Total Time = 9838
+Processor 9
+	Total Time = 9825
+Processor 10
+	Total Time = 9727
+Processor 11
+	Total Time = 9599
+Processor 12
+	Total Time = 9758
+Processor 13
+	Total Time = 9729
+Processor 14
+	Total Time = 9601
+Processor 15
+	Total Time = 9746
+Processor 16
+	Total Time = 9622
+Processor 17
+	Total Time = 9458
+Processor 18
+	Total Time = 9499
+Processor 19
+	Total Time = 9626
+Processor 20
+	Total Time = 9583
+Processor 21
+	Total Time = 9390
+Processor 22
+	Total Time = 9881
+Processor 23
+	Total Time = 10093
+Processor 24
+	Total Time = 10058
+Processor 25
+	Total Time = 9908
+Processor 26
+	Total Time = 9943
+Processor 27
+	Total Time = 9625
+Processor 28
+	Total Time = 9777
+Processor 29
+	Total Time = 9537
+Processor 30
+	Total Time = 9749
+Processor 31
+	Total Time = 10101
+Processor 32
+	Total Time = 10121
+Processor 33
+	Total Time = 10039
+Processor 34
+	Total Time = 10036
+Processor 35
+	Total Time = 9749
+Processor 36
+	Total Time = 10120
+Processor 37
+	Total Time = 9908
+Processor 38
+	Total Time = 9769
+Processor 39
+	Total Time = 9846
+Processor 40
+	Total Time = 9853
+Processor 41
+	Total Time = 9460
+Processor 42
+	Total Time = 9356
+Processor 43
+	Total Time = 9716
+Processor 44
+	Total Time = 9786
+Processor 45
+	Total Time = 9628
+Time Step 4
+Processor 0
+	Total Time = 9977
+Processor 1
+	Total Time = 10123
+Processor 2
+	Total Time = 9978
+Processor 3
+	Total Time = 10191
+Processor 4
+	Total Time = 9898
+Processor 5
+	Total Time = 10082
+Processor 6
+	Total Time = 10103
+Processor 7
+	Total Time = 9977
+Processor 8
+	Total Time = 10038
+Processor 9
+	Total Time = 10009
+Processor 10
+	Total Time = 10243
+Processor 11
+	Total Time = 10228
+Processor 12
+	Total Time = 10154
+Processor 13
+	Total Time = 10192
+Processor 14
+	Total Time = 10164
+Processor 15
+	Total Time = 10007
+Processor 16
+	Total Time = 10041
+Processor 17
+	Total Time = 10155
+Processor 18
+	Total Time = 10016
+Processor 19
+	Total Time = 10010
+Processor 20
+	Total Time = 10262
+Processor 21
+	Total Time = 10135
+Processor 22
+	Total Time = 10048
+Processor 23
+	Total Time = 9901
+Processor 24
+	Total Time = 9943
+Processor 25
+	Total Time = 9995
+Processor 26
+	Total Time = 10020
+Processor 27
+	Total Time = 10137
+Processor 28
+	Total Time = 10141
+Processor 29
+	Total Time = 10130
+Processor 30
+	Total Time = 9978
+Processor 31
+	Total Time = 9861
+Processor 32
+	Total Time = 9952
+Processor 33
+	Total Time = 9912
+Processor 34
+	Total Time = 9902
+Processor 35
+	Total Time = 10154
+Processor 36
+	Total Time = 9991
+Processor 37
+	Total Time = 10086
+Processor 38
+	Total Time = 9955
+Processor 39
+	Total Time = 9982
+Processor 40
+	Total Time = 9842
+Processor 41
+	Total Time = 10028
+Processor 42
+	Total Time = 10115
+Processor 43
+	Total Time = 9996
+Processor 44
+	Total Time = 9752
+Processor 45
+	Total Time = 10027
+END

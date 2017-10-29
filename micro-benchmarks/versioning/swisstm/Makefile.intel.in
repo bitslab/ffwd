@@ -1,0 +1,23 @@
+ifeq ($(STACK_PROTECT), )
+	STACK_PROTECT = on_read_write
+endif
+
+ifeq ($(STACK_PROTECT_BOUND), )
+	STACK_PROTECT_BOUND = icc
+endif
+
+COMPILER = intel
+# for some reason -DNDEBUG causes problems
+PROFILE = normal
+
+include Makefile.in
+
+AS = as
+
+INTEL_OBJ_DIR = $(TARGET_DIR)/intel_obj
+INTEL_LIB_DIR = /home/dragojev/work/wlpdstm/lib
+INTEL_LIB = $(INTEL_LIB_DIR)/libitm
+
+ICC_INCLUDE_DIR = /localhome/dragojev/install/icc-stm/include
+
+CPPFLAGS += -DWLPDSTM_ICC -I$(ICC_INCLUDE_DIR)

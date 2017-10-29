@@ -1,0 +1,64 @@
+ifeq ($(STACK_PROTECT), )
+	STACK_PROTECT = on_read_write
+endif
+
+ifeq ($(STACK_PROTECT_BOUND), )
+	STACK_PROTECT_BOUND = tanger
+endif
+
+include Makefile.in
+
+# dirs
+WLPDSTM_LIB_DIR = /home/dragojev/work/wlpdstm/lib
+TANGER_OBJ_DIR = $(TARGET_DIR)/tanger_obj
+TANGER_LIB = $(WLPDSTM_LIB_DIR)/libtanger-stm
+
+#LLVM_INCLUDE_DIR = /Users/aleksandar/work/llvm/install/include
+
+TANGER_HOME = /home/dragojev/work/tanger/tanger
+
+# LLVM
+LLVMCPP = /home/dragojev/work/llvm/install/bin/llvm-g++
+LLVMLD  = llvm-ld
+
+# path to tanger
+CPPFLAGS += -I$(TANGER_HOME)/include
+
+# use explicit parameters for Tanger
+CPPFLAGS += -DEXPLICIT_TX_PARAMETER
+
+# do not use regular iostream
+CPPFLAGS += -DUSE_LLVM_IOSTREAM
+
+# mubench compile parameters
+TANGER_INCLUDE_DIR = $(TANGER_HOME)/include
+TANGER_LIB_DIR = $(TANGER_HOME)/lib
+TANGERINCLUDE ?= $(TANGER_INCLUDE_DIR)
+INCLUDE += -I $(TANGERINCLUDE)
+STMLIBDIR ?= /home/dragojev/work/wlpdstm/lib
+STMSUPPORTDIR = $(TANGER_LIB_DIR)/stmsupport
+LLVMBUILD = $(shell llvm-config --build-mode)
+TANGERPASS = $(TANGER_HOME)/$(LLVMBUILD)/lib/libtanger.so
+EXTRAPASSES ?=
+PASSESTORUN ?= -tanger
+PASSESTORUNPOST ?=
+NATIVELIBSPRE ?=
+#HEADERS ?= $(wildcard $(INCLUDE)/*.h)
+
+CFLAGS += -Wall -DSTM -DTANGER
+CXXFLAGS += $(CFLAGS)
+CXXFLAGS_MUBENCH = $(CXXFLAGS) -DMUBENCH_TANGER
+NATIVELIBS += -lpthread
+BASELINKOPTS ?=
+NATIVELINKOPTS ?= -g -static
+LINKOPTS ?=
+#TANGERPASSOPTS ?= -debug -stats
+
+OPT ?= opt
+LLVMLD ?= llvm-ld
+LLVMGCC ?= llvm-gcc
+LLVMGXX ?= llvm-g++
+LLVMDIS ?= llvm-dis
+LLC ?= llc
+GCC ?= gcc
+GXX ?= g++

@@ -1,0 +1,2 @@
+#include <liblock-config.h>
+

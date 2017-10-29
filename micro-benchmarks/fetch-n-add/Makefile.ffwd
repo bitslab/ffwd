@@ -1,0 +1,63 @@
+ROOT ?= ../..
+
+#include $(ROOT)/common/Makefile.common
+ifndef ARCH                                                                                                                       
+	ARCH_NAME = $(shell uname -m)                                                                                                 
+endif
+
+ifeq ($(ARCH_NAME), i386)                                                                                                         
+    ARCH = x86                                                                                                                    
+    CFLAGS += -m32                                                                                                                
+    LDFLAGS += -m32                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), i686)                                                                                                         
+    ARCH = x86                                                                                                                    
+    CFLAGS += -m32                                                                                                                
+    LDFLAGS += -m32                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), x86_64)                                                                                                       
+    ARCH = x86_64                                                                                                                 
+    CFLAGS += -m64                                                                                                                
+    LDFLAGS += -m64                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), sun4v)                                                                                                        
+    ARCH = sparc64                                                                                                                
+    CFLAGS += -DSPARC=1 -DINLINED=1 -mt -fast -m64                                                                                
+    LDFLAGS += -lrt -m64                                                                                                          
+endif
+
+BINDIR = ./bin
+BUILDDIR = ./build
+LIB_FFWD = $(ROOT)/include
+MCMODEL = -mcmodel=large
+LIBS = -lnuma -lpthread
+NPROC=$(shell nproc)
+
+CFLAGS += -g -O3
+CFLAGS += -DFFWD -DT$(NPROC)
+CFLAGS += -DNDEBUG
+CFLAGS += -D_REENTRANT -D_GNU_SOURCE
+CFLAGS += -fno-strict-aliasing
+CFLAGS += -I$(LIB_FFWD)
+CFLAGS += -std=gnu89
+LDFLAGS += -lpthread -lnuma -lrt -lm
+#LDFLAGS += -lpthread -lnuma -lrt -lm -ldl -lhoard
+
+.PHONY:	all clean
+
+all: ffwd-shared-vars
+
+create_dir:
+	mkdir -p $(BINDIR) $(BUILDDIR)
+
+ffwd-shared-vars: create_dir libffwd.o
+	$(CC) $(CFLAGS) $(BUILDDIR)/libffwd.o shared_vars.c -o $(BINDIR)/$@ $(LDFLAGS)
+
+libffwd.o:
+	gcc $(CFLAGS) -Wall $(MCMODEL) -c -o $(BUILDDIR)/libffwd.o $(LIB_FFWD)/libffwd.c $(LIBS); 
+
+clean:
+	rm -f $(BINDIR)/ffwd-shared-vars $(BUILDDIR)/*

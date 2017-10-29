@@ -1,0 +1,220 @@
+**** testing ./RAYTRACE with lock multircl placed on core 4
+
+Number of processors:     	46
+Global shared memory size:	1024 MB
+Samples per pixel:        	1
+
+Number of primitive objects: 	7629
+Number of primitive elements:	46423
+
+****** Hierarchial uniform grid memory allocation summary ******* 
+
+     < struct >:            < current >   < maximum >    < sizeof > 
+     <  bytes >:             <  bytes >   <   bytes >    <  bytes > 
+
+     grid:                      59760         59760           144 
+     hashtable entries:        678968        678968             8 
+     emptycell entries:          6632          6632             8 
+     voxel:                   1251480       1251480            40 
+     bintree_node:           12370320      12370320           120 
+
+     Totals:                 14367160      14367160      
+
+TIMING STATISTICS MEASURED BY MAIN PROCESS:
+        Overall start time         1311463016484053
+        Overall end time       1311463016504028
+        Total time with initialization                 19975
+        Total time without initialization                 19819
+
+****************  execution summary ****************
+*** ----     thread 47    (0x7fa832fe5700)      ---- ***
+***  number of critical sections:     2062       ***
+***  5183     cycles per critical sections       ***
+***  8357     cycles between critical sections   ***
+*** ----     thread 46    (0x7fa8337e6700)      ---- ***
+***  number of critical sections:     2454       ***
+***  5331     cycles per critical sections       ***
+***  5518     cycles between critical sections   ***
+*** ----     thread 45    (0x7fa833fe7700)      ---- ***
+***  number of critical sections:     2496       ***
+***  5105     cycles per critical sections       ***
+***  6847     cycles between critical sections   ***
+*** ----     thread 44    (0x7fa8347e8700)      ---- ***
+***  number of critical sections:     1977       ***
+***  5104     cycles per critical sections       ***
+***  8501     cycles between critical sections   ***
+*** ----     thread 43    (0x7fa834fe9700)      ---- ***
+***  number of critical sections:     2265       ***
+***  4757     cycles per critical sections       ***
+***  6971     cycles between critical sections   ***
+*** ----     thread 42    (0x7fa8357ea700)      ---- ***
+***  number of critical sections:     1468       ***
+***  5080     cycles per critical sections       ***
+***  12526    cycles between critical sections   ***
+*** ----     thread 41    (0x7fa835feb700)      ---- ***
+***  number of critical sections:     1979       ***
+***  4955     cycles per critical sections       ***
+***  8714     cycles between critical sections   ***
+*** ----     thread 40    (0x7fa8367ec700)      ---- ***
+***  number of critical sections:     1911       ***
+***  5289     cycles per critical sections       ***
+***  7681     cycles between critical sections   ***
+*** ----     thread 39    (0x7fa836fed700)      ---- ***
+***  number of critical sections:     2426       ***
+***  4907     cycles per critical sections       ***
+***  6959     cycles between critical sections   ***
+*** ----     thread 38    (0x7fa8377ee700)      ---- ***
+***  number of critical sections:     2212       ***
+***  5077     cycles per critical sections       ***
+***  7428     cycles between critical sections   ***
+*** ----     thread 37    (0x7fa837fef700)      ---- ***
+***  number of critical sections:     1939       ***
+***  5239     cycles per critical sections       ***
+***  8695     cycles between critical sections   ***
+*** ----     thread 36    (0x7fa8387f0700)      ---- ***
+***  number of critical sections:     1806       ***
+***  5329     cycles per critical sections       ***
+***  11536    cycles between critical sections   ***
+*** ----     thread 35    (0x7fa838ff1700)      ---- ***
+***  number of critical sections:     1740       ***
+***  5540     cycles per critical sections       ***
+***  10279    cycles between critical sections   ***
+*** ----     thread 34    (0x7fa8397f2700)      ---- ***
+***  number of critical sections:     1756       ***
+***  5386     cycles per critical sections       ***
+***  10838    cycles between critical sections   ***
+*** ----     thread 33    (0x7fa839ff3700)      ---- ***
+***  number of critical sections:     1527       ***
+***  5508     cycles per critical sections       ***
+***  12428    cycles between critical sections   ***
+*** ----     thread 32    (0x7fa83a7f4700)      ---- ***
+***  number of critical sections:     1129       ***
+***  4941     cycles per critical sections       ***
+***  20002    cycles between critical sections   ***
+*** ----     thread 31    (0x7fa83aff5700)      ---- ***
+***  number of critical sections:     2095       ***
+***  5177     cycles per critical sections       ***
+***  8095     cycles between critical sections   ***
+*** ----     thread 30    (0x7fa83b7f6700)      ---- ***
+***  number of critical sections:     2082       ***
+***  5040     cycles per critical sections       ***
+***  9486     cycles between critical sections   ***
+*** ----     thread 29    (0x7fa83bff7700)      ---- ***
+***  number of critical sections:     1974       ***
+***  4907     cycles per critical sections       ***
+***  10289    cycles between critical sections   ***
+*** ----     thread 28    (0x7fa83c7f8700)      ---- ***
+***  number of critical sections:     1906       ***
+***  5061     cycles per critical sections       ***
+***  10929    cycles between critical sections   ***
+*** ----     thread 27    (0x7fa83cff9700)      ---- ***
+***  number of critical sections:     1916       ***
+***  5183     cycles per critical sections       ***
+***  10729    cycles between critical sections   ***
+*** ----     thread 26    (0x7fa83d7fa700)      ---- ***
+***  number of critical sections:     1723       ***
+***  5658     cycles per critical sections       ***
+***  11081    cycles between critical sections   ***
+*** ----     thread 25    (0x7fa83dffb700)      ---- ***
+***  number of critical sections:     1654       ***
+***  5555     cycles per critical sections       ***
+***  11700    cycles between critical sections   ***
+*** ----     thread 24    (0x7fa83e7fc700)      ---- ***
+***  number of critical sections:     1363       ***
+***  5782     cycles per critical sections       ***
+***  15224    cycles between critical sections   ***
+*** ----     thread 23    (0x7fa83effd700)      ---- ***
+***  number of critical sections:     1708       ***
+***  5462     cycles per critical sections       ***
+***  9595     cycles between critical sections   ***
+*** ----     thread 22    (0x7fa83f7fe700)      ---- ***
+***  number of critical sections:     1629       ***
+***  5524     cycles per critical sections       ***
+***  12263    cycles between critical sections   ***
+*** ----     thread 21    (0x7fa83ffff700)      ---- ***
+***  number of critical sections:     1554       ***
+***  5378     cycles per critical sections       ***
+***  14784    cycles between critical sections   ***
+*** ----     thread 20    (0x7fa844b72700)      ---- ***
+***  number of critical sections:     1990       ***
+***  5217     cycles per critical sections       ***
+***  10121    cycles between critical sections   ***
+*** ----     thread 19    (0x7fa845373700)      ---- ***
+***  number of critical sections:     2332       ***
+***  5019     cycles per critical sections       ***
+***  7864     cycles between critical sections   ***
+*** ----     thread 18    (0x7fa845b74700)      ---- ***
+***  number of critical sections:     2073       ***
+***  5137     cycles per critical sections       ***
+***  8779     cycles between critical sections   ***
+*** ----     thread 17    (0x7fa846375700)      ---- ***
+***  number of critical sections:     2087       ***
+***  4892     cycles per critical sections       ***
+***  10013    cycles between critical sections   ***
+*** ----     thread 16    (0x7fa846b76700)      ---- ***
+***  number of critical sections:     2081       ***
+***  5080     cycles per critical sections       ***
+***  10167    cycles between critical sections   ***
+*** ----     thread 15    (0x7fa847377700)      ---- ***
+***  number of critical sections:     1926       ***
+***  5255     cycles per critical sections       ***
+***  10022    cycles between critical sections   ***
+*** ----     thread 14    (0x7fa84cb72700)      ---- ***
+***  number of critical sections:     2394       ***
+***  4522     cycles per critical sections       ***
+***  7795     cycles between critical sections   ***
+*** ----     thread 13    (0x7fa84d373700)      ---- ***
+***  number of critical sections:     2439       ***
+***  4575     cycles per critical sections       ***
+***  7628     cycles between critical sections   ***
+*** ----     thread 12    (0x7fa84db74700)      ---- ***
+***  number of critical sections:     2284       ***
+***  5179     cycles per critical sections       ***
+***  7929     cycles between critical sections   ***
+*** ----     thread 11    (0x7fa84e375700)      ---- ***
+***  number of critical sections:     3037       ***
+***  4779     cycles per critical sections       ***
+***  5546     cycles between critical sections   ***
+*** ----     thread 10    (0x7fa84eb76700)      ---- ***
+***  number of critical sections:     2635       ***
+***  4795     cycles per critical sections       ***
+***  7075     cycles between critical sections   ***
+*** ----     thread 9     (0x7fa84f377700)      ---- ***
+***  number of critical sections:     2230       ***
+***  5109     cycles per critical sections       ***
+***  8348     cycles between critical sections   ***
+*** ----     thread 8     (0x7fa84fb78700)      ---- ***
+***  number of critical sections:     2200       ***
+***  4927     cycles per critical sections       ***
+***  7745     cycles between critical sections   ***
+*** ----     thread 7     (0x7fa847b78700)      ---- ***
+***  number of critical sections:     1858       ***
+***  5333     cycles per critical sections       ***
+***  6602     cycles between critical sections   ***
+*** ----     thread 6     (0x7fa850379700)      ---- ***
+***  number of critical sections:     1816       ***
+***  4442     cycles per critical sections       ***
+***  11253    cycles between critical sections   ***
+*** ----     thread 5     (0x7fa850b7a700)      ---- ***
+***  number of critical sections:     2415       ***
+***  4487     cycles per critical sections       ***
+***  8204     cycles between critical sections   ***
+*** ----     thread 4     (0x7fa85137b700)      ---- ***
+***  number of critical sections:     1693       ***
+***  5221     cycles per critical sections       ***
+***  12313    cycles between critical sections   ***
+*** ----     thread 3     (0x7fa851b7c700)      ---- ***
+***  number of critical sections:     2121       ***
+***  4755     cycles per critical sections       ***
+***  9563     cycles between critical sections   ***
+*** ----     thread 2     (0x7fa893392700)      ---- ***
+*** ----     thread 1     (0x7fa894394700)      ---- ***
+*** ----     thread 0     (0x7fa8c54e47c0)      ---- ***
+***  number of critical sections:     2029       ***
+***  4857     cycles per critical sections       ***
+***  9036     cycles between critical sections   ***
+************       whole program        ************
+***  number of critical sections:    92391       ***
+***  5079     cycles per critical sections       ***
+***  9240     cycles between critical sections   ***
+****************************************************

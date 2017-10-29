@@ -1,0 +1,16 @@
+Directory structure is organized as follows:
+    api      - Definition of API used for manual instrumentation.
+    common   - Files common to different STM implementations. This includes handling tls, various
+               constants etc.
+    epochstm - Implementation of EpochSTM algorithm.
+    include  - Base include file used for manual instrumentation.
+    intel    - Files for libitm.a used by transactional icc.
+    mubench  - Red-black tree microbenchmark.
+    stm      - Implementation of SwissTM algorithm.
+    stm_api  - Boilerplate code for reading data of different sizes. Used by api, intel and tanger.
+    tanger   - Tanger support.
+
+
+Aleksandar Dragojevic aleksandar.dragojevic@epfl.ch
+
+   

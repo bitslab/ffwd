@@ -1,0 +1,136 @@
+ROOT ?= ../..
+
+#include $(ROOT)/common/Makefile.common
+ifndef ARCH                                                                                                                       
+	ARCH_NAME = $(shell uname -m)                                                                                                 
+endif
+
+ifeq ($(ARCH_NAME), i386)                                                                                                         
+    ARCH = x86                                                                                                                    
+    CFLAGS += -m32                                                                                                                
+    LDFLAGS += -m32                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), i686)                                                                                                         
+    ARCH = x86                                                                                                                    
+    CFLAGS += -m32                                                                                                                
+    LDFLAGS += -m32                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), x86_64)                                                                                                       
+    ARCH = x86_64                                                                                                                 
+    CFLAGS += -m64                                                                                                                
+    LDFLAGS += -m64                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), sun4v)                                                                                                        
+    ARCH = sparc64                                                                                                                
+    CFLAGS += -DSPARC=1 -DINLINED=1 -mt -fast -m64                                                                                
+    LDFLAGS += -lrt -m64                                                                                                          
+endif
+
+########################################################################################################
+
+CORE_NUM := $(shell nproc)
+ifeq ($(CORE_NUM), 128)
+		CFLAGS += -DCORES_128
+endif
+
+PLATFORM = $(shell $(ROOT)/include/platform.sh)
+ifeq ($(PLATFORM), XEON)
+  CFLAGS += -DXEON
+else ifeq ($(PLATFORM), AMD)
+  CFLAGS += -DOPTERON
+endif
+
+###################################### Taken from ssync Makefile #######################################
+
+PLATFORM_NUMA=1
+
+DEBUG_FLAGS=-Wall
+COMPILE_FLAGS=-O3 -DADD_PADDING
+
+CORE_NUM := $(shell nproc)
+ifneq ($(CORE_SPEED_KHz), )
+COMPILE_FLAGS += -DCORE_NUM=${CORE_NUM}
+else
+COMPILE_FLAGS += -DCORE_NUM=8
+endif
+########################################################################################################
+
+BINDIR = ./bin
+BUILDDIR = ./build
+GCC:=gcc
+APP = shared-vars 
+LIB_SSYNC = $(ROOT)/ssync-libslock/include
+SRC_SSYNC = $(ROOT)/ssync-libslock/src
+
+CFLAGS += -DSSYNC -D_GNU_SOURCE
+CFLAGS += -D_REENTRANT
+CFLAGS += -g -O3 -DNDEBUG
+CFLAGS += -fno-strict-aliasing 
+CFLAGS += -I. -I$(LIB_SSYNC)
+CFLAGS += -std=gnu89
+LDFLAGS += -lpthread -lrt -lnuma
+OBJ_FILES :=  $(BUILDDIR)/mcs.o $(BUILDDIR)/clh.o $(BUILDDIR)/ttas.o $(BUILDDIR)/tas.o $(BUILDDIR)/ticket.o $(BUILDDIR)/hclh.o $(BUILDDIR)/hticket.o
+OBJS :=  mcs.o clh.o ttas.o tas.o ticket.o hclh.o hticket.o
+LOCKS = mutex ttas tas mcs clh ticket hticket hclh atomic
+
+.PHONY:	all clean
+
+all:	create_dir $(LOCKS) 
+
+create_dir:
+	mkdir -p $(BINDIR) $(BUILDIR)
+
+ttas.o: $(SRC_SSYNC)/ttas.c 
+	$(GCC) -D_GNU_SOURCE $(CFLAGS) $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) -c $(SRC_SSYNC)/ttas.c -o $(BUILDDIR)/ttas.o
+
+tas.o: $(SRC_SSYNC)/spinlock.c
+	$(GCC) -D_GNU_SOURCE $(CFLAGS) $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) -c $(SRC_SSYNC)/spinlock.c -o $(BUILDDIR)/tas.o
+
+ticket.o: $(SRC_SSYNC)/ticket.c 
+	$(GCC) -D_GNU_SOURCE $(CFLAGS) $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) -c $(SRC_SSYNC)/ticket.c -o $(BUILDDIR)/ticket.o
+
+mcs.o: $(SRC_SSYNC)/mcs.c 
+	$(GCC) -D_GNU_SOURCE $(CFLAGS) $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) -c $(SRC_SSYNC)/mcs.c -o $(BUILDDIR)/mcs.o
+
+clh.o: $(SRC_SSYNC)/clh.c 
+	$(GCC) -D_GNU_SOURCE $(CFLAGS) $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) -c $(SRC_SSYNC)/clh.c -o $(BUILDDIR)/clh.o
+
+hclh.o: $(SRC_SSYNC)/hclh.c 
+	$(GCC) -D_GNU_SOURCE $(CFLAGS) $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) -c $(SRC_SSYNC)/hclh.c -o $(BUILDDIR)/hclh.o
+
+hticket.o: $(SRC_SSYNC)/htlock.c $(LIB_SSYNC)/htlock.h
+	$(GCC) -D_GNU_SOURCE $(CFLAGS) $(COMPILE_FLAGS) $(DEBUG_FLAGS) $(INCLUDES) -c $(SRC_SSYNC)/htlock.c -o $(BUILDDIR)/hticket.o
+
+hclh: $(OBJS)
+	$(CC) $(CFLAGS) -DUSE_HCLH_LOCKS $(OBJ_FILES) shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+
+ttas: $(OBJS)
+	$(CC) $(CFLAGS) -DUSE_TTAS_LOCKS $(OBJ_FILES) shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+	
+tas: $(OBJS)
+	$(CC) $(CFLAGS) -DUSE_SPINLOCK_LOCKS $(OBJ_FILES) shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+
+mcs: $(OBJS)
+	$(CC) $(CFLAGS) -DUSE_MCS_LOCKS $(OBJ_FILES) shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+
+clh: $(OBJS)
+	$(CC) $(CFLAGS) -DUSE_CLH_LOCKS $(OBJ_FILES) shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+
+ticket: $(OBJS)
+	$(CC) $(CFLAGS) -DUSE_TICKET_LOCKS $(OBJ_FILES)  shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+	
+mutex: $(OBJS)
+	$(CC) $(CFLAGS) -DUSE_MUTEX_LOCKS $(OBJ_FILES) shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+	
+hticket: $(OBJS)
+	$(CC) $(CFLAGS) -DUSE_HTICKET_LOCKS $(OBJ_FILES) shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+
+atomic:
+	$(CC) $(CFLAGS) atomic_shared_vars.c -o $(BINDIR)/$@-$(APP) $(LDFLAGS)
+
+clean:
+	rm -f $(BINDIR)/mutex-$(APP) $(BINDIR)/ttas-$(APP) $(BINDIR)/tas-$(APP) $(BINDIR)/mcs-$(APP) $(BINDIR)/rw-$(APP) $(BINDIR)/clh-$(APP) $(BINDIR)/ticket-$(APP) $(BINDIR)/hticket-$(APP) $(BINDIR)/hclh-$(APP) $(BINDIR)/atomic-$(APP)
+	rm -f $(OBJ_FILES)

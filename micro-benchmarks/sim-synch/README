@@ -1,0 +1,103 @@
+This preliminary code is highly optimized for x86_64 and SPARC 
+machine architectures. Notice that files sim.c, simstack.c
+and simqueue.c are running much better in a X86_64 machine,
+SPARC machines do not support Fetch&Multiply instructions.
+Compiling or running the code in other architectures may 
+be impossible or may give poor performance.
+The code is developed and tested in an AMD ccNUMA machine
+equipped with 4 8-core processors (magny cours) and in an SPARC
+machine equipped with 2 T2-SPARC processors (each able to handle
+64 threads). For best source code compatibility use 
+a gcc compiler of version 4.3.0 or greater. Although, some
+newer versions of icc and suncc compiler may work.
+In order to achieve the best performance for each implemented
+algorithm choose carefully the backoff upper and lower bounds.
+Notice that backoff bounds are highly dependent from the exact
+configuration of your system (number of threads running, number 
+of cores used, etc.). Furthermore, changes in Makefile 
+may be needed (compiler flags etc) in order to achieve the best 
+performance. In order to compile your files execute
+in a command prompt "make X86" for X86_64 machines and 
+"make SPARC" for SPARC machines. By running command 
+"./bench.sh XYZ.c", you will be able to compile and execute file 
+XYZ.c 10 times and the average performance will be printed.
+Before running any experiment, have a look at config.h. 
+It is of major importance to configure appropriately some
+parameters of your configuration (i.e. the number of threads,
+the number of cores that your machine is equipped, etc). 
+Use this code with your own responsibility, no guarantee is provided.
+
+
+For any further information, please do not hesitate to
+send an email at nkallima (at) cs.uoi.gr. Feedback is always
+valuable.
+
+
+
+FILE            EXPERIMENT
+------------------------------------------------------------------------
+sim.c           Simulates a wait-free Fetch&Multiply atomic object using 
+                Sim algorithm.
+simstack.c      Simulates a wait-free atomic stack using an instance of 
+                Sim algorithm.
+simqueue.c      Simulates a wait-free atomic queue using two instances
+                of Sim algorithm.
+
+
+
+ccuobject.c     Simulates a blocking Fetch&Multiply atomic object using
+                cc-Synch algorithm.
+ccstack.c       Simulates a blocking atomic stack using an instance of
+                cc-Synch algorithm.
+ccqueue.c       Simulates a blocking atomic queue using two instances
+                of cc-Synch algorithm.
+
+
+
+dsmuobject.c    Simulates a blocking Fetch&Multiply atomic object using
+                dsm-Synch algorithm.
+dsmstack.c      Simulates a blocking atomic stack using an instance of
+                dsm-Synch algorithm.
+dsmqueue.c      Simulates a blocking atomic queue using two instances
+                of dsm-Synch algorithm.
+
+
+huobject.c      Simulates a blocking Fetch&Multiply atomic object using
+                H-Synch algorithm.
+hstack.c        Simulates a blocking atomic stack using an instance of
+                H-Synch algorithm.
+hqueue.c        Simulates a blocking atomic queue using two instances
+                of H-Synch algorithm.
+
+
+lfstack.c       This is a lock free implementation of a shared stack.
+msqueue.c       This is a lock free queue implementation using the algorithm 
+                presented by Maged M. Michael and Michael L. Scott, PODC '96
+lfuobject.c     A lock free implementation of Fetch&Multiply object.
+
+
+oyamauobject.c  An implementation of Fetch&Multiply using
+                synchronization technique proposed by Y. Oyama and K. Taura 
+                and A. Yonezawa in paper "Executing parallel programs with 
+                synchronization bottlenecks efficiently".
+
+
+locksuobject.c  An implementation of Fetch&Multiply using high
+                performance spin-locks.
+locksstack.c    An implementation of shared stack using high
+                performance spin-locks.
+locksqueue.c    An implementation of shared queue using high
+                performance spin-locks.
+
+
+
+Makefile        It just compiles all the files using some default parameters.
+                Use "make X86" for a X86 machine and "make SPARC" for a SPARC 
+                machine. It is highly recommended to use bench.sh script in order
+                to perform experiments. Please modify the parameters 
+                of config.h and bench.sh to conform to your system (compiler 
+                flags, machine architecture, etc).
+bench.sh        A simple shell script for extracting performance numbers
+                for each of the above algorithms. Some algorithms do not
+                need any parameter. Some of them may need backoff 
+                upper/lower bounds as parameters.

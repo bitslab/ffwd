@@ -1,0 +1,2088 @@
+mutrace-rcl evaluation script
+=============================
+Which macrobenchmark shall we use?
+ (1) splash2/raytrace-bbb (using balls4)
+ (2) splash2/raytrace-rbb (using balls4)
+ (3) splash2/raytrace-rrb (using balls4)
+ (4) memcached-blocking-lock (using get)
+ (5) memcached-blocking-lock (using set)
+ (6) memcached-remote-core-lock (using get)
+ (7) memcached-remote-core-lock (using set)
+ (8) SPLASH-2 (full)
+
+=================================================================================
+apps/barnes
+=================================================================================
+
+		Hack code: Plummer model
+
+     nbody     dtime       eps       tol     dtout     tstop    fcells     NPROC
+     16384   0.02500    0.0500      1.00     0.250     0.075      2.00        46
+
+COMPUTESTART  = 1308589585608190
+COMPUTEEND    = 1308589585658381
+COMPUTETIME   =        50191
+TRACKTIME     =        20236
+PARTITIONTIME =           47	 0.00
+TREEBUILDTIME =         6045	 0.30
+FORCECALCTIME =        10808	 0.53
+RESTTIME      =         3336	 0.16
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process BARNES (pid 59409).
+
+mutrace: Showing statistics for process BARNES (pid 59409).
+mutrace: 2050 mutexes used.
+
+Mutex #1392 (0x1fb4000) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+Mutex #1457 (0x1011188) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(startrun+0x173) [0x403373]
+0x0000000000403373: ANLinit at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:309
+ (inlined by) startrun at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:485
+
+Mutex #1727 (0x1fbb968) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+Mutex #149 (0x1fb68a0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+Mutex #864 (0x1fc6098) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+Mutex #36 (0x1fc3578) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+Mutex #98 (0x1fb65f8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+Mutex #1869 (0x1fb5770) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+Mutex #1585 (0x1fc1b60) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+Mutex #1285 (0x1fc0d28) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f778ce2b0aa]
+	./BARNES(tab_init+0x1a6) [0x402996]
+0x0000000000402996: tab_init at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/barnes/code.C:379
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+    1392      541      425      276        5.193        1.394        0.003        0.024 M-.--.
+    1457      230      229       99        5.067        0.728        0.003        0.012 M-.--.
+    1727      312      132       45        2.718        0.327        0.001        0.009 M-.--.
+     149      163      105       33        2.000        0.176        0.001        0.019 M-.--.
+     864      274       84       33        4.548        0.338        0.001        0.026 M-.--.
+      36      232       91       32        2.561        0.442        0.002        0.017 M-.--.
+      98      215       93       30        4.091        0.247        0.001        0.010 M-.--.
+    1869      307       92       27        2.284        0.443        0.001        0.011 M-.--.
+    1585      316       91       27        4.531        0.335        0.001        0.017 M-.--.
+    1285      201       51       26        4.697        0.232        0.001        0.023 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 368.299 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+apps/fmm
+=================================================================================
+Creating a two cluster, non uniform distribution for 16384 particles
+Starting FMM with 46 processors
+Finished FMM
+                                   PROCESS STATISTICS
+             Track        Tree        List        Part        Pass       Inter        Bar        Intra       Other
+ Proc        Time         Time        Time        Time        Time       Time         Time       Time        Time
+    0        29190        2100        3718        5734        5254        9549        1438         209        1179
+
+                                   TIMING INFORMATION
+Start time                        : 1308589588742482
+Initialization finish time        : 1308589589100324
+Overall finish time               : 1308589589129514
+Total time with initialization    :           387032
+Total time without initialization :            29220
+
+Total time for steps 3 to 5 :        29220
+
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process FMM (pid 59519).
+
+mutrace: Showing statistics for process FMM (pid 59519).
+mutrace: 2052 mutexes used.
+
+Mutex #984 (0x1f3c1e8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #980 (0x1f3c1c0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #988 (0x1f3c210) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #992 (0x1f3c238) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #972 (0x1f3c170) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #976 (0x1f3c198) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #968 (0x1f3c148) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #996 (0x1f3c260) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #1016 (0x1f3c328) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+Mutex #1024 (0x1f3c378) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f09ba7a60aa]
+	./FMM(InitGlobalMemory+0xce) [0x40d97e]
+0x000000000040d97e: InitGlobalMemory at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/fmm/memory.c:70
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+     984     1675     1117      484        0.931        1.390        0.001        0.018 M-.--.
+     980     1583     1050      462        0.726        1.431        0.001        0.016 M-.--.
+     988     1352      909      331        1.183        1.202        0.001        0.021 M-.--.
+     992     1225      810      318        0.799        1.108        0.001        0.023 M-.--.
+     972     1208      732      288        0.502        1.117        0.001        0.015 M-.--.
+     976     1368      785      286        0.596        1.332        0.001        0.013 M-.--.
+     968     1033      690      284        0.997        1.193        0.001        0.019 M-.--.
+     996     1237      828      268        0.786        1.035        0.001        0.009 M-.--.
+    1016     1243      862      260        0.708        0.979        0.001        0.016 M-.--.
+    1024     1195      764      232        1.230        1.037        0.001        0.016 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 391.041 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+mutrace: WARNING: 4 internal hash collisions detected. Results might not be as reliable as they could be.
+mutrace:          Try to increase --hash-size=, which is currently at 3371.
+
+=================================================================================
+apps/ocean/contiguous_partitions
+=================================================================================
+
+Ocean simulation with W-cycle multigrid solver
+    Processors                         : 32
+    Grid size                          : 258 x 258
+    Grid resolution (meters)           : 20000.00
+    Time between relaxations (seconds) : 28800
+    Error tolerance                    : 1e-07
+
+
+                       PROCESS STATISTICS
+                  Total          Multigrid         Multigrid
+ Proc             Time             Time            Fraction
+    0            277008             243830             0.880
+
+                       TIMING INFORMATION
+Start time                        : 1308589592220818
+Initialization finish time        : 1308589592623843
+Overall finish time               : 1308589592901604
+Total time with initialization    :           680786
+Total time without initialization :           277761
+    (excludes first timestep)
+
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process OCEAN (pid 59629).
+
+mutrace: Showing statistics for process OCEAN (pid 59629).
+mutrace: 6 mutexes used.
+
+Mutex #4 (0x31f40a0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f6adadf00aa]
+	./OCEAN(main+0x10f2) [0x406052]
+0x0000000000406052: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/ocean/contiguous_partitions/main.c:434
+
+Mutex #1 (0x31f4028) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f6adadf00aa]
+	./OCEAN(main+0x10b9) [0x406019]
+0x0000000000406019: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/ocean/contiguous_partitions/main.c:431
+
+Mutex #2 (0x31f4050) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f6adadf00aa]
+	./OCEAN(main+0x10cb) [0x40602b]
+0x000000000040602b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/ocean/contiguous_partitions/main.c:432
+
+Mutex #0 (0x31f4000) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f6adadf00aa]
+	./OCEAN(main+0x10a7) [0x406007]
+0x0000000000406007: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/ocean/contiguous_partitions/main.c:430
+
+mutrace: Showing 4 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       4     6400     6388     4222        6.971       26.272        0.004        0.022 M-.--.
+       1      192      191      132        7.786        0.805        0.004        0.022 M-.--.
+       2       32       31       21        6.857        0.163        0.005        0.020 M-.--.
+       0       32       31        4        6.714        0.093        0.003        0.012 M-.--.
+                                                                                        ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 680.900 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+apps/ocean/non_contiguous_partitions
+=================================================================================
+
+Ocean simulation with W-cycle multigrid solver
+    Processors                         : 32
+    Grid size                          : 258 x 258
+    Grid resolution (meters)           : 20000.00
+    Time between relaxations (seconds) : 28800
+    Error tolerance                    : 1e-07
+
+
+                       PROCESS STATISTICS
+                  Total          Multigrid         Multigrid
+ Proc             Time             Time            Fraction
+    0            251835             221192             0.878
+
+                       TIMING INFORMATION
+Start time                        : 1308589595951459
+Initialization finish time        : 1308589596349733
+Overall finish time               : 1308589596602064
+Total time with initialization    :           650605
+Total time without initialization :           252331
+    (excludes first timestep)
+
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process OCEAN (pid 59689).
+
+mutrace: Showing statistics for process OCEAN (pid 59689).
+mutrace: 6 mutexes used.
+
+Mutex #4 (0x10c10a0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fb270f5f0aa]
+	./OCEAN(main+0x5b4) [0x402724]
+0x0000000000402724: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/ocean/non_contiguous_partitions/main.c:249
+
+Mutex #2 (0x10c1050) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fb270f5f0aa]
+	./OCEAN(main+0x58d) [0x4026fd]
+0x00000000004026fd: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/ocean/non_contiguous_partitions/main.c:247
+
+Mutex #0 (0x10c1000) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fb270f5f0aa]
+	./OCEAN(main+0x569) [0x4026d9]
+0x00000000004026d9: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/ocean/non_contiguous_partitions/main.c:245
+
+mutrace: Showing 3 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       4     6400     6393     4196        6.262       24.454        0.004        0.024 M-.--.
+       2      224      223      150        5.327        0.873        0.004        0.020 M-.--.
+       0       32       31        7        6.143        0.080        0.003        0.008 M-.--.
+                                                                                        ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 650.727 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+apps/radiosity
+=================================================================================
+TIMING STATISTICS MEASURED BY MAIN PROCESS:
+	Overall start time	    1308589600272310
+	Overall end time	    1308589602180651
+	Total time with initialization	             1908341
+	Total time without initialization	             1907518
+Rasiosity Statistics
+
+    Histogram of interactions/elem
+	 Interactions  Occurrence
+	 -------------------------------
+	 (Over 100)      252 (87690.109375)
+	    100          2 (15405.940430)
+	    98          3 (18481.357422)
+	    96          1 (4036.006348)
+	    95          2 (28852.392578)
+	    94          3 (69363.335938)
+	    92          2 (14809.519531)
+	    90          1 (7623.520020)
+	    89          3 (49838.527344)
+	    88          3 (15260.589844)
+	    87          2 (6614.772461)
+	    86          4 (20577.964844)
+	    84          1 (37736.035156)
+	    83          1 (7623.680664)
+	    82          2 (22847.037109)
+	    80          1 (7623.680664)
+	    79          1 (9905.674805)
+	    78          2 (37648.175781)
+	    77          2 (42054.523438)
+	    76          1 (5919.844727)
+	    75          2 (7999.340332)
+	    74          1 (14858.602539)
+	    73          3 (11152.067383)
+	    72          1 (338800.843750)
+	    71          2 (15517.667969)
+	    70          2 (1989.850464)
+	    68          1 (338800.843750)
+	    67          1 (3025.241699)
+	    65          1 (338800.843750)
+	    61          2 (171194.203125)
+	    60          3 (2658.762939)
+	    59          3 (8636.666016)
+	    58          2 (42860.507812)
+	    57          3 (114727.429688)
+	    56          3 (227529.750000)
+	    55          2 (1904.186157)
+	    54          2 (170776.390625)
+	    52          3 (158248.640625)
+	    51          3 (271425.343750)
+	    50          1 (2252.088623)
+	    49          2 (12101.119141)
+	    48          1 (90046.687500)
+	    47          3 (143523.890625)
+	    46          2 (90046.687500)
+	    45          3 (255150.625000)
+	    44          2 (48993.691406)
+	    43          8 (171638.546875)
+	    42          1 (90046.687500)
+	    41          8 (132203.265625)
+	    40          6 (218454.750000)
+	    39          9 (102275.015625)
+	    38          3 (5077.564453)
+	    37          8 (76864.914062)
+	    36          4 (44116.218750)
+	    35          5 (51909.871094)
+	    34          5 (128840.335938)
+	    33          6 (104843.523438)
+	    32          7 (52254.710938)
+	    31          16 (82131.906250)
+	    30          12 (164188.265625)
+	    29          7 (86641.078125)
+	    28          38 (61210.406250)
+	    27          15 (74430.382812)
+	    26          19 (108625.187500)
+	    25          31 (26078.224609)
+	    24          21 (43728.589844)
+	    23          14 (51227.199219)
+	    22          45 (22521.416016)
+	    21          68 (20740.404297)
+	    20          115 (8677.419922)
+	    19          46 (15253.483398)
+	    18          237 (6086.203613)
+	    17          127 (6255.708008)
+	    16          1276 (2286.250488)
+	    15          146 (9080.811523)
+	    14          207 (7665.380371)
+	    13          327 (6333.319336)
+	    12          747 (3549.154297)
+	    11          309 (6829.137695)
+	    10          774 (4293.594727)
+	    9          773 (3851.566895)
+	    8          2364 (2018.366333)
+	    7          292 (7194.252441)
+	    6          498 (3939.385498)
+	    5          879 (3658.094482)
+	    4          1404 (3531.349121)
+	    3          535 (4784.771484)
+	    2          2537 (3435.034180)
+	    1          1158 (4349.748535)
+	    0          1714 (5081.481934)
+    Configurations
+	Patch assignment: Static equal number
+	Always inserting at top of list for visibility testing (not sorted)
+	Recursive pruning enabled for BSP tree traversal
+	Patch cache:      Enabled
+	Always check all other queues when task stealing (not neighbor scheme)
+    Parameters
+	Number of processors:    46
+	Number of task queues:   46
+	Number of tasks / queue: 200
+	Area epsilon:            2000.000000
+	#inter parallel refine:  5
+	#visibility comp / task: 4
+	BF epsilon:              0.015000
+	Energy convergence:      0.005000
+    Iterations to converge:   7 times
+    Resource Usage
+	Number of patches:            364
+	Total number of elements:     17164
+	Total number of interactions: 168784
+	          completely visible: 81819
+	        completely invisible: 32641
+	           partially visible: 54324
+	Interaction coherence (root interaction not counted)
+	       Common for 4 siblings: 74044
+	       Common for 3 siblings: 25809
+	       Common for 2 siblings: 10778
+	       Common for no sibling: 7964
+	Avg. elements per patch:      47.2
+	Avg. interactions per patch:  463.7
+	Avg. interactions per element:9.8
+	Number of elements in equivalent uniform mesh: 17080
+	Elem(hierarchical)/Elem(uniform): 100.49%
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process RADIOSITY (pid 59743).
+
+mutrace: Showing statistics for process RADIOSITY (pid 59743).
+mutrace: 4003 mutexes used.
+
+Mutex #906 (0x7f7fff93ade8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_interactionlist+0xb8) [0x407975]
+0x0000000000407975: init_interactionlist at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/elemman.c:2533
+	./RADIOSITY(init_global+0x204) [0x40b670]
+0x000000000040b670: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2318
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #3219 (0x7f7ffe7c8030) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_taskq+0x219) [0x40f9ab]
+0x000000000040f9ab: init_taskq at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/taskman.c:1783
+	./RADIOSITY(init_global+0x1e0) [0x40b64c]
+0x000000000040b64c: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2315
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #1112 (0x7f7ffea6ad18) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_global+0x196) [0x40b602]
+0x000000000040b602: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2305
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #3832 (0x7f7ffe7f0990) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_taskq+0x219) [0x40f9ab]
+0x000000000040f9ab: init_taskq at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/taskman.c:1783
+	./RADIOSITY(init_global+0x1e0) [0x40b64c]
+0x000000000040b64c: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2315
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #1664 (0x7f7ffea4ac60) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_global+0x78) [0x40b4e4]
+0x000000000040b4e4: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2287
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #1969 (0x7f7ffe7e05d0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_taskq+0x219) [0x40f9ab]
+0x000000000040f9ab: init_taskq at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/taskman.c:1783
+	./RADIOSITY(init_global+0x1e0) [0x40b64c]
+0x000000000040b64c: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2315
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #3308 (0x7f7ffe817278) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_taskq+0x219) [0x40f9ab]
+0x000000000040f9ab: init_taskq at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/taskman.c:1783
+	./RADIOSITY(init_global+0x1e0) [0x40b64c]
+0x000000000040b64c: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2315
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #2995 (0x7f7ffe81d3e0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_taskq+0x219) [0x40f9ab]
+0x000000000040f9ab: init_taskq at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/taskman.c:1783
+	./RADIOSITY(init_global+0x1e0) [0x40b64c]
+0x000000000040b64c: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2315
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #139 (0x7f7ffe81f458) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_taskq+0x219) [0x40f9ab]
+0x000000000040f9ab: init_taskq at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/taskman.c:1783
+	./RADIOSITY(init_global+0x1e0) [0x40b64c]
+0x000000000040b64c: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2315
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+Mutex #3278 (0x7f7ffe7fcc60) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f800295b0aa]
+	./RADIOSITY(init_taskq+0x219) [0x40f9ab]
+0x000000000040f9ab: init_taskq at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/taskman.c:1783
+	./RADIOSITY(init_global+0x1e0) [0x40b64c]
+0x000000000040b64c: init_global at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:2315
+	./RADIOSITY(main+0xc1) [0x409989]
+0x0000000000409989: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/radiosity/rad_main.c:1305
+	/lib/libc.so.6(__libc_start_main+0xfe) [0x7f8002152d8e]
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+     906   258350   234175    87178        1.669      264.134        0.001        0.021 M-.--.
+    3219    38196    23703    14118        1.690       98.434        0.003        0.024 M-.--.
+    1112     6364     6026     2044        0.461        7.310        0.001        0.014 M-.--.
+    3832     5910     1656      893        0.578        3.414        0.001        0.018 M-.--.
+    1664     2916     2561      597        2.530        4.569        0.002        0.025 M-.--.
+    1969     6007     1217      504        1.554        3.215        0.001        0.010 M-.--.
+    3308     4603     1165      491        0.211        7.514        0.002        0.022 M-.--.
+    2995     5245     1003      454        0.289        8.570        0.002        0.025 M-.--.
+     139     5085      943      437        1.209        8.615        0.002        0.021 M-.--.
+    3278     4357     1045      425        1.053        2.679        0.001        0.012 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 2571.823 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+mutrace: WARNING: 632 internal hash collisions detected. Results might not be as reliable as they could be.
+mutrace:          Try to increase --hash-size=, which is currently at 3371.
+
+mutrace: WARNING: 863 internal mutex contention detected. Results might not be reliable as they could be.
+mutrace:          Try to increase --hash-size=, which is currently at 3371.
+
+=================================================================================
+apps/raytrace : balls4
+=================================================================================
+
+Number of processors:     	46
+Global shared memory size:	32 MB
+Samples per pixel:        	1
+
+Number of primitive objects: 	7382
+Number of primitive elements:	7382
+
+****** Hierarchial uniform grid memory allocation summary ******* 
+
+     < struct >:            < current >   < maximum >    < sizeof > 
+     <  bytes >:             <  bytes >   <   bytes >    <  bytes > 
+
+     grid:                        432           432           144 
+     hashtable entries:           376           376             8 
+     emptycell entries:            40            40             8 
+     voxel:                     10040         10040            40 
+     bintree_node:              59760         59760           120 
+
+     Totals:                    70648         70648      
+
+TIMING STATISTICS MEASURED BY MAIN PROCESS:
+        Overall start time         1308589605514188
+        Overall end time       1308589606252163
+        Total time with initialization                737975
+        Total time without initialization                737152
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process RAYTRACE (pid 59961).
+Uniform Hierarchy built.
+
+mutrace: Showing statistics for process RAYTRACE (pid 59961).
+mutrace: 49 mutexes used.
+
+Mutex #1 (0x7f95ee20f088) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x285) [0x40a435]
+0x000000000040a435: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:368
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #2 (0x7f95ee20f0b0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x29a) [0x40a44a]
+0x000000000040a44a: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:373
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #0 (0x7f95ee20f060) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x270) [0x40a420]
+0x000000000040a420: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:367
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #41 (0x7f95ee20f6c8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #3 (0x7f95ee20f0d8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #9 (0x7f95ee20f1c8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #10 (0x7f95ee20f1f0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #6 (0x7f95ee20f150) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #17 (0x7f95ee20f308) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+Mutex #7 (0x7f95ee20f178) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f95ef8960aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff965dddbf]
+	[0x3634702d004543]
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       1   118883    98446    36152        1.162      106.273        0.001        0.012 M-.--.
+       2    32838     1470      330        2.531       54.723        0.002        0.234 M-.--.
+       0       46       45       10        3.111        0.182        0.004        0.022 M-.--.
+      41       17        6        1        3.545        0.040        0.002        0.014 M-.--.
+       3       33       17        0        3.444        0.061        0.002        0.009 M-.--.
+       9       33       16        0        2.500        0.029        0.001        0.006 M-.--.
+      10       33       15        0        3.000        0.024        0.001        0.003 M-.--.
+       6       33       13        0        2.250        0.030        0.001        0.006 M-.--.
+      17       33       10        0        2.000        0.026        0.001        0.004 M-.--.
+       7       33       10        0        2.500        0.022        0.001        0.002 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 858.153 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+apps/raytrace : car
+=================================================================================
+
+Number of processors:     	46
+Global shared memory size:	64 MB
+Samples per pixel:        	1
+
+Number of primitive objects: 	7629
+Number of primitive elements:	46423
+
+****** Hierarchial uniform grid memory allocation summary ******* 
+
+     < struct >:            < current >   < maximum >    < sizeof > 
+     <  bytes >:             <  bytes >   <   bytes >    <  bytes > 
+
+     grid:                      59760         59760           144 
+     hashtable entries:        678968        678968             8 
+     emptycell entries:          6632          6632             8 
+     voxel:                   1251480       1251480            40 
+     bintree_node:           12370320      12370320           120 
+
+     Totals:                 14367160      14367160      
+
+TIMING STATISTICS MEASURED BY MAIN PROCESS:
+        Overall start time         1308589610245301
+        Overall end time       1308589610789534
+        Total time with initialization                544233
+        Total time without initialization                543421
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process RAYTRACE (pid 60071).
+Uniform Hierarchy built.
+
+mutrace: Showing statistics for process RAYTRACE (pid 60071).
+mutrace: 49 mutexes used.
+
+Mutex #1 (0x7fe84bbde088) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x285) [0x40a435]
+0x000000000040a435: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:368
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #2 (0x7fe84bbde0b0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x29a) [0x40a44a]
+0x000000000040a44a: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:373
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #0 (0x7fe84bbde060) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x270) [0x40a420]
+0x000000000040a420: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:367
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #7 (0x7fe84bbde178) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #19 (0x7fe84bbde358) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #10 (0x7fe84bbde1f0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #11 (0x7fe84bbde218) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #9 (0x7fe84bbde1c8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #3 (0x7fe84bbde0d8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+Mutex #8 (0x7fe84bbde1a0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fe84d2650aa]
+	./RAYTRACE(main+0x2db) [0x40a48b]
+0x000000000040a48b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/raytrace/main.c:375
+	[0x7fff2b3dadbd]
+	[0x3634702d004543]
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       1    92391    64070    24265        0.524       75.787        0.001        0.011 M-.--.
+       2   252498     1428      263        2.582      367.615        0.001       11.205 M-.--.
+       0       46       45        9        3.444        0.183        0.004        0.050 M-.--.
+       7       33       22        1        1.625        0.035        0.001        0.003 M-.--.
+      19       33       21        1        1.500        0.033        0.001        0.005 M-.--.
+      10       33       27        0        1.500        0.031        0.001        0.003 M-.--.
+      11       33       27        0        2.000        0.027        0.001        0.002 M-.--.
+       9       33       24        0        1.571        0.035        0.001        0.005 M-.--.
+       3       33       23        0        1.667        0.050        0.002        0.007 M-.--.
+       8       33       22        0        1.778        0.035        0.001        0.004 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 1463.563 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+apps/volrend
+=================================================================================
+Both computing normals, opacities and octree as well as rendering: starting from .den file
+NOTE: Preprocessing (computing normals, opacities and octree) is done serially by only one processor
+Gouraud shading from lookup tables used
+	46 processes
+	4x4 image block size
+	doing nonadaptive rendering
+	using precomputed normals and opacities in separate array
+	using opacity octree
+	starting angle at (90.0, -36.0, 0.0) with rotation step of 3
+rotating 8 steps in the Y direction
+
+*****Entering init_decomposition with num_nodes = 46
+*****Exited init_decomposition with num_nodes = 46
+    Allocating density map of 7405568 bytes...
+    Loading map from .den file...
+wall clock execution time to load map:  20 ms
+    Allocating normal map of 14322552 bytes...
+    Computing normal...
+wall clock execution time to compute normal:  426 ms
+    Allocating opacity map of 7161276 bytes...
+    Computing opacity map...
+wall clock execution time to compute opacity:  128 ms
+    Allocating shade lookup table of 7938 bytes...
+    Allocating image of 140625 bytes...
+    Allocating image of 16 bytes...
+    Computing binary pyramid of 9 levels...
+      Allocating pyramid level of 895160 bytes...
+    Computing octree base...
+    Performing OR of eight neighbors in binary mask...
+      Allocating pyramid level of 112903 bytes...
+      Computing pyramid level 1 from level 0...
+      Allocating pyramid level of 14336 bytes...
+      Computing pyramid level 2 from level 1...
+      Allocating pyramid level of 1792 bytes...
+      Computing pyramid level 3 from level 2...
+      Allocating pyramid level of 224 bytes...
+      Computing pyramid level 4 from level 3...
+      Allocating pyramid level of 32 bytes...
+      Computing pyramid level 5 from level 4...
+      Allocating pyramid level of 4 bytes...
+      Computing pyramid level 6 from level 5...
+      Allocating pyramid level of 1 bytes...
+      Computing pyramid level 7 from level 6...
+      Allocating pyramid level of 1 bytes...
+      Computing pyramid level 8 from level 7...
+wall clock execution time to compute octree:  265 ms
+    Deallocating density map...
+
+Rendering...
+node	frame	time	itime	rays	hrays	samples trilirped
+ 37	  0	     7	     0	     0	     0	       0
+ 41	  0	     7	     0	     0	     0	       0
+ 36	  0	     7	     0	     0	     0	       0
+ 12	  0	     7	     0	     0	     0	       0
+ 31	  0	     7	     0	     0	     0	       0
+ 27	  0	     7	     0	     0	     0	       0
+ 38	  0	     7	     0	     0	     0	       0
+ 19	  0	     7	     0	     0	     0	       0
+ 17	  0	     7	     0	     0	     0	       0
+ 20	  0	     7	     0	     0	     0	       0
+  8	  0	     7	     0	     0	     0	       0
+ 22	  0	     7	     0	     0	     0	       0
+ 45	  0	     7	     0	     0	     0	       0
+ 23	  0	     7	     0	     0	     0	       0
+  0	  0	     7	     0	     0	     0	       0
+ 43	  0	     7	     0	     0	     0	       0
+ 25	  0	     7	     0	     0	     0	       0
+  2	  0	     7	     0	     0	     0	       0
+ 18	  0	     7	     0	     0	     0	       0
+ 15	  0	     7	     0	     0	     0	       0
+ 14	  0	     7	     0	     0	     0	       0
+ 13	  0	     7	     0	     0	     0	       0
+ 44	  0	     7	     0	     0	     0	       0
+  5	  0	     7	     0	     0	     0	       0
+  9	  0	     7	     0	     0	     0	       0
+ 39	  0	     7	     0	     0	     0	       0
+ 34	  0	     7	     0	     0	     0	       0
+ 33	  0	     7	     0	     0	     0	       0
+ 28	  0	     7	     0	     0	     0	       0
+ 26	  0	     7	     0	     0	     0	       0
+ 16	  0	     7	     0	     0	     0	       0
+ 30	  0	     7	     0	     0	     0	       0
+ 10	  0	     7	     0	     0	     0	       0
+  4	  0	     7	     0	     0	     0	       0
+ 11	  0	     7	     0	     0	     0	       0
+ 32	  0	     7	     0	     0	     0	       0
+  6	  0	     7	     0	     0	     0	       0
+ 21	  0	     7	     0	     0	     0	       0
+ 40	  0	     7	     0	     0	     0	       0
+ 42	  0	     7	     0	     0	     0	       0
+  1	  0	     7	     0	     0	     0	       0
+  3	  0	     7	     0	     0	     0	       0
+  7	  0	     7	     0	     0	     0	       0
+ 24	  0	     7	     0	     0	     0	       0
+ 35	  0	     7	     0	     0	     0	       0
+ 29	  0	     7	     0	     0	     0	       0
+ 26	  1	     6	     0	     0	     0	       0
+ 29	  1	     6	     0	     0	     0	       0
+ 12	  1	     6	     0	     0	     0	       0
+ 40	  1	     6	     0	     0	     0	       0
+ 27	  1	     6	     0	     0	     0	       0
+ 38	  1	     6	     0	     0	     0	       0
+ 19	  1	     6	     0	     0	     0	       0
+ 10	  1	     6	     0	     0	     0	       0
+ 20	  1	     6	     0	     0	     0	       0
+  0	  1	     7	     0	     0	     0	       0
+ 30	  1	     6	     0	     0	     0	       0
+ 43	  1	     6	     0	     0	     0	       0
+ 45	  1	     6	     0	     0	     0	       0
+ 33	  1	     6	     0	     0	     0	       0
+ 39	  1	     6	     0	     0	     0	       0
+ 17	  1	     6	     0	     0	     0	       0
+  9	  1	     6	     0	     0	     0	       0
+ 15	  1	     6	     0	     0	     0	       0
+  8	  1	     6	     0	     0	     0	       0
+  7	  1	     6	     0	     0	     0	       0
+ 41	  1	     6	     0	     0	     0	       0
+  6	  1	     6	     0	     0	     0	       0
+ 13	  1	     6	     0	     0	     0	       0
+ 31	  1	     6	     0	     0	     0	       0
+ 23	  1	     6	     0	     0	     0	       0
+  3	  1	     6	     0	     0	     0	       0
+ 22	  1	     7	     0	     0	     0	       0
+ 35	  1	     6	     0	     0	     0	       0
+ 21	  1	     6	     0	     0	     0	       0
+ 24	  1	     6	     0	     0	     0	       0
+ 44	  1	     6	     0	     0	     0	       0
+  4	  1	     6	     0	     0	     0	       0
+  5	  1	     6	     0	     0	     0	       0
+ 32	  1	     6	     0	     0	     0	       0
+ 36	  1	     6	     0	     0	     0	       0
+ 34	  1	     6	     0	     0	     0	       0
+  2	  1	     6	     0	     0	     0	       0
+ 14	  1	     6	     0	     0	     0	       0
+ 28	  1	     6	     0	     0	     0	       0
+ 11	  1	     6	     0	     0	     0	       0
+ 37	  1	     6	     0	     0	     0	       0
+ 18	  1	     6	     0	     0	     0	       0
+ 25	  1	     6	     0	     0	     0	       0
+ 42	  1	     6	     0	     0	     0	       0
+ 16	  1	     6	     0	     0	     0	       0
+  1	  1	     6	     0	     0	     0	       0
+ 37	  2	     6	     0	     0	     0	       0
+ 12	  2	     6	     0	     0	     0	       0
+ 11	  2	     6	     0	     0	     0	       0
+ 19	  2	     6	     0	     0	     0	       0
+ 20	  2	     6	     0	     0	     0	       0
+ 35	  2	     6	     0	     0	     0	       0
+ 31	  2	     6	     0	     0	     0	       0
+ 44	  2	     6	     0	     0	     0	       0
+ 28	  2	     6	     0	     0	     0	       0
+ 42	  2	     6	     0	     0	     0	       0
+ 23	  2	     6	     0	     0	     0	       0
+  9	  2	     6	     0	     0	     0	       0
+ 38	  2	     6	     0	     0	     0	       0
+ 10	  2	     6	     0	     0	     0	       0
+  1	  2	     6	     0	     0	     0	       0
+  0	  2	     6	     0	     0	     0	       0
+  8	  2	     6	     0	     0	     0	       0
+ 18	  2	     6	     0	     0	     0	       0
+ 33	  2	     6	     0	     0	     0	       0
+ 34	  2	     6	     0	     0	     0	       0
+ 25	  2	     6	     0	     0	     0	       0
+  3	  2	     6	     0	     0	     0	       0
+ 26	  2	     6	     0	     0	     0	       0
+ 41	  2	     6	     0	     0	     0	       0
+ 43	  2	     6	     0	     0	     0	       0
+ 16	  2	     6	     0	     0	     0	       0
+ 40	  2	     6	     0	     0	     0	       0
+ 36	  2	     6	     0	     0	     0	       0
+ 39	  2	     6	     0	     0	     0	       0
+ 22	  2	     6	     0	     0	     0	       0
+  7	  2	     6	     0	     0	     0	       0
+ 27	  2	     6	     0	     0	     0	       0
+ 13	  2	     6	     0	     0	     0	       0
+ 24	  2	     6	     0	     0	     0	       0
+ 30	  2	     6	     0	     0	     0	       0
+  4	  2	     6	     0	     0	     0	       0
+ 15	  2	     6	     0	     0	     0	       0
+ 17	  2	     6	     0	     0	     0	       0
+  6	  2	     6	     0	     0	     0	       0
+ 45	  2	     6	     0	     0	     0	       0
+  2	  2	     6	     0	     0	     0	       0
+ 32	  2	     6	     0	     0	     0	       0
+ 21	  2	     6	     0	     0	     0	       0
+ 14	  2	     6	     0	     0	     0	       0
+  5	  2	     6	     0	     0	     0	       0
+ 29	  2	     6	     0	     0	     0	       0
+ 10	  3	     6	     0	     0	     0	       0
+ 41	  3	     6	     0	     0	     0	       0
+ 30	  3	     6	     0	     0	     0	       0
+  1	  3	     6	     0	     0	     0	       0
+  2	  3	     6	     0	     0	     0	       0
+ 14	  3	     6	     0	     0	     0	       0
+ 17	  3	     6	     0	     0	     0	       0
+ 44	  3	     6	     0	     0	     0	       0
+ 37	  3	     6	     0	     0	     0	       0
+ 15	  3	     6	     0	     0	     0	       0
+ 39	  3	     6	     0	     0	     0	       0
+ 21	  3	     6	     0	     0	     0	       0
+ 22	  3	     6	     0	     0	     0	       0
+ 25	  3	     6	     0	     0	     0	       0
+ 12	  3	     6	     0	     0	     0	       0
+ 38	  3	     6	     0	     0	     0	       0
+ 18	  3	     6	     0	     0	     0	       0
+ 43	  3	     6	     0	     0	     0	       0
+ 28	  3	     6	     0	     0	     0	       0
+ 33	  3	     6	     0	     0	     0	       0
+ 26	  3	     6	     0	     0	     0	       0
+  7	  3	     6	     0	     0	     0	       0
+  8	  3	     6	     0	     0	     0	       0
+ 19	  3	     6	     0	     0	     0	       0
+ 36	  3	     6	     0	     0	     0	       0
+  6	  3	     6	     0	     0	     0	       0
+ 27	  3	     6	     0	     0	     0	       0
+ 24	  3	     6	     0	     0	     0	       0
+ 13	  3	     6	     0	     0	     0	       0
+ 16	  3	     6	     0	     0	     0	       0
+ 20	  3	     6	     0	     0	     0	       0
+ 32	  3	     6	     0	     0	     0	       0
+ 42	  3	     6	     0	     0	     0	       0
+ 11	  3	     6	     0	     0	     0	       0
+  9	  3	     6	     0	     0	     0	       0
+ 23	  3	     6	     0	     0	     0	       0
+ 40	  3	     6	     0	     0	     0	       0
+ 31	  3	     6	     0	     0	     0	       0
+  5	  3	     6	     0	     0	     0	       0
+ 45	  3	     6	     0	     0	     0	       0
+  4	  3	     6	     0	     0	     0	       0
+  3	  3	     6	     0	     0	     0	       0
+  0	  3	     6	     0	     0	     0	       0
+ 29	  3	     6	     0	     0	     0	       0
+ 34	  3	     6	     0	     0	     0	       0
+ 35	  3	     6	     0	     0	     0	       0
+ 20	  4	     6	     0	     0	     0	       0
+  4	  4	     6	     0	     0	     0	       0
+ 11	  4	     6	     0	     0	     0	       0
+ 10	  4	     6	     0	     0	     0	       0
+  6	  4	     6	     0	     0	     0	       0
+  7	  4	     6	     0	     0	     0	       0
+  5	  4	     6	     0	     0	     0	       0
+ 33	  4	     6	     0	     0	     0	       0
+ 39	  4	     6	     0	     0	     0	       0
+ 23	  4	     6	     0	     0	     0	       0
+ 28	  4	     6	     0	     0	     0	       0
+ 21	  4	     6	     0	     0	     0	       0
+ 27	  4	     6	     0	     0	     0	       0
+  2	  4	     6	     0	     0	     0	       0
+  9	  4	     6	     0	     0	     0	       0
+ 42	  4	     6	     0	     0	     0	       0
+ 31	  4	     6	     0	     0	     0	       0
+  1	  4	     6	     0	     0	     0	       0
+ 36	  4	     6	     0	     0	     0	       0
+ 15	  4	     6	     0	     0	     0	       0
+ 18	  4	     6	     0	     0	     0	       0
+ 16	  4	     6	     0	     0	     0	       0
+ 13	  4	     6	     0	     0	     0	       0
+  0	  4	     6	     0	     0	     0	       0
+ 43	  4	     6	     0	     0	     0	       0
+ 30	  4	     6	     0	     0	     0	       0
+ 29	  4	     6	     0	     0	     0	       0
+ 22	  4	     6	     0	     0	     0	       0
+ 34	  4	     6	     0	     0	     0	       0
+ 14	  4	     6	     0	     0	     0	       0
+ 25	  4	     6	     0	     0	     0	       0
+ 45	  4	     6	     0	     0	     0	       0
+  3	  4	     6	     0	     0	     0	       0
+  8	  4	     6	     0	     0	     0	       0
+ 32	  4	     6	     0	     0	     0	       0
+ 19	  4	     6	     0	     0	     0	       0
+ 38	  4	     6	     0	     0	     0	       0
+ 35	  4	     6	     0	     0	     0	       0
+ 37	  4	     6	     0	     0	     0	       0
+ 44	  4	     6	     0	     0	     0	       0
+ 41	  4	     6	     0	     0	     0	       0
+ 17	  4	     6	     0	     0	     0	       0
+ 12	  4	     6	     0	     0	     0	       0
+ 26	  4	     6	     0	     0	     0	       0
+ 24	  4	     6	     0	     0	     0	       0
+ 40	  4	     6	     0	     0	     0	       0
+ 23	  5	     6	     0	     0	     0	       0
+ 35	  5	     6	     0	     0	     0	       0
+ 12	  5	     6	     0	     0	     0	       0
+ 24	  5	     6	     0	     0	     0	       0
+ 44	  5	     5	     0	     0	     0	       0
+  4	  5	     6	     0	     0	     0	       0
+ 10	  5	     6	     0	     0	     0	       0
+  7	  5	     6	     0	     0	     0	       0
+ 22	  5	     6	     0	     0	     0	       0
+ 38	  5	     5	     0	     0	     0	       0
+ 26	  5	     6	     0	     0	     0	       0
+ 29	  5	     6	     0	     0	     0	       0
+  8	  5	     6	     0	     0	     0	       0
+ 27	  5	     6	     0	     0	     0	       0
+ 13	  5	     6	     0	     0	     0	       0
+  5	  5	     6	     0	     0	     0	       0
+ 17	  5	     6	     0	     0	     0	       0
+ 14	  5	     6	     0	     0	     0	       0
+ 43	  5	     6	     0	     0	     0	       0
+  0	  5	     6	     0	     0	     0	       0
+ 45	  5	     6	     0	     0	     0	       0
+ 39	  5	     6	     0	     0	     0	       0
+ 28	  5	     6	     0	     0	     0	       0
+ 21	  5	     6	     0	     0	     0	       0
+ 41	  5	     6	     0	     0	     0	       0
+  3	  5	     6	     0	     0	     0	       0
+ 32	  5	     6	     0	     0	     0	       0
+ 25	  5	     6	     0	     0	     0	       0
+  2	  5	     6	     0	     0	     0	       0
+ 31	  5	     6	     0	     0	     0	       0
+ 34	  5	     6	     0	     0	     0	       0
+ 36	  5	     6	     0	     0	     0	       0
+ 30	  5	     6	     0	     0	     0	       0
+  6	  5	     6	     0	     0	     0	       0
+ 16	  5	     6	     0	     0	     0	       0
+ 40	  5	     6	     0	     0	     0	       0
+ 37	  5	     6	     0	     0	     0	       0
+ 18	  5	     6	     0	     0	     0	       0
+ 15	  5	     6	     0	     0	     0	       0
+ 19	  5	     6	     0	     0	     0	       0
+ 42	  5	     6	     0	     0	     0	       0
+ 20	  5	     6	     0	     0	     0	       0
+  1	  5	     6	     0	     0	     0	       0
+ 11	  5	     6	     0	     0	     0	       0
+ 33	  5	     6	     0	     0	     0	       0
+  9	  5	     6	     0	     0	     0	       0
+ 18	  6	     5	     0	     0	     0	       0
+ 20	  6	     5	     0	     0	     0	       0
+ 42	  6	     5	     0	     0	     0	       0
+ 24	  6	     6	     0	     0	     0	       0
+ 39	  6	     6	     0	     0	     0	       0
+ 40	  6	     5	     0	     0	     0	       0
+ 11	  6	     5	     0	     0	     0	       0
+  8	  6	     5	     0	     0	     0	       0
+  6	  6	     5	     0	     0	     0	       0
+ 35	  6	     6	     0	     0	     0	       0
+ 43	  6	     6	     0	     0	     0	       0
+ 17	  6	     6	     0	     0	     0	       0
+ 26	  6	     6	     0	     0	     0	       0
+ 15	  6	     5	     0	     0	     0	       0
+ 34	  6	     6	     0	     0	     0	       0
+ 36	  6	     6	     0	     0	     0	       0
+ 30	  6	     6	     0	     0	     0	       0
+ 45	  6	     6	     0	     0	     0	       0
+ 33	  6	     6	     0	     0	     0	       0
+ 19	  6	     5	     0	     0	     0	       0
+ 14	  6	     6	     0	     0	     0	       0
+ 12	  6	     6	     0	     0	     0	       0
+ 44	  6	     6	     0	     0	     0	       0
+  1	  6	     5	     0	     0	     0	       0
+ 22	  6	     6	     0	     0	     0	       0
+ 41	  6	     6	     0	     0	     0	       0
+ 38	  6	     6	     0	     0	     0	       0
+  0	  6	     6	     0	     0	     0	       0
+  2	  6	     6	     0	     0	     0	       0
+  5	  6	     6	     0	     0	     0	       0
+ 29	  6	     5	     0	     0	     0	       0
+ 27	  6	     6	     0	     0	     0	       0
+ 25	  6	     6	     0	     0	     0	       0
+  7	  6	     6	     0	     0	     0	       0
+  9	  6	     5	     0	     0	     0	       0
+ 10	  6	     6	     0	     0	     0	       0
+ 28	  6	     6	     0	     0	     0	       0
+ 31	  6	     6	     0	     0	     0	       0
+ 21	  6	     6	     0	     0	     0	       0
+ 13	  6	     6	     0	     0	     0	       0
+ 16	  6	     5	     0	     0	     0	       0
+ 32	  6	     6	     0	     0	     0	       0
+  3	  6	     6	     0	     0	     0	       0
+  4	  6	     6	     0	     0	     0	       0
+ 23	  6	     6	     0	     0	     0	       0
+ 37	  6	     5	     0	     0	     0	       0
+ 42	  7	     6	     0	     0	     0	       0
+  7	  7	     5	     0	     0	     0	       0
+ 14	  7	     6	     0	     0	     0	       0
+ 11	  7	     5	     0	     0	     0	       0
+  9	  7	     5	     0	     0	     0	       0
+  3	  7	     5	     0	     0	     0	       0
+ 33	  7	     6	     0	     0	     0	       0
+ 43	  7	     5	     0	     0	     0	       0
+ 10	  7	     5	     0	     0	     0	       0
+ 38	  7	     6	     0	     0	     0	       0
+ 31	  7	     5	     0	     0	     0	       0
+ 44	  7	     6	     0	     0	     0	       0
+ 27	  7	     5	     0	     0	     0	       0
+  6	  7	     6	     0	     0	     0	       0
+ 28	  7	     5	     0	     0	     0	       0
+ 19	  7	     6	     0	     0	     0	       0
+ 16	  7	     5	     0	     0	     0	       0
+ 40	  7	     6	     0	     0	     0	       0
+ 32	  7	     5	     0	     0	     0	       0
+  8	  7	     6	     0	     0	     0	       0
+  4	  7	     6	     0	     0	     0	       0
+ 25	  7	     5	     0	     0	     0	       0
+ 18	  7	     6	     0	     0	     0	       0
+ 12	  7	     6	     0	     0	     0	       0
+ 22	  7	     6	     0	     0	     0	       0
+  1	  7	     6	     0	     0	     0	       0
+ 21	  7	     5	     0	     0	     0	       0
+ 23	  7	     6	     0	     0	     0	       0
+ 37	  7	     6	     0	     0	     0	       0
+  0	  7	     6	     0	     0	     0	       0
+ 41	  7	     6	     0	     0	     0	       0
+ 36	  7	     6	     0	     0	     0	       0
+ 15	  7	     5	     0	     0	     0	       0
+ 24	  7	     6	     0	     0	     0	       0
+ 39	  7	     6	     0	     0	     0	       0
+ 29	  7	     6	     0	     0	     0	       0
+ 20	  7	     6	     0	     0	     0	       0
+ 13	  7	     5	     0	     0	     0	       0
+ 17	  7	     6	     0	     0	     0	       0
+  2	  7	     6	     0	     0	     0	       0
+ 30	  7	     6	     0	     0	     0	       0
+ 45	  7	     6	     0	     0	     0	       0
+  5	  7	     5	     0	     0	     0	       0
+ 35	  7	     5	     0	     0	     0	       0
+ 34	  7	     5	     0	     0	     0	       0
+ 26	  7	     5	     0	     0	     0	       0
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process VOLREND (pid 60181).
+
+mutrace: Showing statistics for process VOLREND (pid 60181).
+mutrace: 67 mutexes used.
+
+Mutex #1 (0x258b878) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xc4) [0x406ff4]
+0x0000000000406ff4: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:151
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #20 (0x258bb70) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #21 (0x258bb98) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #22 (0x258bbc0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #15 (0x258baa8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #18 (0x258bb20) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #16 (0x258bad0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #19 (0x258bb48) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #14 (0x258ba80) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+Mutex #2 (0x258b8a0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7fa3f3bab0aa]
+	./VOLREND(Frame+0xe2) [0x407012]
+0x0000000000407012: Frame at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/volrend/main.c:158
+	[0x7fffb7278dca]
+	[0x706e690036340044]
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       1      736      735      544       25.118        4.501        0.006        0.049 M-.--.
+      20     2200     1172      483        0.902        1.322        0.001        0.003 M-.--.
+      21     2225     1085      467        0.716        1.275        0.001        0.006 M-.--.
+      22     2246     1052      460        0.856        1.290        0.001        0.007 M-.--.
+      15     2112     1050      458        0.855        1.353        0.001        0.002 M-.--.
+      18     2152     1073      452        0.897        1.311        0.001        0.003 M-.--.
+      16     2122     1003      448        0.926        1.230        0.001        0.002 M-.--.
+      19     2176     1072      427        0.797        1.315        0.001        0.002 M-.--.
+      14     2097      978      401        0.885        1.274        0.001        0.002 M-.--.
+       2     1951      555      385        0.316        2.906        0.001        0.010 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 948.683 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+apps/water-nsquared
+=================================================================================
+Using 46 procs on 3 steps of 512 mols
+Other parameters:
+	TSTEP = 1.50e-16
+	NORDER = 6
+	NSAVE = -1
+	NRST = 3000
+	NPRINT = 3
+	NFMC = 0
+	CUTOFF = 6.212752
+
+
+TEMPERATURE                =   298.00 K
+DENSITY                    =  0.99800 G/C.C.
+NUMBER OF MOLECULES        =      512
+NUMBER OF PROCESSORS       =       46
+TIME STEP                  = 1.50e-01 SEC
+ORDER USED TO SOLVE F=MA   =        6 
+NO. OF TIME STEPS          =        3 
+FREQUENCY OF DATA SAVING   =       -1 
+FREQUENCY TO WRITE RST FILE=     3000 
+SPHERICAL CUTOFF RADIUS    =   6.2128 ANGSTROM
+
+NS = 7.9999899999999995
+BOXL =  24.851010
+CUTOFF =   6.212752
+XS =   3.106380
+ZERO = 1.55319
+WCOS = 0.585882
+WSIN = 0.756950
+***** NEW RUN STARTING FROM REGULAR LATTICE *****
+         3        1.57495      0.05127     10.55761                      -2.15831
+           10.026        305.74022        -19.57198
+COMPUTESTART (after initialization) = 1308589618239047
+COMPUTEEND = 1308589618279691
+COMPUTETIME (after initialization) = 40644
+Measured Time (2nd timestep onward) = 19750
+Intramolecular time only (2nd timestep onward) = 6539
+Intermolecular time only (2nd timestep onward) = 10021
+Other time (2nd timestep onward) = 3190
+
+Exited Happily with XTT = 10.0255 (note: XTT value is garbage if NPRINT > NSTEP)
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process WATER-NSQUARED (pid 60291).
+
+mutrace: Showing statistics for process WATER-NSQUARED (pid 60291).
+mutrace: 521 mutexes used.
+
+Mutex #199 (0x157d118) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x49f) [0x408fff]
+0x0000000000408fff: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:237
+
+Mutex #194 (0x157d050) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x369) [0x408ec9]
+0x0000000000408ec9: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:202
+
+Mutex #195 (0x157d078) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x37b) [0x408edb]
+0x0000000000408edb: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:203
+
+Mutex #200 (0x157d140) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x4b4) [0x409014]
+0x0000000000409014: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:241
+
+Mutex #193 (0x157d028) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x357) [0x408eb7]
+0x0000000000408eb7: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:201
+
+Mutex #315 (0x157e338) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x407) [0x408f67]
+0x0000000000408f67: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:213
+
+Mutex #175 (0x1581ec0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x407) [0x408f67]
+0x0000000000408f67: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:213
+
+Mutex #154 (0x1581b78) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x407) [0x408f67]
+0x0000000000408f67: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:213
+
+Mutex #358 (0x157e9f0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x407) [0x408f67]
+0x0000000000408f67: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:213
+
+Mutex #71 (0x1580e80) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f5b1dc9e0aa]
+	./WATER-NSQUARED(main+0x407) [0x408f67]
+0x0000000000408f67: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-nsquared/water.c:213
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+     199      414      336      151        1.815        0.760        0.002        0.016 M-.--.
+     194      184      183       96        5.639        0.640        0.003        0.022 M-.--.
+     195      184      183       66        4.528        0.908        0.005        0.033 M-.--.
+     200       46       45       22        7.000        0.119        0.003        0.011 M-.--.
+     193       46       45       14        5.111        0.157        0.003        0.013 M-.--.
+     315       96       95        9        6.111        0.189        0.002        0.010 M-.--.
+     175      100       99        8        6.143        0.207        0.002        0.006 M-.--.
+     154      100       99        8        6.150        0.219        0.002        0.006 M-.--.
+     358       96       95        8        6.028        0.168        0.002        0.007 M-.--.
+      71       96       95        8         -nan        0.163        0.002        0.006 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 351.664 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+apps/water-spatial
+=================================================================================
+Using 46 procs on 3 steps of 512 mols
+Other parameters:
+	TSTEP = 1.50e-16
+	NORDER = 6
+	NSAVE = -1
+	NRST = 3000
+	NPRINT = 3
+	NFMC = 0
+	CUTOFF = 6.212752
+
+64 boxes with 46 processors
+
+
+TEMPERATURE                =   298.00 K
+DENSITY                    =  0.99800 G/C.C.
+NUMBER OF MOLECULES        =      512
+NUMBER OF PROCESSORS       =       46
+TIME STEP                  = 1.50e-01 SEC
+ORDER USED TO SOLVE F=MA   =        6 
+NO. OF TIME STEPS          =        3 
+FREQUENCY OF DATA SAVING   =       -1 
+FREQUENCY TO WRITE RST FILE=     3000 
+xprocs = 2	yprocs = 1	zprocs = 23
+x_inc = 2	 y_inc = 4	 z_inc = 0
+x_left = 0	 y_left = 0	 z_left = 4
+SPHERICAL CUTOFF RADIUS    =   6.2128 ANGSTROM
+
+NS = 7.9999999999999893
+BOXL =  24.851010
+CUTOFF =   6.212752
+BOX_LENGTH =   6.212752
+BOX_PER_SIDE = 4
+XS =   3.106376
+ZERO = 1.55319
+WCOS = 0.585882
+WSIN = 0.756950
+***** NEW RUN STARTING FROM REGULAR LATTICE *****
+         3     4711.30613   1586.02005      9.16081     -1.85845 
+         6304.629    1430180.83630        414.12462
+COMPUTESTART (after initialization) = 1308589621405483
+COMPUTEEND = 1308589621446814
+COMPUTETIME (after initialization) = 41331
+Measured Time (2nd timestep onward) = 21170
+Intramolecular time only (2nd timestep onward) = 5860
+Intermolecular time only (2nd timestep onward) = 13281
+Other time (2nd timestep onward) = 2029
+
+Exited Happily with XTT = 6304.63 (note: XTT value is garbage if NPRINT > NSTEP)
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process WATER-SPATIAL (pid 60401).
+
+mutrace: Showing statistics for process WATER-SPATIAL (pid 60401).
+mutrace: 70 mutexes used.
+
+Mutex #60 (0xb150a0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f717fac90aa]
+	./WATER-SPATIAL(main+0xc92) [0x409a92]
+0x0000000000409a92: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-spatial/water.c:327
+
+Mutex #59 (0xb15078) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f717fac90aa]
+	./WATER-SPATIAL(main+0xc7d) [0x409a7d]
+0x0000000000409a7d: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-spatial/water.c:326
+
+Mutex #58 (0xb15050) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f717fac90aa]
+	./WATER-SPATIAL(main+0xc6b) [0x409a6b]
+0x0000000000409a6b: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-spatial/water.c:325
+
+Mutex #61 (0xb150c8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f717fac90aa]
+	./WATER-SPATIAL(main+0xca7) [0x409aa7]
+0x0000000000409aa7: fprintf at /usr/include/bits/stdio2.h:98
+ (inlined by) main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-spatial/water.c:330
+
+Mutex #57 (0xb15028) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f717fac90aa]
+	./WATER-SPATIAL(main+0xc59) [0x409a59]
+0x0000000000409a59: main at /home/jp/svn/margaux/profiling/splash2-base/codes/apps/water-spatial/water.c:324
+
+mutrace: Showing 5 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+      60      414      344      145        2.444        0.794        0.002        0.016 M-.--.
+      59      184      183      106        7.056        0.729        0.004        0.021 M-.--.
+      58      184      183       85        6.944        0.668        0.004        0.056 M-.--.
+      61       46       45       25        8.444        0.170        0.004        0.014 M-.--.
+      57       46       45       10        5.889        0.137        0.003        0.012 M-.--.
+                                                                                        ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 56.259 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+kernels/cholesky
+=================================================================================
+
+Sparse Cholesky Factorization
+     Problem:         
+     46 Processors
+     Postpass partition size: 32
+     16384 byte cache
+
+
+true partitions
+Fan-out, no block copy-across
+LB domain, embedded distribution
+No ordering
+3231 supers, 4.33 nodes/super, 174 max super
+3231/1187 supers before/after
+393059150/405034303 (1.03) ops before/after amalgamation
+before partition
+Divide for 46 P, 275 domains, 0.12 of work static, 0.86 eff, (inf overall)
+562121 total domain updates
+1779 max height, 405034303 ops, 75891.76 conc, 40.62 bl for 46 P
+Target partition size 0, postpass size 32
+Processor array is 23 by 2
+No redistribution
+Supers: 18: 1  24: 15  26: 3  28: 1  30: 20  33: 1  36: 13  42: 9  44: 1  48: 3  54: 1  60: 5  64: 2  66: 2  72: 1  78: 2  84: 2  90: 1  102: 1  111: 1  138: 1  168: 1  222: 1  546: 1  
+Blocks: 18: 1  22: 2  24: 21  26: 9  27: 3  28: 10  30: 33  31: 2  32: 24  33: 9  34: 8  35: 2  36: 15  42: 9  
+148 partitions
+148 partitions, 2507 blocks
+405034303 operations for factorization
+
+                            PROCESS STATISTICS
+              Total
+ Proc         Time 
+    0         49804
+                            TIMING INFORMATION
+Start time                        : 1308589627964511
+Initialization finish time        : 1308589628113430
+Overall finish time               : 1308589628163234
+Total time with initialization    :           198723
+Total time without initialization :            49804
+
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process CHOLESKY (pid 60591).
+
+mutrace: Showing statistics for process CHOLESKY (pid 60591).
+mutrace: 95 mutexes used.
+
+Mutex #2 (0x7f2af6b9a7f8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #34 (0x7f2af6b9ae28) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #32 (0x7f2af6b9ad98) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #85 (0x7f2af6b9a648) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #20 (0x7f2af6b9aa80) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #36 (0x7f2af6b9aeb8) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #6 (0x7f2af6b9a888) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #91 (0x7f2af6b9a720) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #0 (0x7f2af6b9a7b0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+Mutex #4 (0x7f2af6b9a840) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f2af84790aa]
+	./CHOLESKY(InitTaskQueues+0x3f) [0x410e1f]
+0x0000000000410e1f: InitTaskQueues at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/cholesky/mf.c:53
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       2     1818     1520      505        0.592        2.805        0.002        0.022 M-.--.
+      34     1940     1569      497        1.208        2.663        0.001        0.009 M-.--.
+      32     1926     1624      485        0.948        2.579        0.001        0.009 M-.--.
+      85     1882     1589      482        0.427        2.899        0.002        0.014 M-.--.
+      20     2020     1572      479        0.731        2.856        0.001        0.015 M-.--.
+      36     1918     1542      475        0.647        2.417        0.001        0.007 M-.--.
+       6     1904     1504      474        0.658        3.140        0.002        0.021 M-.--.
+      91     1794     1492      474        1.117        3.097        0.002        0.039 M-.--.
+       0     1840     1550      470        0.582        2.934        0.002        0.013 M-.--.
+       4     1816     1516      470        0.552        2.350        0.001        0.014 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 203.790 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+mutrace: WARNING: 23 internal hash collisions detected. Results might not be as reliable as they could be.
+mutrace:          Try to increase --hash-size=, which is currently at 3371.
+
+mutrace: WARNING: 8114 internal mutex contention detected. Results might not be reliable as they could be.
+mutrace:          Try to increase --hash-size=, which is currently at 3371.
+
+=================================================================================
+kernels/fft
+=================================================================================
+
+FFT with Blocking Transpose
+   1024 Complex Doubles
+   32 Processors
+   32768 Cache lines
+   64 Byte line size
+   4096 Bytes per page
+
+
+                 PROCESS STATISTICS
+            Computation      Transpose     Transpose
+ Proc          Time            Time        Fraction
+    0              4405             50       0.01135
+
+                 TIMING INFORMATION
+Start time                        : 1308589631260731
+Initialization finish time        : 1308589631265672
+Overall finish time               : 1308589631270077
+Total time with initialization    :             9346
+Total time without initialization :             4405
+Overall transpose time            :               50
+Overall transpose fraction        :          0.01135
+
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process FFT (pid 60701).
+
+mutrace: Showing statistics for process FFT (pid 60701).
+mutrace: 1 mutexes used.
+
+Mutex #0 (0x1ece008) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f885e9d10aa]
+	./FFT(main+0x667) [0x4034d7]
+0x00000000004034d7: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/fft/fft.c:325
+
+mutrace: Showing 1 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       0       32       31       12        4.000        0.108        0.003        0.011 M-.--.
+                                                                                        ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 10.019 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+kernels/LU/contiguous_blocks
+=================================================================================
+
+Blocked Dense LU Factorization
+     512 by 512 Matrix
+     46 Processors
+     16 by 16 Element Blocks
+
+
+                            PROCESS STATISTICS
+              Total      Diagonal     Perimeter      Interior       Barrier
+ Proc         Time         Time         Time           Time          Time
+    0         71628            11           393          5022         66173
+
+                            TIMING INFORMATION
+Start time                        : 1308589634300627
+Initialization finish time        : 1308589634340334
+Overall finish time               : 1308589634413351
+Total time with initialization    :           112724
+Total time without initialization :            73017
+
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process LU (pid 60743).
+
+mutrace: Showing statistics for process LU (pid 60743).
+mutrace: 1 mutexes used.
+
+Mutex #0 (0x1add070) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8e0661c0aa]
+	./LU(main+0x709) [0x404129]
+0x0000000000404129: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/lu/contiguous_blocks/lu.c:316
+
+mutrace: Showing 1 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       0       46       45        7        3.889        0.126        0.003        0.010 M-.--.
+                                                                                        ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 113.831 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+kernels/LU/non_contiguous_blocks
+=================================================================================
+
+Blocked Dense LU Factorization
+     128 by 128 Matrix
+     46 Processors
+     16 by 16 Element Blocks
+
+
+                            PROCESS STATISTICS
+              Total      Diagonal     Perimeter      Interior       Barrier
+ Proc         Time         Time         Time           Time          Time
+    0         19622             7            27            18         19564
+
+                            TIMING INFORMATION
+Start time                        : 1308589637445368
+Initialization finish time        : 1308589637452129
+Overall finish time               : 1308589637473146
+Total time with initialization    :            27778
+Total time without initialization :            21017
+
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process LU (pid 60799).
+
+mutrace: Showing statistics for process LU (pid 60799).
+mutrace: 1 mutexes used.
+
+Mutex #0 (0xeb2070) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f43ca3600aa]
+	./LU(main+0x499) [0x403c29]
+0x0000000000403c29: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/lu/non_contiguous_blocks/lu.c:226
+
+mutrace: Showing 1 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+       0       46       45        8        4.889        0.119        0.003        0.010 M-.--.
+                                                                                        ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 28.735 ms.
+
+mutrace: Results for SMP with 48 processors.
+
+=================================================================================
+kernels/radix
+=================================================================================
+
+Integer Radix Sort
+     262144 Keys
+     32 Processors
+     Radix = 1024
+     Max key = 524288
+
+
+                 PROCESS STATISTICS
+               Total            Rank            Sort
+ Proc          Time             Time            Time
+    0           6892            2926            2381
+
+                 TIMING INFORMATION
+Start time                        : 1308589640503969
+Initialization finish time        : 1308589640523145
+Overall finish time               : 1308589640530037
+Total time with initialization    :            26068
+Total time without initialization :             6892
+
+
+Profiling output:
+=================
+mutrace: 0.2 sucessfully initialized for process RADIX (pid 60855).
+
+mutrace: Showing statistics for process RADIX (pid 60855).
+mutrace: 66 mutexes used.
+
+Mutex #43 (0x7f8c5556d008) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x566) [0x403686]
+0x0000000000403686: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:256
+
+Mutex #56 (0x7f8c5579dcd0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+Mutex #30 (0x7f8c5587b1b0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+Mutex #8 (0x7f8c55837030) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+Mutex #38 (0x7f8c557d0df0) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+Mutex #1 (0x7f8c557bfd90) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+Mutex #25 (0x7f8c558d0390) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+Mutex #36 (0x7f8c558f2450) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+Mutex #47 (0x7f8c55848090) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+Mutex #58 (0x7f8c5586a150) first referenced by:
+	/usr/local/lib/libmutrace.so(pthread_mutex_init+0x1ab) [0x7f8c574470aa]
+	./RADIX(main+0x5e0) [0x403700]
+0x0000000000403700: main at /home/jp/svn/margaux/profiling/splash2-base/codes/kernels/radix/radix.c:276
+
+mutrace: Showing 10 most contended mutexes:
+
+ Mutex #   Locked  Changed    Cont.       L2 DCM tot.Time[ms] avg.Time[ms] max.Time[ms]  Flags
+      43       32       31        4        3.429        0.083        0.003        0.009 M-.--.
+      56       10        7        1        5.000        0.047        0.005        0.010 M-.--.
+      30        6        4        1        3.500        0.068        0.011        0.034 M-.--.
+       8        5        4        1         -nan        0.021        0.004        0.016 M-.--.
+      38        5        3        1         -nan        0.023        0.005        0.019 M-.--.
+       1       12        8        0         -nan        0.070        0.006        0.019 M-.--.
+      25       11        8        0         -nan        0.045        0.004        0.014 M-.--.
+      36       11        8        0         -nan        0.029        0.003        0.010 M-.--.
+      47       11        7        0         -nan        0.055        0.005        0.020 M-.--.
+      58       11        7        0        1.000        0.054        0.005        0.018 M-.--.
+     ...      ...      ...      ...          ...          ...           ...         ... ||||||
+                                                                                        /|||||
+          Object:                                                  M = Mutex, W = RWLock /||||
+           State:                                              x = dead, ! = inconsistent /|||
+             Use:                                              R = used in realtime thread /||
+      Mutex Type:                               r = RECURSIVE, e = ERRORCHECK, a = ADAPTIVE /|
+  Mutex Protocol:                                                   i = INHERIT, p = PROTECT /
+     RWLock Kind:              r = PREFER_READER, w = PREFER_WRITER, W = PREFER_WRITER_NONREC 
+
+mutrace: Note that the flags column R is only valid in --track-rt mode!
+
+mutrace: Total runtime is 26.980 ms.
+
+mutrace: Results for SMP with 48 processors.

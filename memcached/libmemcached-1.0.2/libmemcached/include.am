@@ -1,0 +1,130 @@
+# vim:ft=automake
+# included from Top Level Makefile.am
+# All paths should be given relative to the root
+
+libmemcached_libmemcached_la_SOURCES =
+
+include libmemcached/csl/include.am
+
+EXTRA_DIST+= \
+	     libmemcached/libmemcached_probes.d \
+	     libmemcached/memcached/README.txt
+
+nobase_include_HEADERS+= \
+			 libmemcached/memcached.h \
+			 libmemcached/memcached.hpp \
+			 libmemcached/util.h
+
+noinst_HEADERS+= \
+		 libmemcached/array.h \
+		 libmemcached/assert.hpp \
+		 libmemcached/backtrace.hpp \
+		 libmemcached/byteorder.h \
+		 libmemcached/common.h \
+		 libmemcached/continuum.hpp \
+		 libmemcached/do.hpp \
+		 libmemcached/error.hpp \
+		 libmemcached/initialize_query.h \
+		 libmemcached/internal.h \
+		 libmemcached/io.h \
+		 libmemcached/io.hpp \
+		 libmemcached/is.h \
+		 libmemcached/key.hpp \
+		 libmemcached/libmemcached_probes.h \
+		 libmemcached/memcached/protocol_binary.h \
+		 libmemcached/memcached/vbucket.h \
+		 libmemcached/memory.h \
+		 libmemcached/namespace.h \
+		 libmemcached/options.hpp \
+		 libmemcached/response.h \
+		 libmemcached/server.hpp \
+		 libmemcached/server_instance.h \
+		 libmemcached/string.hpp \
+		 libmemcached/virtual_bucket.h \
+		 libmemcached/watchpoint.h
+
+lib_LTLIBRARIES+= libmemcached/libmemcached.la
+libmemcached_libmemcached_la_CFLAGS= -DBUILDING_LIBMEMCACHED
+
+libmemcached_libmemcached_la_CXXFLAGS= -DBUILDING_LIBMEMCACHED
+
+libmemcached_libmemcached_la_SOURCES+= \
+				       ${libhashkit_libhashkit_la_SOURCES} \
+				       libmemcached/allocators.cc \
+				       libmemcached/analyze.cc \
+				       libmemcached/array.c \
+				       libmemcached/auto.cc \
+				       libmemcached/backtrace.cc \
+				       libmemcached/behavior.cc \
+				       libmemcached/byteorder.cc \
+				       libmemcached/callback.cc \
+				       libmemcached/connect.cc \
+				       libmemcached/delete.cc \
+				       libmemcached/do.cc \
+				       libmemcached/dump.cc \
+				       libmemcached/error.cc \
+				       libmemcached/exist.cc \
+				       libmemcached/fetch.cc \
+				       libmemcached/flush.cc \
+				       libmemcached/flush_buffers.cc \
+				       libmemcached/get.cc \
+				       libmemcached/touch.cc \
+				       libmemcached/hash.cc \
+				       libmemcached/hosts.cc \
+				       libmemcached/initialize_query.cc \
+				       libmemcached/io.cc \
+				       libmemcached/key.cc \
+				       libmemcached/memcached.cc \
+				       libmemcached/options.cc \
+				       libmemcached/parse.cc \
+				       libmemcached/namespace.cc \
+				       libmemcached/purge.cc \
+				       libmemcached/quit.cc \
+				       libmemcached/response.cc \
+				       libmemcached/result.cc \
+				       libmemcached/server.cc \
+				       libmemcached/server_list.cc \
+				       libmemcached/stats.cc \
+				       libmemcached/storage.cc \
+				       libmemcached/strerror.cc \
+				       libmemcached/string.cc \
+				       libmemcached/verbosity.cc \
+				       libmemcached/version.cc \
+				       libmemcached/virtual_bucket.c
+
+libmemcached/options.cc: libmemcached/csl/parser.h
+
+
+libmemcached_libmemcached_la_DEPENDENCIES=
+libmemcached_libmemcached_la_LIBADD=
+if TARGET_LINUX
+libmemcached_libmemcached_la_LIBADD+= -lm
+endif
+libmemcached_libmemcached_la_LDFLAGS+= -version-info ${MEMCACHED_LIBRARY_VERSION}
+
+libmemcached_libmemcached_la_LIBADD+= $(LTLIBSASL) $(LTLIBSASL2)
+libmemcached_libmemcached_la_SOURCES += libmemcached/sasl.cc
+if HAVE_SASL
+libmemcached_libmemcached_la_CXXFLAGS+= ${PTHREAD_CFLAGS}
+libmemcached_libmemcached_la_LIBADD+= ${PTHREAD_LIBS}
+endif
+
+if HAVE_DTRACE
+BUILT_SOURCES+= libmemcached/dtrace_probes.h
+CLEANFILES+= libmemcached/dtrace_probes.h
+CLEANFILES+= libmemcached/libmemcached_probes.o
+
+libmemcached_libmemcached_la_DEPENDENCIES += libmemcached/libmemcached_probes.o
+libmemcached_libmemcached_la_LIBADD += libmemcached/libmemcached_probes.o
+libmemcached_libmemcached_la_SOURCES += libmemcached/libmemcached_probes.d
+endif
+
+SUFFIXES+= .d
+
+libmemcached/dtrace_probes.h: libmemcached/libmemcached_probes.d
+	$(DTRACE) $(DTRACEFLAGS) -h -o ${top_srcdir}/libmemcached/dtrace_probes.h -s ${top_srcdir}/libmemcached/libmemcached_probes.d
+
+libmemcached/libmemcached_probes.o: libmemcached/libmemcached_probes.d ${libmemcached_libmemcached_la_OBJECTS} config.h
+
+.d.o:
+	$(DTRACE) $(DTRACEFLAGS) -o $@ -G -s libmemcached/libmemcached_probes.d

@@ -1,0 +1,33 @@
+ROOT ?= ../..
+LIBLOCK_ROOT = $(ROOT)/liblock
+
+#include $(ROOT)/common/Makefile.common
+
+BINDIR = ./bin
+BUILDIR = ./build
+MCMODEL = -mcmodel=large
+
+CFLAGS += -g -O3 -DLIBLOCK 
+CFLAGS += -DNDEBUG
+CFLAGS += -D_REENTRANT -D_GNU_SOURCE
+CFLAGS += -fno-strict-aliasing
+CFLAGS += -I. -I$(LIBLOCK_ROOT)
+CFLAGS += -std=gnu89
+CFLAGS += -D_GNU_SOURCE
+LDFLAGS += -lpthread -lnuma -lrt
+
+.PHONY:	all clean
+
+all: rcl-shared-vars fc-shared-vars
+
+create_dir:
+	mkdir -p $(BINDIR)
+
+rcl-shared-vars: $(LIBLOCK_ROOT)/liblock.c $(LIBLOCK_ROOT)/rcl.c liblock-config.c shared_vars.c
+	$(CC) $(CFLAGS) $^ -o $(BINDIR)/$@ $(LDFLAGS) -DTYPE_NOINFO=TYPE_RCL
+
+fc-shared-vars: $(LIBLOCK_ROOT)/liblock.c $(LIBLOCK_ROOT)/flatcombining.c liblock-config.c shared_vars.c
+	$(CC) $(CFLAGS) $^ -o $(BINDIR)/$@ $(LDFLAGS) -DTYPE_NOINFO=TYPE_FLATCOMBINING
+
+clean:
+	rm -f $(BINDIR)/rcl-lazylist $(BINDIR)/fc-lazylist

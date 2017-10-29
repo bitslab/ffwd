@@ -1,0 +1,64 @@
+ROOT ?= ../..
+LIBLOCK_ROOT = $(ROOT)/liblock
+
+#include $(ROOT)/common/Makefile.common
+ifndef ARCH                                                                                                                       
+	ARCH_NAME = $(shell uname -m)                                                                                                 
+endif
+
+ifeq ($(ARCH_NAME), i386)                                                                                                         
+    ARCH = x86                                                                                                                    
+    CFLAGS += -m32                                                                                                                
+    LDFLAGS += -m32                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), i686)                                                                                                         
+    ARCH = x86                                                                                                                    
+    CFLAGS += -m32                                                                                                                
+    LDFLAGS += -m32                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), x86_64)                                                                                                       
+    ARCH = x86_64                                                                                                                 
+    CFLAGS += -m64                                                                                                                
+    LDFLAGS += -m64                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), sun4v)                                                                                                        
+    ARCH = sparc64                                                                                                                
+    CFLAGS += -DSPARC=1 -DINLINED=1 -mt -fast -m64                                                                                
+    LDFLAGS += -lrt -m64                                                                                                          
+endif
+
+BINDIR = ./bin
+BUILDIR = ./build
+LAZYLISTDIR = $(ROOT)/synchrobench/c-cpp/src/linkedlists/lazy-list
+MCMODEL = -mcmodel=large
+
+CFLAGS += -g -O3 -DLIBLOCK
+CFLAGS += -DSYNCHRO
+CFLAGS += -DNDEBUG
+CFLAGS += -D_REENTRANT -D_GNU_SOURCE
+CFLAGS += -fno-strict-aliasing
+CFLAGS += -I$(LIBLOCK_ROOT) -I$(LAZYLISTDIR)
+CFLAGS += -std=gnu89
+CFLAGS += -D_GNU_SOURCE
+LDFLAGS += -lpthread -lnuma -lrt
+
+.PHONY:	all clean
+
+all: create_dir rcl-lazylist fc-lazylist
+
+create_dir:
+	mkdir -p $(BINDIR)
+ 
+#rcl-lazylist: $(LIBLOCK_ROOT)/liblock.c $(LIBLOCK_ROOT)/rcl.c $(LAZYLISTDIR)/liblock-config.c $(LAZYLISTDIR)/intset.c $(LAZYLISTDIR)/delegate_lazy.c $(LAZYLISTDIR)/linkedlist-lock.c $(LAZYLISTDIR)/test.c
+rcl-lazylist: $(LIBLOCK_ROOT)/liblock.c $(LIBLOCK_ROOT)/rcl.c $(LAZYLISTDIR)/intset.c $(LAZYLISTDIR)/delegate_lazy.c $(LAZYLISTDIR)/linkedlist-lock.c $(LAZYLISTDIR)/liblock_test.c
+	$(CC) $(CFLAGS) $^ -o $(BINDIR)/$@ $(LDFLAGS) -DTYPE_NOINFO=TYPE_RCL
+
+#fc-lazylist: $(LIBLOCK_ROOT)/liblock.c $(LIBLOCK_ROOT)/flatcombining.c $(LAZYLISTDIR)/liblock-config.c $(LAZYLISTDIR)/intset.c $(LAZYLISTDIR)/delegate_lazy.c $(LAZYLISTDIR)/linkedlist-lock.c $(LAZYLISTDIR)/test.c
+fc-lazylist: $(LIBLOCK_ROOT)/liblock.c $(LIBLOCK_ROOT)/flatcombining.c $(LAZYLISTDIR)/intset.c $(LAZYLISTDIR)/delegate_lazy.c $(LAZYLISTDIR)/linkedlist-lock.c $(LAZYLISTDIR)/liblock_test.c
+	$(CC) $(CFLAGS) $^ -o $(BINDIR)/$@ $(LDFLAGS) -DTYPE_NOINFO=TYPE_FLATCOMBINING
+
+clean:
+	rm -f $(BINDIR)/rcl-lazylist $(BINDIR)/fc-lazylist

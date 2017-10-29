@@ -1,0 +1,433 @@
+# vim:ft=automake
+# Copyright (C) 2011 Data Differential
+# All rights reserved.
+#
+# Use and distribution licensed under the BSD license.  See
+# the COPYING file in the parent directory for full text.
+#
+# included from Top Level Makefile.am
+# All paths should be given relative to the root
+
+TESTS_LDADDS= \
+	      libmemcached/libmemcached.la \
+	      libmemcached/libmemcachedutil.la \
+	      libtest/libtest.la
+
+DEBUG_COMMAND= $(LIBTOOL) --mode=execute gdb
+
+PAHOLE_COMMAND= $(LIBTOOL) --mode=execute pahole
+
+EXTRA_DIST+= \
+	     tests/cpp_example.cc \
+	     tests/output_plus.res
+
+noinst_HEADERS+= \
+		 tests/basic.h \
+		 tests/callbacks.h \
+		 tests/debug.h \
+		 tests/error_conditions.h \
+		 tests/exist.h \
+		 tests/hash_results.h \
+		 tests/ketama.h \
+		 tests/ketama_test_cases.h \
+		 tests/ketama_test_cases_spy.h \
+		 tests/libmemcached_world.h \
+		 tests/namespace.h \
+		 tests/parser.h \
+		 tests/touch.h \
+		 tests/deprecated.h \
+		 tests/pool.h \
+		 tests/print.h \
+		 tests/replication.h \
+		 tests/server_add.h \
+		 tests/string.h \
+		 tests/virtual_buckets.h
+
+# Cycle should always run first
+tests_cycle_CFLAGS= $(AM_CFLAGS) $(NO_CONVERSION) $(NO_STRICT_ALIASING)
+tests_cycle_CXXFLAGS= $(AM_CXXFLAGS)
+tests_cycle_CXXFLAGS+= ${PTHREAD_CFLAGS}
+tests_cycle_SOURCES= tests/cycle.cc
+tests_cycle_DEPENDENCIES= $(TESTS_LDADDS)
+tests_cycle_LDADD= $(tests_cycle_DEPENDENCIES)
+tests_cycle_LDADD+= ${PTHREAD_LIBS}
+check_PROGRAMS+= tests/cycle
+noinst_PROGRAMS+= tests/cycle
+
+# Test internals
+tests_internals_SOURCES= tests/internals.cc
+tests_internals_SOURCES+= tests/string.cc
+tests_internals_CXXFLAGS =  $(AM_CXXFLAGS) ${PTHREAD_CFLAGS}
+tests_internals_DEPENDENCIES= libmemcachedinternal/libmemcachedinternal.la libtest/libtest.la  libmemcachedinternal/libmemcachedutilinternal.la
+tests_internals_LDADD= libmemcachedinternal/libmemcachedinternal.la
+tests_internals_LDADD+= ${PTHREAD_LIBS}
+tests_internals_LDADD+= libmemcachedinternal/libmemcachedutilinternal.la
+tests_internals_LDADD+= libtest/libtest.la
+check_PROGRAMS+= tests/internals
+noinst_PROGRAMS+= tests/internals
+
+
+tests_testapp_CXXFLAGS =  $(AM_CXXFLAGS) ${PTHREAD_CFLAGS}
+tests_testapp_CFLAGS= $(AM_CFLAGS) $(NO_CONVERSION) $(NO_STRICT_ALIASING)
+tests_testapp_SOURCES= \
+		       tests/basic.cc \
+		       tests/debug.cc \
+		       tests/deprecated.cc \
+		       tests/error_conditions.cc \
+		       tests/exist.cc \
+		       tests/ketama.cc \
+		       tests/mem_functions.cc \
+		       tests/namespace.cc \
+		       tests/parser.cc \
+		       tests/touch.cc \
+		       tests/callbacks.cc \
+		       tests/pool.cc \
+		       tests/print.cc \
+		       tests/replication.cc \
+		       tests/server_add.cc \
+		       tests/virtual_buckets.cc
+tests_testapp_SOURCES+= clients/generator.cc clients/execute.cc
+tests_testapp_DEPENDENCIES= \
+			    libmemcached/libmemcached.la \
+			    libtest/libtest.la
+			    libhashkit/libhashkit.la \
+			    libmemcached/libmemcachedutil.la
+tests_testapp_LDADD= \
+		     ${PTHREAD_LIBS} \
+		     libmemcached/libmemcached.la \
+		     libmemcached/libmemcachedutil.la \
+		     libtest/libtest.la \
+		     libhashkit/libhashkit.la
+check_PROGRAMS+= tests/testapp
+noinst_PROGRAMS+= tests/testapp
+
+tests_sasl_CXXFLAGS =  $(AM_CXXFLAGS) ${PTHREAD_CFLAGS}
+tests_sasl_CFLAGS= $(AM_CFLAGS) $(NO_CONVERSION) $(NO_STRICT_ALIASING)
+tests_sasl_SOURCES= \
+		    tests/basic.cc \
+		    tests/debug.cc \
+		    tests/deprecated.cc \
+		    tests/error_conditions.cc \
+		    tests/ketama.cc \
+		    tests/sasl.cc \
+		    tests/namespace.cc \
+		    tests/parser.cc \
+		    tests/pool.cc \
+		    tests/print.cc \
+		    tests/replication.cc \
+		    tests/virtual_buckets.cc
+tests_sasl_SOURCES+= clients/generator.cc clients/execute.cc
+tests_sasl_DEPENDENCIES= \
+			 libmemcached/libmemcached.la \
+			 libtest/libtest.la
+tests_sasl_LDADD= \
+		  ${PTHREAD_LIBS} \
+		  libmemcached/libmemcached.la \
+		  libmemcached/libmemcachedutil.la \
+		  libtest/libtest.la \
+		  libhashkit/libhashkit.la
+check_PROGRAMS+= tests/sasl
+noinst_PROGRAMS+= tests/sasl
+
+tests_testplus_SOURCES= tests/plus.cpp
+tests_testplus_CXXFLAGS = $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_testplus_DEPENDENCIES= $(TESTS_LDADDS)
+tests_testplus_LDADD= $(tests_testplus_DEPENDENCIES)
+check_PROGRAMS+= tests/testplus
+noinst_PROGRAMS+= tests/testplus
+
+tests_failure_SOURCES= tests/failure.cc
+tests_failure_CXXFLAGS = $(AM_CXXFLAGS)
+tests_failure_DEPENDENCIES= $(TESTS_LDADDS)
+tests_failure_LDADD= $(tests_failure_DEPENDENCIES)
+check_PROGRAMS+= tests/failure
+noinst_PROGRAMS+= tests/failure
+
+tests_atomsmasher_SOURCES= \
+			   tests/atomsmasher.cc \
+			   tests/debug.cc \
+			   tests/print.cc \
+			   clients/generator.cc \
+			   clients/execute.cc
+tests_atomsmasher_DEPENDENCIES= $(TESTS_LDADDS)
+tests_atomsmasher_LDADD= $(tests_atomsmasher_DEPENDENCIES)
+noinst_PROGRAMS+= tests/atomsmasher
+
+tests_testudp_CFLAGS= $(AM_CFLAGS) $(NO_CONVERSION) $(NO_STRICT_ALIASING)
+tests_testudp_SOURCES= tests/mem_udp.cc
+tests_testudp_DEPENDENCIES= $(TESTS_LDADDS)
+tests_testudp_LDADD= $(tests_testudp_DEPENDENCIES)
+check_PROGRAMS+= tests/testudp
+noinst_PROGRAMS+= tests/testudp
+
+tests_testhashkit_SOURCES = tests/hashkit_functions.cc
+tests_testhashkit_DEPENDENCIES = libtest/libtest.la libhashkit/libhashkit.la $(TESTS_LDADDS)
+tests_testhashkit_LDADD = $(tests_testhashkit_DEPENDENCIES)
+check_PROGRAMS+= tests/testhashkit
+noinst_PROGRAMS+= tests/testhashkit
+
+tests_hash_plus_SOURCES= tests/hash_plus.cc
+tests_hash_plus_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_hash_plus_DEPENDENCIES= $(tests_testhashkit_DEPENDENCIES)
+tests_hash_plus_LDADD= $(tests_testhashkit_DEPENDENCIES)
+check_PROGRAMS+= tests/hash_plus
+noinst_PROGRAMS+= tests/hash_plus
+
+tests_memcapable_SOURCES= tests/memcapable.cc
+tests_memcapable_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memcapable_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memcapable
+tests_memcapable_LDADD=  libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memcapable
+noinst_PROGRAMS+= tests/memcapable
+
+tests_memstat_SOURCES= tests/memstat.cc
+tests_memstat_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memstat_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memstat
+tests_memstat_LDADD=  libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memstat
+noinst_PROGRAMS+= tests/memstat
+
+tests_memcp_SOURCES= tests/memcp.cc
+tests_memcp_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memcp_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memcp
+tests_memcp_LDADD=  libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memcp
+noinst_PROGRAMS+= tests/memcp
+
+tests_memflush_SOURCES= tests/memflush.cc
+tests_memflush_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memflush_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memflush
+tests_memflush_LDADD= libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memflush
+noinst_PROGRAMS+= tests/memflush
+
+tests_memrm_SOURCES= tests/memrm.cc
+tests_memrm_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memrm_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memrm
+tests_memrm_LDADD= libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memrm
+noinst_PROGRAMS+= tests/memrm
+
+tests_memexist_SOURCES= tests/memexist.cc
+tests_memexist_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memexist_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memexist
+tests_memexist_LDADD= libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memexist
+noinst_PROGRAMS+= tests/memexist
+
+tests_memtouch_SOURCES= tests/memtouch.cc
+tests_memtouch_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memtouch_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memtouch
+tests_memtouch_LDADD=  libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memtouch
+noinst_PROGRAMS+= tests/memtouch
+
+tests_memcat_SOURCES= tests/memcat.cc
+tests_memcat_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memcat_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memcat
+tests_memcat_LDADD= libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memcat
+noinst_PROGRAMS+= tests/memcat
+
+tests_memerror_SOURCES= tests/memerror.cc
+tests_memerror_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memerror_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memerror
+tests_memerror_LDADD= libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memerror
+noinst_PROGRAMS+= tests/memerror
+
+tests_memslap_SOURCES= tests/memslap.cc
+tests_memslap_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memslap_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memslap
+tests_memslap_LDADD= libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memslap
+noinst_PROGRAMS+= tests/memslap
+
+tests_memdump_SOURCES= tests/memdump.cc
+tests_memdump_CXXFLAGS= $(AM_CXXFLAGS) $(NO_EFF_CXX)
+tests_memdump_DEPENDENCIES= libtest/libtest.la $(TESTS_LDADDS) clients/memdump
+tests_memdump_LDADD=  libtest/libtest.la $(TESTS_LDADDS)
+check_PROGRAMS+= tests/memdump
+noinst_PROGRAMS+= tests/memdump
+ 
+# Test linking with C application
+tests_c_test_SOURCES= tests/c_test.c
+tests_c_test_LDADD= libmemcached/libmemcached.la
+tests_c_test_DEPENDENCIES= libmemcached/libmemcached.la
+check_PROGRAMS+=tests/c_test
+noinst_PROGRAMS+=tests/c_test
+
+# Test linking with C application/SASL include
+tests_c_sasl_test_SOURCES= tests/c_sasl_test.c
+tests_c_sasl_test_LDADD= libmemcached/libmemcached.la
+tests_c_sasl_test_DEPENDENCIES= libmemcached/libmemcached.la
+check_PROGRAMS+=tests/c_sasl_test
+noinst_PROGRAMS+=tests/c_sasl_test
+
+test: check
+
+check-local: $(TEST_DOCS)
+	@echo "Tests completed"
+
+test-x: test-plus test-memcp test-memdump test-memflush test-memstat
+	@echo "Tests completed"
+
+test-memcp: clients/memcp
+	@echo "Testing memcp"
+	@@MEMC_BINARY@ -d -u root -P `pwd`/tests/Xumemc.pid -p 12555
+	@clients/memcp --servers="localhost:12555" clients/memcp clients/memcat clients/memstat
+	@cat tests/Xumemc.pid | xargs kill || echo "Failed to kill memcached server"
+	@rm tests/Xumemc.pid
+
+valgrind-memcp: clients/memcat clients/memcp
+	@echo "Testing memcp"
+	@@MEMC_BINARY@ -d -u root -P `pwd`/tests/Xumemc.pid -p 12555
+	@$(VALGRIND_COMMAND) clients/memcp --servers="localhost:12555" clients/memcp clients/memcat clients/memstat
+	@cat tests/Xumemc.pid | xargs kill || echo "Failed to kill memcached server"
+	@rm tests/Xumemc.pid
+
+test-memflush: clients/memflush
+	@echo "Testing memflush"
+	@$(MEMC_BINARY) -d -u root -P `pwd`/tests/Xumemc.pid -p 12555
+	@clients/memflush --servers="localhost:12555"
+	@cat tests/Xumemc.pid | xargs kill || echo "Failed to kill memcached server"
+	@rm tests/Xumemc.pid
+
+valgrind-memflush: clients/memflush
+	@echo "Testing memflush"
+	@$(MEMC_BINARY) -d -u root -P `pwd`/tests/Xumemc.pid -p 12555
+	@$(VALGRIND_COMMAND) clients/memflush --servers="localhost:12555"
+	@cat tests/Xumemc.pid | xargs kill || echo "Failed to kill memcached server"
+	@rm tests/Xumemc.pid
+
+test-memdump: clients/memdump clients/memcp
+	@echo "Testing memdump"
+	@$(MEMC_BINARY) -d -u root -P `pwd`/tests/Xumemc.pid -p 12555
+	@clients/memcp --servers="localhost:12555" clients/memcat
+	@clients/memdump --servers="localhost:12555" > /dev/null
+	@cat tests/Xumemc.pid | xargs kill || echo "Failed to kill memcached server"
+	@rm tests/Xumemc.pid
+
+valgrind-memdump: clients/memcat clients/memcp
+	@echo "Testing memdump"
+	@$(MEMC_BINARY) -d -u root -P `pwd`/tests/Xumemc.pid -p 12555
+	@clients/memcp --servers="localhost:12555" clients/memcat
+	@$(VALGRIND_COMMAND) clients/memdump --servers="localhost:12555" > /dev/null
+	@cat tests/Xumemc.pid | xargs kill || echo "Failed to kill memcached server"
+	@rm tests/Xumemc.pid
+
+test-memstat: clients/memstat
+	@echo "Testing memstat"
+	@$(MEMC_BINARY) -d -u root -P `pwd`/tests/Xumemc.pid -p 12555
+	@clients/memstat --servers="localhost:12555" > /dev/null
+	@cat tests/Xumemc.pid | xargs kill || echo "Failed to kill memcached server"
+	@rm tests/Xumemc.pid
+
+valgrind-memstat: clients/memstat
+	@echo "Testing memstat"
+	@$(MEMC_BINARY) -d -u root -P `pwd`/tests/Xumemc.pid -p 12555
+	@$(VALGRIND_COMMAND) clients/memstat --servers="localhost:12555" > /dev/null
+	@cat tests/Xumemc.pid | xargs kill || echo "Failed to kill memcached server"
+	@rm tests/Xumemc.pid
+
+test-mem: tests/var tests/testapp
+	@tests/testapp
+
+test-sasl: tests/sasl
+	@tests/sasl
+
+test-atom: tests/var tests/atomsmasher
+	@tests/atomsmasher
+
+test-plus: tests/var tests/testplus
+	@tests/testplus
+
+test-hash: tests/var tests/testhashkit
+	@tests/testhashkit
+
+test-hashplus: tests/var tests/hash_plus
+	@tests/hash_plus
+
+test-cycle: tests/var tests/cycle
+	@tests/cycle
+
+test-memcapable: tests/var tests/memcapable
+	@tests/memcapable
+
+pahole-mem: tests/testapp
+	@$(PAHOLE_COMMAND)  tests/testapp
+
+gdb-mem: tests/testapp
+	@$(DEBUG_COMMAND)  tests/testapp
+
+gdb-sasl: tests/sasl
+	@$(DEBUG_COMMAND)  tests/sasl
+
+gdb-atom: tests/atomsmasher
+	@$(DEBUG_COMMAND) tests/atomsmasher
+
+gdb-udp: tests/testudp
+	@$(DEBUG_COMMAND) tests/testudp
+
+gdb-plus: tests/testplus
+	$(DEBUG_COMMAND) tests/testplus
+
+gdb-hash: tests/testhashkit
+	@$(DEBUG_COMMAND) tests/testhashkit
+
+gdb-hashplus: tests/hash_plus
+	@$(DEBUG_COMMAND) tests/hash_plus
+
+gdb-cycle: tests/cycle
+	@$(DEBUG_COMMAND) tests/cycle
+
+gdb-failure: tests/failure
+	@$(DEBUG_COMMAND) tests/failure
+
+valgrind-cycle: tests/cycle
+	$(VALGRIND_COMMAND) tests/cycle
+
+valgrind-mem: tests/testapp
+	@$(VALGRIND_COMMAND) tests/testapp
+
+valgrind-failure: tests/failure
+	@$(VALGRIND_COMMAND) tests/failure
+
+valgrind-atom: tests/atomsmasher
+	$(VALGRIND_COMMAND) tests/atomsmasher
+
+valgrind-udp: tests/testudp
+	$(VALGRIND_COMMAND) tests/testudp
+
+valgrind-plus: tests/testplus
+	@$(VALGRIND_COMMAND) tests/testplus
+
+valgrind-sasl: tests/sasl
+	@$(VALGRIND_COMMAND) tests/sasl
+
+valgrind-hash: tests/testhashkit
+	@$(VALGRIND_COMMAND) tests/testhashkit
+
+valgrind-hashplus: tests/hash_plus
+	@$(VALGRIND_COMMAND) tests/hash_plus
+
+helgrind-cycle: tests/cycle
+	@$(HELGRIND_COMMAND) tests/cycle
+
+helgrind-mem: tests/testapp
+	@$(HELGRIND_COMMAND) tests/testapp
+
+helgrind-atom: tests/atomsmasher
+	@$(HELGRIND_COMMAND) tests/atomsmasher
+
+helgrind-udp: tests/testudp
+	@$(HELGRIND_COMMAND) tests/testudp
+
+helgrind-plus: tests/testplus
+	@$(HELGRIND_COMMAND) tests/testplus
+
+helgrind-hash: tests/testhashkit
+	@$(HELGRIND_COMMAND) tests/testhashkit
+
+helgrind-hashplus: tests/hash_plus
+	@$(HELGRIND_COMMAND) tests/hash_plus

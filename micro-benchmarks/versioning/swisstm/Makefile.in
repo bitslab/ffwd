@@ -1,0 +1,455 @@
+########################################
+# installation specific dirs
+LIBPAPI_DIR = /home/dragojev/local64
+
+ATOMIC_OPS_INCLUDE = /home/dragojev/local/libatomicops/include/
+
+########################################
+# set general variables
+SOLARIS_CPP = /home/dragojev/local/gcc/bin/g++
+SOLARIS_CC = /home/dragojev/local/gcc/bin/gcc
+
+GNU_CPP = g++
+GNU_CC = gcc
+
+INTEL_CPP = icpc
+INTEL_CC = icc
+
+AR = ar
+
+########################################
+# set the compiler
+ifeq ($(COMPILER), )
+	COMPILER = gnu
+endif
+
+ifeq ($(COMPILER), gnu)
+	CC = $(GNU_CC)
+	CPP = $(GNU_CPP)
+endif
+
+ifeq ($(COMPILER), intel)
+	CC = $(INTEL_CC)
+	CPP = $(INTEL_CPP)
+endif
+
+########################################
+# set compiler and linker options
+COMMON_CPPFLAGS = -Wall -I$(ATOMIC_OPS_INCLUDE) -fno-strict-aliasing
+COMMON_LDFLAGS  =
+
+CPPFLAGS = $(COMMON_CPPFLAGS)
+CPPFLAGS += -fno-exceptions -nostdinc++
+LDFLAGS = $(COMMON_LDFLAGS)
+
+ifeq ($(COMPILER), gnu)
+	CPPFLAGS += -fno-threadsafe-statics
+endif
+
+ifeq ($(COMPILER), intel)
+	COMMON_CPPFLAGS += -wd981 -wd522 -wd181 -wd869 -wd111 -wd1599 -wd1418
+endif
+
+MFLAGS = -j2
+
+########################################
+# set platform specific variables
+OS_NAME = $(shell uname -s)
+
+ifeq ($(OS_NAME), Darwin)
+    OS = MacOS
+endif
+
+ifeq ($(OS_NAME), Linux)
+    OS = Linux
+endif
+
+ifeq ($(OS_NAME), SunOS)
+    OS = Solaris
+endif
+
+ifeq ($(OS), MacOS)
+    LPDSTM_CPPFLAGS = -D WLPDSTM_MACOS
+    MUBENCH_CPPFLAGS = -D MUBENCH_MACOS
+    COMMON_CPPFLAGS += -pthread
+    COMMON_LDFLAGS += -pthread
+endif
+
+ifeq ($(OS), Linux)
+    LPDSTM_CPPFLAGS = -D WLPDSTM_LINUXOS
+    MUBENCH_CPPFLAGS = -D MUBENCH_LINUXOS
+    COMMON_CPPFLAGS += -pthread
+    COMMON_LDFLAGS += -lrt -pthread
+endif
+
+# override the compiler too
+ifeq ($(OS), Solaris)
+    LPDSTM_CPPFLAGS = -D WLPDSTM_SOLARIS
+    MUBENCH_CPPFLAGS = -D MUBENCH_SOLARIS
+    COMMON_CPPFLAGS += -mt
+    COMMON_LDFLAGS += -lrt -mt
+	CPP = $(SOLARIS_CPP)
+	CC = $(SOLARIS_CC)
+endif
+
+########################################
+# set architecture specific flags
+ifeq ($(ARCH), )
+    ARCH_NAME = $(shell uname -m)
+endif
+
+ifeq ($(ARCH_NAME), i386)
+    ARCH = x86
+endif
+
+ifeq ($(ARCH_NAME), i686)
+    ARCH = x86
+endif
+
+ifeq ($(ARCH_NAME), x86_64)
+    ARCH = x86_64
+endif
+
+ifeq ($(ARCH_NAME), sun4v)
+    ARCH = sparc64
+endif
+
+ifeq ($(ARCH), x86)
+    LPDSTM_CPPFLAGS += -D WLPDSTM_X86 -D WLPDSTM_32
+endif
+
+ifeq ($(ARCH), x86_64)
+    LPDSTM_CPPFLAGS += -D WLPDSTM_X86 -D WLPDSTM_64
+endif
+
+ifeq ($(ARCH), sparc64)
+    LPDSTM_CPPFLAGS += -D WLPDSTM_SPARC -D WLPDSTM_64
+	COMMON_CPPFLAGS += -m64
+	COMMON_LDFLAGS += -m64
+endif
+
+########################################
+# set CPU specific flags
+ifeq ($(CPU), )
+ifeq ($(OS), Solaris)
+	CPU_NAME = $(shell uname -i)
+endif
+endif
+
+ifeq ($(CPU_NAME), SUNW,SPARC-Enterprise-T5120)
+	CPU = niagara2
+endif
+
+ifeq ($(CPU), niagara2)
+	LPDSTM_CPPFLAGS += -D WLPDSTM_NIAGARA2
+endif
+
+CPPFLAGS += $(LPDSTM_CPPFLAGS)
+LDFLAGS += $(LPDSTM_LDFLAGS)
+
+########################################
+# does the machine support unaligned accesses?
+ifeq ($(UNALIGNED_ACCESSES), )
+    UNALIGNED_ACCESSES = yes
+endif
+
+ifeq ($(ARCH), x86)
+    UNALIGNED_ACCESSES = yes
+endif
+
+ifeq ($(ARCH), x86_64)
+    UNALIGNED_ACCESSES = yes
+endif
+
+ifeq ($(ARCH), sparc64)
+    UNALIGNED_ACCESSES = no
+endif
+
+ifeq ($(UNALIGNED_ACCESSES), yes)
+	CPPFLAGS += -D ALLOW_UNALIGNED_ACCESSES
+endif
+
+########################################
+# select log implementation
+LOG_CPPFLAGS_chunked = -D CHUNKED_LOG
+LOG_CPPFLAGS_vector = -D VECTOR_LOG
+LOG_CPPFLAGS_linked = -D LINKED_LOG
+
+ifeq ($(LOG), )
+	LOG = chunked
+endif
+
+CPPFLAGS += $(LOG_CPPFLAGS_${LOG})
+
+
+########################################
+# choose an STM to build
+
+ifeq ($(STM), )
+	STM = swisstm
+endif
+
+ifeq ($(STM), swisstm)
+	CPPFLAGS += -D SWISSTM
+endif
+
+ifeq ($(STM), epochstm)
+	CPPFLAGS += -D EPOCHSTM
+endif
+
+ifeq ($(STM), tlrw)
+	CPPFLAGS += -D TLRW
+endif
+
+ifeq ($(STM), rw)
+	CPPFLAGS += -D RW
+endif
+
+ifeq ($(STM), p-tlrw)
+	CPPFLAGS += -D P_TLRW
+endif
+
+ifeq ($(STM), dynamic)
+	CPPFLAGS += -D DYNAMIC
+endif
+
+
+########################################
+# set initial values for the core variables
+
+# dirs to use
+SRC_DIR = ./src
+INCLUDE_SRC_DIR = $(SRC_DIR)/include
+STM_API_DIR = $(SRC_DIR)/api
+STM_SRC_DIR = $(SRC_DIR)/stm
+EPOCHSTM_SRC_DIR = $(SRC_DIR)/epochstm
+TLRW_SRC_DIR = $(SRC_DIR)/tlrw
+RW_SRC_DIR = $(SRC_DIR)/rw
+P_TLRW_SRC_DIR = $(SRC_DIR)/p-tlrw
+DYNAMIC_SRC_DIR = $(SRC_DIR)/dynamic
+MUBENCH_SRC_DIR = $(SRC_DIR)/mubench
+
+INCLUDE_DIR = ./include
+TARGET_DIR = ./target
+LIB_DIR = ./lib
+OBJ_DIR = $(TARGET_DIR)/obj
+
+INCLUDE_IN_FILE = $(INCLUDE_SRC_DIR)/stm.h
+INCLUDE_OUT_FILE = $(INCLUDE_DIR)/stm.h
+
+########################################
+# set the build profile (default=normal)
+CPPFLAGS_normal  =  -ggdb -O3
+CPPFLAGS_fast    =  -DNDEBUG -O3
+CPPFLAGS_debug   =  -g -O0
+CPPFLAGS_gp0     =  -ggdb -pg -O0
+CPPFLAGS_gp      =  -ggdb -pg -O3
+
+ifeq ($(PROFILE), )
+	ifeq ($(COMPILER), gnu)
+		PROFILE = fast
+	endif
+
+	ifeq ($(COMPILER), intel)
+		PROFILE = normal
+	endif
+endif
+
+COMMON_CPPFLAGS += $(CPPFLAGS_${PROFILE})
+
+
+
+########################################
+# select tls implementation
+TLS_CPPFLAGS_pthread = -D USE_PTHREAD_TLS
+
+TLS_CPPFLAGS_gcc = -D USE_GCC_TLS
+
+ifeq ($(TLS), )
+    ifeq ($(OS), MacOS)
+        TLS = pthread
+    endif
+
+    ifeq ($(OS), LinuxOS)
+        TLS = gcc
+    endif
+
+    ifeq ($(OS), Solaris)
+        TLS = gcc
+    endif
+endif
+
+CPPFLAGS += $(TLS_CPPFLAGS_${TLS})
+
+########################################
+# select waiting policy
+WAITING_POLICY_CPPFLAGS_preemptive = -D USE_PREEMPTIVE_WAITING
+
+WAITING_POLICY_CPPFLAGS_live =
+
+ifeq ($(WAITING_POLICY), )
+	WAITING_POLICY = live
+endif
+
+CPPFLAGS += $(WAITING_POLICY_CPPFLAGS_${WAITING_POLICY})
+
+########################################
+# collect stats or no
+COLLECT_STATS_CPPFLAGS_yes = -D COLLECT_STATS
+COLLECT_STATS_CPPFLAGS_no =
+
+ifeq ($(COLLECT_STATS), )
+	COLLECT_STATS = yes
+endif
+
+COMMON_CPPFLAGS += $(COLLECT_STATS_CPPFLAGS_${COLLECT_STATS})
+
+########################################
+# wait after a number of successive aborts or not
+WAIT_ON_ABORT_CPPFLAGS_yes = -D WAIT_ON_SUCC_ABORTS
+WAIT_ON_ABORT_CPPFLAGS_no =
+
+ifeq ($(WAIT_ON_ABORT), )
+	WAIT_ON_ABORT = yes
+endif
+
+CPPFLAGS += $(WAIT_ON_ABORT_CPPFLAGS_${WAIT_ON_ABORT})
+
+########################################
+# collect detailed stats
+DETAILED_STATS_CPPFLAGS_yes = -D DETAILED_STATS
+DETAILED_STATS_CPPFLAGS_no =
+
+ifeq ($(DETAILED_STATS), )
+	DETAILED_STATS = no
+endif
+
+CPPFLAGS += $(DETAILED_STATS_CPPFLAGS_${DETAILED_STATS})
+
+########################################
+# profile transactions
+TX_PROFILING_CPPFLAGS_no     = -D WLPDSTM_TX_PROFILING_NO
+TX_PROFILING_CPPFLAGS_simple = -D WLPDSTM_TX_PROFILING_SIMPLE
+TX_PROFILING_CPPFLAGS_adaptive = -D WLPDSTM_TX_PROFILING_ADAPTIVE
+TX_PROFILING_CPPFLAGS_adaptive_dynamic = -D WLPDSTM_TX_PROFILING_ADAPTIVE_DYNAMIC
+TX_PROFILING_CPPFLAGS_tx_duration = -D WLPDSTM_TX_PROFILING_TX_DURATION
+TX_PROFILING_CPPFLAGS_non_tx_duration = -D WLPDSTM_NON_TX_PROFILING_TX_DURATION
+TX_PROFILING_CPPFLAGS_non_tx_duration_simple = -D WLPDSTM_NON_TX_PROFILING_TX_DURATION_SIMPLE
+TX_PROFILING_CPPFLAGS_non_tx_duration_pcnt_simple = -D WLPDSTM_NON_TX_PROFILING_TX_DURATION_PCNT_SIMPLE
+TX_PROFILING_CPPFLAGS_non_tx_duration_pcnt_sampling = -D WLPDSTM_NON_TX_PROFILING_TX_DURATION_PCNT_SAMPLING
+
+ifeq ($(TX_PROFILING), )
+	TX_PROFILING = no
+endif
+
+ifeq ($(TX_PROFILING), non_tx_duration_pcnt_simple)
+    ENABLE_PERFORMANCE_COUNTING = yes
+endif
+
+ifeq ($(TX_PROFILING), non_tx_duration_pcnt_sampling)
+    ENABLE_PERFORMANCE_COUNTING = yes
+endif
+
+CPPFLAGS += $(TX_PROFILING_CPPFLAGS_${TX_PROFILING})
+
+########################################
+# spin loop backoff
+SPIN_LOOP_BACKOFF_CPPFLAGS_no  = -D WLPDSTM_SPIN_LOOP_BACKOFF_NO
+SPIN_LOOP_BACKOFF_CPPFLAGS_cas = -D WLPDSTM_SPIN_LOOP_BACKOFF_CAS
+
+ifeq ($(SPIN_LOOP_BACKOFF), )
+	SPIN_LOOP_BACKOFF = no
+endif
+
+CPPFLAGS += $(SPIN_LOOP_BACKOFF_CPPFLAGS_${SPIN_LOOP_BACKOFF})
+
+########################################
+# collect per abort/commit stats
+PER_ABORT_COMMIT_STATS_CPPFLAGS_yes = -D PER_ABORT_COMMIT_STATS
+PER_ABORT_COMMIT_STATS_CPPFLAGS_no =
+
+ifeq ($(PER_ABORT_COMMIT_STATS), )
+	PER_ABORT_COMMIT_STATS = no
+endif
+
+CPPFLAGS += $(PER_ABORT_COMMIT_STATS_CPPFLAGS_${PER_ABORT_COMMIT_STATS})
+
+########################################
+# collect per abort/commit stats
+GREEN_CM_CPPFLAGS_yes = -D GREEN_CM
+GREEN_CM_CPPFLAGS_no =
+
+ifeq ($(GREEN_CM), )
+	GREEN_CM = no
+endif
+
+CPPFLAGS += $(GREEN_CM_CPPFLAGS_${GREEN_CM})
+
+########################################
+# include stm specific flags
+ifeq ($(STM), swisstm)
+	include Makefile.swisstm.in
+endif
+
+ifeq ($(STM), epochstm)
+	include Makefile.epochstm.in
+endif
+
+ifeq ($(STM), tlrw)
+	include Makefile.tlrw.in
+endif
+
+ifeq ($(STM), rw)
+	include Makefile.rw.in
+endif
+
+ifeq ($(STM), p-tlrw)
+	include Makefile.p-tlrw.in
+endif
+
+ifeq ($(STM), dynamic)
+	include Makefile.dynamic.in
+endif
+
+########################################
+# performance counting for transactions
+PERFORMANCE_COUNTING_yes = -D PERFORMANCE_COUNTING
+PERFORMANCE_COUNTING_no = 
+
+ifeq ($(PERFORMANCE_COUNTING), )
+	PERFORMANCE_COUNTING = no
+endif
+
+ifeq ($(PERFORMANCE_COUNTING), yes)
+    ENABLE_PERFORMANCE_COUNTING = yes
+endif
+
+CPPFLAGS += $(PERFORMANCE_COUNTING_${PERFORMANCE_COUNTING})
+
+# use performance counting for 
+ifeq ($(ENABLE_PERFORMANCE_COUNTING), yes)
+	ifeq ($(OS), Solaris)
+		COMMON_LDFLAGS += -lcpc
+	endif
+
+	ifeq ($(OS), Linux)
+		CPPFLAGS += -I$(LIBPAPI_DIR)/include
+		COMMON_LDFLAGS += -L$(LIBPAPI_DIR)/lib -lpapi
+	endif
+endif
+
+
+########################################
+# define mubench flags
+MUBENCH_CPPFLAGS += $(COMMON_CPPFLAGS) -DMUBENCH_WLPDSTM
+MUBENCH_CPPFLAGS += -I$(INCLUDE_DIR)
+MUBENCH_LDFLAGS  += $(COMMON_LDFLAGS)
+MUBENCH_LDFLAGS  += -L$(LIB_DIR) -lwlpdstm
+
+ifeq ($(COMPILER), intel)
+	MUBENCH_LDFLAGS  += -lstdc++
+endif
+
+ifeq ($(OS), MacOS)
+	MUBENCH_LDFLAGS  += -framework CoreServices
+endif

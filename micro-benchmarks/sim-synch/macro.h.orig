@@ -1,0 +1,723 @@
+
+#define PRIMITIVE_CAT(a, ...) a ## __VA_ARGS__
+#define IIF(c) PRIMITIVE_CAT(IIF_, c)
+#define IIF_0(t, ...) __VA_ARGS__
+#define IIF_1(t, ...) t
+
+#define COMPL(b) PRIMITIVE_CAT(COMPL_, b)
+#define COMPL_0 1
+#define COMPL_1 0
+
+#define DEC(x) PRIMITIVE_CAT(DEC_, x)
+#define DEC_0 0
+#define DEC_1 0
+#define DEC_2 1
+#define DEC_3 2
+#define DEC_4 3
+#define DEC_5 4
+#define DEC_6 5
+#define DEC_7 6
+#define DEC_8 7
+#define DEC_9 8
+#define DEC_10 9
+#define DEC_11 10
+#define DEC_12 11
+#define DEC_13 12
+#define DEC_14 13
+#define DEC_15 14
+#define DEC_16 15
+#define DEC_17 16
+#define DEC_18 17
+#define DEC_19 18
+#define DEC_20 19
+#define DEC_21 20
+#define DEC_22 21
+#define DEC_23 22
+#define DEC_24 23
+#define DEC_25 24
+#define DEC_26 25
+#define DEC_27 26
+#define DEC_28 27
+#define DEC_29 28
+#define DEC_30 29
+#define DEC_31 30
+#define DEC_32 31
+#define DEC_33 32
+#define DEC_34 33
+
+#define ADDI1(x) PRIMITIVE_CAT(ADDI1_, x)
+#define ADDI1_0 1
+#define ADDI1_1 65
+#define ADDI1_2 2
+#define ADDI1_3 66
+#define ADDI1_4 3
+#define ADDI1_5 67
+#define ADDI1_6 4
+#define ADDI1_7 68
+#define ADDI1_8 5
+#define ADDI1_9 69
+#define ADDI1_10 6
+#define ADDI1_11 70
+#define ADDI1_12 7
+#define ADDI1_13 71
+#define ADDI1_14 8
+#define ADDI1_15 72
+#define ADDI1_16 9
+#define ADDI1_17 73
+#define ADDI1_18 10
+#define ADDI1_19 74
+#define ADDI1_20 11
+#define ADDI1_21 75
+#define ADDI1_22 12
+#define ADDI1_23 76
+#define ADDI1_24 13
+#define ADDI1_25 77
+#define ADDI1_26 14
+#define ADDI1_27 78
+#define ADDI1_28 15
+#define ADDI1_29 79
+
+#define ADDO1(x) PRIMITIVE_CAT(ADDO1_, x)
+#define ADDO1_0 1
+#define ADDO1_1 2 
+#define ADDO1_2 3
+#define ADDO1_3 4 
+#define ADDO1_4 5
+#define ADDO1_5 6 
+#define ADDO1_6 7
+#define ADDO1_7 8 
+#define ADDO1_8 9
+#define ADDO1_9 10 
+#define ADDO1_10 11
+#define ADDO1_11 12 
+#define ADDO1_12 13
+#define ADDO1_13 14 
+#define ADDO1_14 15
+#define ADDO1_15 65 
+#define ADDO1_16 66
+#define ADDO1_17 67 
+#define ADDO1_18 68 
+#define ADDO1_19 69 
+#define ADDO1_20 70 
+#define ADDO1_21 71 
+#define ADDO1_22 72 
+#define ADDO1_23 73 
+#define ADDO1_24 74 
+#define ADDO1_25 75 
+#define ADDO1_26 76 
+#define ADDO1_27 77 
+#define ADDO1_28 78 
+#define ADDO1_29 79 
+
+#define ADDI17(x) PRIMITIVE_CAT(ADDI17_, x)
+#define ADDI17_0 17
+#define ADDI17_1 81
+#define ADDI17_2 18
+#define ADDI17_3 82
+#define ADDI17_4 19
+#define ADDI17_5 83
+#define ADDI17_6 20
+#define ADDI17_7 84
+#define ADDI17_8 21
+#define ADDI17_9 85
+#define ADDI17_10 22
+#define ADDI17_11 86
+#define ADDI17_12 23
+#define ADDI17_13 87
+#define ADDI17_14 24
+#define ADDI17_15 88
+#define ADDI17_16 25
+#define ADDI17_17 89
+#define ADDI17_18 26
+#define ADDI17_19 90
+#define ADDI17_20 27
+#define ADDI17_21 91
+#define ADDI17_22 28
+#define ADDI17_23 92
+#define ADDI17_24 29
+#define ADDI17_25 93
+#define ADDI17_26 30
+#define ADDI17_27 94
+#define ADDI17_28 31
+#define ADDI17_29 95
+
+#define ADDO17(x) PRIMITIVE_CAT(ADDO17_, x)
+#define ADDO17_0 17
+#define ADDO17_1 18
+#define ADDO17_2 19
+#define ADDO17_3 20
+#define ADDO17_4 21
+#define ADDO17_5 22
+#define ADDO17_6 23
+#define ADDO17_7 24
+#define ADDO17_8 25
+#define ADDO17_9 26
+#define ADDO17_10 27 
+#define ADDO17_11 28 
+#define ADDO17_12 29 
+#define ADDO17_13 30 
+#define ADDO17_14 31 
+#define ADDO17_15 81 
+#define ADDO17_16 82 
+#define ADDO17_17 83 
+#define ADDO17_18 84 
+#define ADDO17_19 85 
+#define ADDO17_20 86 
+#define ADDO17_21 87 
+#define ADDO17_22 88 
+#define ADDO17_23 89 
+#define ADDO17_24 90 
+#define ADDO17_25 91 
+#define ADDO17_26 92 
+#define ADDO17_27 93 
+#define ADDO17_28 94 
+#define ADDO17_29 95 
+
+#define ADDI16(x) PRIMITIVE_CAT(ADDI16_, x)
+#define ADDI16_0 16
+#define ADDI16_1  80
+#define ADDI16_2  17
+#define ADDI16_3  81
+#define ADDI16_4  18
+#define ADDI16_5  82
+#define ADDI16_6  19
+#define ADDI16_7  83
+#define ADDI16_8  20
+#define ADDI16_9  84
+#define ADDI16_10 21 
+#define ADDI16_11 85 
+#define ADDI16_12  22
+#define ADDI16_13  86
+#define ADDI16_14  23
+#define ADDI16_15  87
+#define ADDI16_16  24
+#define ADDI16_17  88
+#define ADDI16_18  25
+#define ADDI16_19  89
+#define ADDI16_20  26
+#define ADDI16_21  90
+#define ADDI16_22  27
+#define ADDI16_23  91
+#define ADDI16_24  28
+#define ADDI16_25  92
+#define ADDI16_26  29
+#define ADDI16_27  93
+#define ADDI16_28  30
+#define ADDI16_29  94
+#define ADDI16_30 31
+#define ADDI16_31 95
+
+#define ADDI33(x) PRIMITIVE_CAT(ADDI33_, x)
+#define ADDI33_0 33
+#define ADDI33_1 97
+#define ADDI33_2 34
+#define ADDI33_3 98
+#define ADDI33_4 35
+#define ADDI33_5 99
+#define ADDI33_6 36
+#define ADDI33_7 100
+#define ADDI33_8 37
+#define ADDI33_9 101
+#define ADDI33_10 38
+#define ADDI33_11 102
+#define ADDI33_12 39
+#define ADDI33_13 103
+#define ADDI33_14 40
+#define ADDI33_15 104
+#define ADDI33_16 41
+#define ADDI33_17 105
+#define ADDI33_18 42
+#define ADDI33_19 106
+#define ADDI33_20 43
+#define ADDI33_21 107
+#define ADDI33_22 44
+#define ADDI33_23 108
+#define ADDI33_24 45
+#define ADDI33_25 109
+#define ADDI33_26 46
+#define ADDI33_27 110
+#define ADDI33_28 47
+#define ADDI33_29 111
+
+#define ADDO33(x) PRIMITIVE_CAT(ADDO33_, x)
+#define ADDO33_0 33  
+#define ADDO33_1 34 
+#define ADDO33_2 35  
+#define ADDO33_3 36 
+#define ADDO33_4 37 
+#define ADDO33_5 38 
+#define ADDO33_6 39  
+#define ADDO33_7 40  
+#define ADDO33_8 41  
+#define ADDO33_9 42  
+#define ADDO33_10 43  
+#define ADDO33_11 44  
+#define ADDO33_12 45  
+#define ADDO33_13 46  
+#define ADDO33_14 47  
+#define ADDO33_15  97 
+#define ADDO33_16  98 
+#define ADDO33_17  99 
+#define ADDO33_18 100 
+#define ADDO33_19 101 
+#define ADDO33_20 102 
+#define ADDO33_21 103 
+#define ADDO33_22 104 
+#define ADDO33_23 105 
+#define ADDO33_24 106 
+#define ADDO33_25 107 
+#define ADDO33_26 108 
+#define ADDO33_27 109 
+#define ADDO33_28 110 
+#define ADDO33_29 111 
+
+#define ADDI32(x) PRIMITIVE_CAT(ADDI32_, x)
+#define ADDI32_0 32
+#define ADDI32_1 96
+#define ADDI32_2  33
+#define ADDI32_3  97
+#define ADDI32_4  34
+#define ADDI32_5  98
+#define ADDI32_6  35
+#define ADDI32_7  99 
+#define ADDI32_8  36
+#define ADDI32_9  100
+#define ADDI32_10  37
+#define ADDI32_11 101 
+#define ADDI32_12  38
+#define ADDI32_13  102
+#define ADDI32_14  39
+#define ADDI32_15  103
+#define ADDI32_16  40
+#define ADDI32_17  104
+#define ADDI32_18  41
+#define ADDI32_19  105
+#define ADDI32_20  42
+#define ADDI32_21  106
+#define ADDI32_22  43
+#define ADDI32_23  107
+#define ADDI32_24  44
+#define ADDI32_25  108
+#define ADDI32_26  45
+#define ADDI32_27  109
+#define ADDI32_28  46
+#define ADDI32_29  110
+#define ADDI32_30  47
+#define ADDI32_31 111
+
+#define ADDI49(x) PRIMITIVE_CAT(ADDI49_, x)
+#define ADDI49_0 49
+#define ADDI49_1 113
+#define ADDI49_2 50
+#define ADDI49_3 114
+#define ADDI49_4 51
+#define ADDI49_5 115
+#define ADDI49_6 52
+#define ADDI49_7 116
+#define ADDI49_8 53
+#define ADDI49_9 117
+#define ADDI49_10 54
+#define ADDI49_11 118
+#define ADDI49_12 55
+#define ADDI49_13 119
+#define ADDI49_14 56
+#define ADDI49_15 120
+#define ADDI49_16 57
+#define ADDI49_17 121
+#define ADDI49_18 58
+#define ADDI49_19 122
+#define ADDI49_20 59
+#define ADDI49_21 123
+#define ADDI49_22 60
+#define ADDI49_23 124
+#define ADDI49_24 61
+#define ADDI49_25 125
+#define ADDI49_26 62
+#define ADDI49_27 126
+#define ADDI49_28 63
+#define ADDI49_29 127
+
+#define ADDO49(x) PRIMITIVE_CAT(ADDO49_, x)
+#define ADDO49_0 49
+#define ADDO49_1 50
+#define ADDO49_2 51
+#define ADDO49_3 52
+#define ADDO49_4 53
+#define ADDO49_5 54
+#define ADDO49_6 55
+#define ADDO49_7 56
+#define ADDO49_8 57
+#define ADDO49_9 58
+#define ADDO49_10 59 
+#define ADDO49_11 60 
+#define ADDO49_12 61 
+#define ADDO49_13 62 
+#define ADDO49_14 63 
+#define ADDO49_15 113 
+#define ADDO49_16 114 
+#define ADDO49_17 115 
+#define ADDO49_18 116 
+#define ADDO49_19 117 
+#define ADDO49_20 118 
+#define ADDO49_21 119 
+#define ADDO49_22 120 
+#define ADDO49_23 121 
+#define ADDO49_24 122 
+#define ADDO49_25 123 
+#define ADDO49_26 124 
+#define ADDO49_27 125 
+#define ADDO49_28 126 
+#define ADDO49_29 127 
+
+#define ADDI48(x) PRIMITIVE_CAT(ADDI48_, x)
+#define ADDI48_0 48
+#define ADDI48_1 112
+#define ADDI48_2  49
+#define ADDI48_3  113
+#define ADDI48_4  50
+#define ADDI48_5  114
+#define ADDI48_6  51
+#define ADDI48_7  115
+#define ADDI48_8  52
+#define ADDI48_9  116
+#define ADDI48_10  53
+#define ADDI48_11 117 
+#define ADDI48_12  54
+#define ADDI48_13  118
+#define ADDI48_14  55
+#define ADDI48_15  119
+#define ADDI48_16  56
+#define ADDI48_17  120
+#define ADDI48_18  57
+#define ADDI48_19  121
+#define ADDI48_20  58
+#define ADDI48_21  122
+#define ADDI48_22  59
+#define ADDI48_23  123
+#define ADDI48_24  60
+#define ADDI48_25  124
+#define ADDI48_26  61
+#define ADDI48_27  125
+#define ADDI48_28  62
+#define ADDI48_29  126
+#define ADDI48_30  63
+#define ADDI48_31 127
+
+#define ADD1(x) PRIMITIVE_CAT(ADD1_, x)
+#define ADD1_0 1
+#define ADD1_1 2
+#define ADD1_2 3
+#define ADD1_3 4
+#define ADD1_4 5
+#define ADD1_5 6
+#define ADD1_6 7
+#define ADD1_7  8
+#define ADD1_8  9
+#define ADD1_9 10
+#define ADD1_10 11
+#define ADD1_11 12
+#define ADD1_12 13
+#define ADD1_13 14
+#define ADD1_14 15
+#define ADD1_15 16
+#define ADD1_16 17
+#define ADD1_17 18
+#define ADD1_18 19
+#define ADD1_19 20
+#define ADD1_20 21
+#define ADD1_21 22
+#define ADD1_22 23
+#define ADD1_23 24
+#define ADD1_24 25
+#define ADD1_25 26
+#define ADD1_26 27
+#define ADD1_27 28
+#define ADD1_28 29
+#define ADD1_29 30
+#define ADD1_30 31
+#define ADD1_31 32
+#define ADD1_32 33
+#define ADD1_33 34
+#define ADD1_34 35
+#define ADD1_35 36
+#define ADD1_36 37
+#define ADD1_37 38
+#define ADD1_38 39
+#define ADD1_39 40
+#define ADD1_40 41
+#define ADD1_41 42
+#define ADD1_42 43
+#define ADD1_43 44
+#define ADD1_44 45
+#define ADD1_45 46
+#define ADD1_46 47
+#define ADD1_47 48
+#define ADD1_48 49
+#define ADD1_49 50
+#define ADD1_50 51
+#define ADD1_51 52
+#define ADD1_52 53
+#define ADD1_53 54
+#define ADD1_54 55
+#define ADD1_55 56
+#define ADD1_56 57
+#define ADD1_57 58
+#define ADD1_58 59
+#define ADD1_59 60
+#define ADD1_60 61
+#define ADD1_61 62
+#define ADD1_62 63
+#define ADD1_63 64
+#define ADD1_64 65
+
+#define ADD2(x) PRIMITIVE_CAT(ADD2_, x)
+#define ADD2_0 2
+#define ADD2_1 3
+#define ADD2_2 4
+#define ADD2_3 5
+#define ADD2_4 6
+#define ADD2_5 7
+#define ADD2_6 8
+#define ADD2_7  9
+#define ADD2_8 10
+#define ADD2_9 11
+#define ADD2_10 12
+#define ADD2_11 13
+#define ADD2_12 14
+#define ADD2_13 15
+#define ADD2_14 16
+#define ADD2_15 17
+#define ADD2_16 18
+#define ADD2_17 19
+#define ADD2_18 20
+#define ADD2_19 21
+#define ADD2_20 22
+#define ADD2_21 23
+#define ADD2_22 24
+#define ADD2_23 25
+#define ADD2_24 26
+#define ADD2_25 27
+#define ADD2_26 28
+#define ADD2_27 29
+#define ADD2_28 30
+#define ADD2_29 31
+#define ADD2_30 32
+#define ADD2_31 33
+
+#define ADD16(x) PRIMITIVE_CAT(ADD16_, x)
+#define ADD16_0 16
+#define ADD16_1 17
+#define ADD16_2 18
+#define ADD16_3 19
+#define ADD16_4 20
+#define ADD16_5 21
+#define ADD16_6 22
+#define ADD16_7 23
+#define ADD16_8 24
+#define ADD16_9 25
+#define ADD16_10 26
+#define ADD16_11 27
+#define ADD16_12 28
+#define ADD16_13 29
+#define ADD16_14 30
+#define ADD16_15 31
+
+#define ADD32(x) PRIMITIVE_CAT(ADD32_, x)
+#define ADD32_0 32
+#define ADD32_1 33
+#define ADD32_2 34
+#define ADD32_3 35
+#define ADD32_4 36
+#define ADD32_5 37
+#define ADD32_6 38
+#define ADD32_7 39
+#define ADD32_8 40
+#define ADD32_9 41
+#define ADD32_10 42
+#define ADD32_11 43
+#define ADD32_12 44
+#define ADD32_13 45
+#define ADD32_14 46
+#define ADD32_15 47
+
+#define ADD48(x) PRIMITIVE_CAT(ADD48_, x)
+#define ADD48_0 48
+#define ADD48_1 49
+#define ADD48_2 50
+#define ADD48_3 51
+#define ADD48_4 52
+#define ADD48_5 53
+#define ADD48_6 54
+#define ADD48_7 55
+#define ADD48_8 56
+#define ADD48_9 57
+#define ADD48_10 58
+#define ADD48_11 59
+#define ADD48_12 60
+#define ADD48_13 61
+#define ADD48_14 62
+#define ADD48_15 63
+
+#define ADD17(x) PRIMITIVE_CAT(ADD17_, x)
+#define ADD17_0 17
+#define ADD17_1 18
+#define ADD17_2 19
+#define ADD17_3 20
+#define ADD17_4 21
+#define ADD17_5 22
+#define ADD17_6 23
+#define ADD17_7 24
+#define ADD17_8 25
+#define ADD17_9 26
+#define ADD17_10 27
+#define ADD17_11 28
+#define ADD17_12 29
+#define ADD17_13 30
+#define ADD17_14 31
+
+#define ADD33(x) PRIMITIVE_CAT(ADD33_, x)
+#define ADD33_0 33
+#define ADD33_1 34
+#define ADD33_2 35
+#define ADD33_3 36
+#define ADD33_4 37
+#define ADD33_5 38
+#define ADD33_6 39
+#define ADD33_7 40
+#define ADD33_8 41
+#define ADD33_9 42
+#define ADD33_10 43
+#define ADD33_11 44
+#define ADD33_12 45
+#define ADD33_13 46
+#define ADD33_14 47
+
+#define ADD49(x) PRIMITIVE_CAT(ADD49_, x)
+#define ADD49_0 49
+#define ADD49_1 50
+#define ADD49_2 51
+#define ADD49_3 52
+#define ADD49_4 53
+#define ADD49_5 54
+#define ADD49_6 55
+#define ADD49_7 56
+#define ADD49_8 57
+#define ADD49_9 58
+#define ADD49_10 59
+#define ADD49_11 60
+#define ADD49_12 61
+#define ADD49_13 62
+#define ADD49_14 63
+
+
+#ifdef N126
+    #define CHIP0 30
+    #define CHIP1 32
+    #define CHIP2 32
+    #define CHIP3 32
+#elif N120
+    #define CHIP0 30
+    #define CHIP1 30
+    #define CHIP2 30
+    #define CHIP3 30
+#elif G60
+    #define CHIP0 30
+    #define CHIP1 30
+    #define CHIP2 30
+    #define CHIP3 30
+#elif L120
+    #define CHIP0 14
+    #define CHIP1 16
+    #define CHIP2 16
+    #define CHIP3 16
+#elif L60
+    #define CHIP0 15
+    #define CHIP1 15
+    #define CHIP2 15
+    #define CHIP3 15
+#else
+    #define CHIP0 15
+    #define CHIP1 16
+    #define CHIP2 16
+    #define CHIP3 16
+#endif
+
+#define CHECK_N(x, n, ...) n
+#define CHECK(...) CHECK_N(__VA_ARGS__, 0,)
+#define PROBE(x) x, 1,
+
+#define NOT(x) CHECK(PRIMITIVE_CAT(NOT_, x))
+#define NOT_0 PROBE(~)
+
+#define BOOL(x) COMPL(NOT(x))
+#define IF(c) IIF(BOOL(c))
+
+#define EAT(...)
+#define EXPAND(...) __VA_ARGS__
+#define WHEN(c) IF(c)(EXPAND, EAT)
+
+#define EMPTY()
+#define DEFER(id) id EMPTY()
+#define OBSTRUCT(...) __VA_ARGS__ DEFER(EMPTY)()
+
+#define EVAL(...)  EVAL1(EVAL1(EVAL1(__VA_ARGS__)))
+#define EVAL1(...) EVAL2(EVAL2(EVAL2(__VA_ARGS__)))
+#define EVAL2(...) EVAL3(EVAL3(EVAL3(__VA_ARGS__)))
+#define EVAL3(...) EVAL4(EVAL4(EVAL4(__VA_ARGS__)))
+#define EVAL4(...) EVAL5(EVAL5(EVAL5(__VA_ARGS__)))
+#define EVAL5(...) __VA_ARGS__
+
+#define SERVER_CODE(cid, id, cflag, ...) SERVER_CODE_IMP(cid, id, cflag, __VA_ARGS__)
+#define LOCAL_SERVERFLAGS_INIT(cid, id, _) LOCAL_SERVERFLAGS_INIT_IMP(id, _)
+#define LOCAL_CLIENTFLAGS_INIT(cid, id, cflag, ...) LOCAL_CLIENTFLAGS_INIT_IMP(cid, id, cflag, __VA_ARGS__)
+#define COPY_RETVAL(cid, id, chip) COPY_RETVAL_IMP(cid, id, chip)
+#define UPDATE_SERVER_FLAGS(cid, id, _) UPDATE_SERVER_FLAGS_IMP(id, _)
+#define UPDATE_LOCALS(cid, id, _) UPDATE_LOCALS_IMP(id, _)
+#define LOCAL_SERVERFLAGS_DECL(cid, id, _)   LOCAL_SERVERFLAGS_DECL_IMP(id, _) 
+#define LOCAL_CLIENTFLAGS_DECL(cid, id, _)  LOCAL_CLIENTFLAGS_DECL_IMP(id, _)
+#define RETVAL_DECL(cid, id, _)  RETVAL_DECL_IMP(id, _)
+#define SERVER_FLAG(id_in_chip, id, y, chip) SERVER_FLAG_IMP(id_in_chip, id, y, chip)
+
+#ifdef N120
+    #define CHIP0_IMP(id, macro_to_call, ...) macro_to_call(ADD2(id), ADDI1(id), __VA_ARGS__)
+    #define CHIP1_IMP(id, macro_to_call, ...) macro_to_call(ADD2(id), ADDI17(id), __VA_ARGS__)
+    #define CHIP2_IMP(id, macro_to_call, ...) macro_to_call(ADD2(id), ADDI33(id), __VA_ARGS__)
+    #define CHIP3_IMP(id, macro_to_call, ...) macro_to_call(ADD2(id), ADDI49(id), __VA_ARGS__)
+#elif N126
+    #define CHIP0_IMP(id, macro_to_call, ...) macro_to_call(ADD2(id), ADDI1(id), __VA_ARGS__)
+    #define CHIP1_IMP(id, macro_to_call, ...) macro_to_call(id, ADDI16(id), __VA_ARGS__)
+    #define CHIP2_IMP(id, macro_to_call, ...) macro_to_call(id, ADDI32(id), __VA_ARGS__)
+    #define CHIP3_IMP(id, macro_to_call, ...) macro_to_call(id, ADDI48(id), __VA_ARGS__)
+#elif G60
+    #define CHIP0_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADDO1(id), __VA_ARGS__)
+    #define CHIP1_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADDO17(id), __VA_ARGS__)
+    #define CHIP2_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADDO33(id), __VA_ARGS__)
+    #define CHIP3_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADDO49(id), __VA_ARGS__)
+#elif L60
+    #define CHIP0_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADD1(id), __VA_ARGS__)
+    #define CHIP1_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADD17(id), __VA_ARGS__)
+    #define CHIP2_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADD33(id), __VA_ARGS__)
+    #define CHIP3_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADD49(id), __VA_ARGS__)
+#else
+    #define CHIP0_IMP(id, macro_to_call, ...) macro_to_call(ADD1(id), ADD1(id), __VA_ARGS__)
+    #define CHIP1_IMP(id, macro_to_call, ...) macro_to_call(id, ADD16(id), __VA_ARGS__)
+    #define CHIP2_IMP(id, macro_to_call, ...) macro_to_call(id, ADD32(id), __VA_ARGS__)
+    #define CHIP3_IMP(id, macro_to_call, ...) macro_to_call(id, ADD48(id), __VA_ARGS__)
+#endif 
+
+#define UNROLL(id, macro_to_call, ...) macro_to_call(ADD1(id), __VA_ARGS__)
+
+#define REPEAT(count, macro, ...) \
+    WHEN(count) \
+    ( \
+        OBSTRUCT(REPEAT_INDIRECT) () \
+        ( \
+            DEC(count), macro, __VA_ARGS__ \
+        ) \
+        OBSTRUCT(macro) \
+        ( \
+            DEC(count), __VA_ARGS__ \
+        ) \
+    )
+#define REPEAT_INDIRECT() REPEAT
+

@@ -1,0 +1,47 @@
+# vim:ft=automake
+# included from Top Level Makefile.am
+# All paths should be given relative to the root
+
+EXTRA_DIST+= \
+	     libmemcached-1.0/configure.h.in
+
+nobase_include_HEADERS+= \
+			 libmemcached-1.0/allocators.h \
+			 libmemcached-1.0/analyze.h \
+			 libmemcached-1.0/auto.h \
+			 libmemcached-1.0/basic_string.h \
+			 libmemcached-1.0/behavior.h \
+			 libmemcached-1.0/callback.h \
+			 libmemcached-1.0/configure.h \
+			 libmemcached-1.0/constants.h \
+			 libmemcached-1.0/delete.h \
+			 libmemcached-1.0/dump.h \
+			 libmemcached-1.0/error.h \
+			 libmemcached-1.0/exist.h \
+			 libmemcached-1.0/exception.hpp \
+			 libmemcached-1.0/fetch.h \
+			 libmemcached-1.0/flush.h \
+			 libmemcached-1.0/flush_buffers.h \
+			 libmemcached-1.0/get.h \
+			 libmemcached-1.0/hash.h \
+			 libmemcached-1.0/memcached.h \
+			 libmemcached-1.0/memcached.hpp \
+			 libmemcached-1.0/options.h \
+			 libmemcached-1.0/parse.h \
+			 libmemcached-1.0/quit.h \
+			 libmemcached-1.0/return.h \
+                         libmemcached-1.0/platform.h \
+			 libmemcached-1.0/result.h \
+                         libmemcached-1.0/sasl.h \
+			 libmemcached-1.0/server.h \
+			 libmemcached-1.0/server_list.h \
+			 libmemcached-1.0/stats.h \
+			 libmemcached-1.0/storage.h \
+			 libmemcached-1.0/strerror.h \
+			 libmemcached-1.0/string.h \
+			 libmemcached-1.0/touch.h \
+			 libmemcached-1.0/types.h \
+			 libmemcached-1.0/verbosity.h \
+			 libmemcached-1.0/version.h \
+			 libmemcached-1.0/visibility.h
+

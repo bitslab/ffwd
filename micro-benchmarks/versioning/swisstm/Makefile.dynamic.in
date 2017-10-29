@@ -1,0 +1,148 @@
+########################################
+# collect timestamp extend stats
+TS_EXTEND_STATS_CPPFLAGS_yes = -D TS_EXTEND_STATS
+TS_EXTEND_STATS_CPPFLAGS_no =
+
+ifeq ($(TS_EXTEND_STATS), )
+	TS_EXTEND_STATS = yes
+endif
+
+CPPFLAGS += $(TS_EXTEND_STATS_CPPFLAGS_${TS_EXTEND_STATS})
+
+########################################
+# manage commit_ts
+COMMIT_TS_CPPFLAGS_inc = -D COMMIT_TS_INC
+COMMIT_TS_CPPFLAGS_gv4 = -D COMMIT_TS_GV4
+
+ifeq ($(COMMIT_TS), )
+	COMMIT_TS = inc
+endif
+
+CPPFLAGS += $(COMMIT_TS_CPPFLAGS_${COMMIT_TS})
+
+########################################
+# support privatization
+PRIVATIZATION_CPPFLAGS_no =
+PRIVATIZATION_CPPFLAGS_quiescence = -D PRIVATIZATION_QUIESCENCE
+PRIVATIZATION_CPPFLAGS_quiescence_tree = -D PRIVATIZATION_QUIESCENCE_TREE
+
+ifeq ($(PRIVATIZATION), )
+	PRIVATIZATION = no
+endif
+
+CPPFLAGS += $(PRIVATIZATION_CPPFLAGS_${PRIVATIZATION})
+
+########################################
+# signaling
+SIGNALING_CPPFLAGS_no = 
+SIGNALING_CPPFLAGS_yes = -D SIGNALING
+
+ifeq ($(SIGNALING), )
+	SIGNALING = no
+endif
+
+CPPFLAGS += $(SIGNALING_CPPFLAGS_${SIGNALING})
+
+
+########################################
+# choose privatization safe or epoch based memory manager
+MM_CPPFLAGS_epoch_based = -D MM_EPOCH
+MM_CPPFLAGS_privatization = -D MM_PRIVATIZATION
+
+ifeq ($(MM), )
+	MM = epoch_based
+endif
+
+CPPFLAGS += $(MM_CPPFLAGS_${MM})
+
+########################################
+# collect influence diagram stats
+INFLUENCE_DIAGRAM_STATS_CPPFLAGS_yes = -D INFLUENCE_DIAGRAM_STATS
+INFLUENCE_DIAGRAM_STATS_CPPFLAGS_no =
+
+ifeq ($(INFLUENCE_DIAGRAM_STATS), )
+	INFLUENCE_DIAGRAM_STATS = no
+endif
+
+CPPFLAGS += $(INFLUENCE_DIAGRAM_STATS_CPPFLAGS_${INFLUENCE_DIAGRAM_STATS})
+
+########################################
+# use simple greedy
+SIMPLE_GREEDY_CPPFLAGS_yes = -D SIMPLE_GREEDY
+SIMPLE_GREEDY_CPPFLAGS_no =
+
+ifeq ($(SIMPLE_GREEDY), )
+	SIMPLE_GREEDY = no
+endif
+
+CPPFLAGS += $(SIMPLE_GREEDY_CPPFLAGS_${SIMPLE_GREEDY})
+
+########################################
+# what to do with accesses to tx private stack
+STACK_PROTECT_CPPFLAGS_no =
+STACK_PROTECT_CPPFLAGS_on_read_write = -D STACK_PROTECT_ON_WRITE -D STACK_PROTECT_ON_READ -D STACK_PROTECT
+
+ifeq ($(STACK_PROTECT), )
+	STACK_PROTECT = no
+endif
+
+CPPFLAGS += $(STACK_PROTECT_CPPFLAGS_${STACK_PROTECT})
+
+########################################
+# how to get stack protect upper bound
+STACK_PROTECT_BOUND_CPPFLAGS_no =
+STACK_PROTECT_BOUND_CPPFLAGS_tanger = -D STACK_PROTECT_TANGER_BOUND
+STACK_PROTECT_BOUND_CPPFLAGS_wlpdstm = -D STACK_PROTECT_WLPDSTM_BOUND
+STACK_PROTECT_BOUND_CPPFLAGS_icc = -D STACK_PROTECT_ICC_BOUND
+
+ifeq ($(STACK_PROTECT_BOUND), )
+	STACK_PROTECT_BOUND = no
+endif
+
+CPPFLAGS += $(STACK_PROTECT_BOUND_CPPFLAGS_${STACK_PROTECT_BOUND})
+
+########################################
+# use inlined, static od dynamic version
+ifeq ($(API_LINKAGE), )
+	API_LINKAGE = dynamic
+endif
+
+ifeq ($(API_LINKAGE), dynamic)
+	CPPFLAGS += -D DYNAMIC_DYNAMIC
+endif
+
+ifeq ($(API_LINKAGE), static)
+	CPPFLAGS += -D DYNAMIC_STATIC
+endif
+
+ifeq ($(API_LINKAGE), inline)
+	CPPFLAGS += -D DYNAMIC_INLINE
+endif
+
+########################################
+# use eager, mixed, lazy or switched implementation
+ifeq ($(STM_ALGORITHM), )
+	STM_ALGORITHM = mixed
+endif
+
+ifeq ($(STM_ALGORITHM), mixed)
+	CPPFLAGS += -D DYNAMIC_MIXED
+endif
+
+ifeq ($(STM_ALGORITHM), eager)
+	CPPFLAGS += -D DYNAMIC_EAGER
+endif
+
+ifeq ($(STM_ALGORITHM), lazy)
+	CPPFLAGS += -D DYNAMIC_LAZY
+endif
+
+ifeq ($(STM_ALGORITHM), switch)
+	CPPFLAGS += -D DYNAMIC_SWITCH
+endif
+
+
+# tbb malloc dirs
+TBB_MALLOC_INCLUDE_DIR=/home/aleksandar/work/epfl/gc/tbb20_20070927oss_src/include/tbb
+TBB_MALLOC_LIB_DIR=/home/aleksandar/work/epfl/gc/tbb20_20070927oss_src/build/linux_ia32_gcc_cc4.1.3_libc2.6.1_kernel2.6.22_release
+

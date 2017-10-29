@@ -1,0 +1,277 @@
+Données brutes:
+nb wakeup:      nombre de réveille du manager
+nb not alive:   parmi ces réveilles, nombre de fois où alive = false
+false:          nombre de parcours de la boucle servicing avec au moins deux locks différents
+total:          nombre de parcours de la boucle servicing avec au moins un lock
+cs:             nombre de sections critiques exécutées
+nb-normal:      nombre de parcours de la boucle servicing
+nb-slow:        nombre de parcours de la boucle servicing avec exécution du slow path (blocking)
+
+Données calculées:
+false rate:     false/total
+use rate:       total/cs
+slow path rate: nb-slow/nb-normal
+L2_DCM/cs:      nombre de faute de cache L2 par section critique
+
+---------------------------------------------------------------------
+raytrace/car:
+
+rcl:       22ms
+mcs:       66ms
+flat:      56ms
+posix:    200ms
+spinlock: 650ms
+
+--- manager of core 4
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 2 for core 4
+   false: 0, total: 9011, cs: 92391, nb-normal 19790059, nb-slow 0
+   false rate: 0.000000
+   use rate: 10.253135
+   slow path rate: 0.000000
+   'PAPI_L2_DCM'/cs: 0.905056
+
+
+---------------------------------------------------------------------
+raytrace/balls4
+
+rcl:      105ms
+mcs:      108ms
+flat:     122ms
+posix:    185ms
+spinlock: 600ms
+
+--- manager of core 4
+    nb wakeup: 4
+    nb not alive: 0
+---- servicing thread 2 for core 4
+   false: 0, total: 95811, cs: 118883, nb-normal 4606415, nb-slow 0
+   false rate: 0.000000
+   use rate: 1.240807
+   slow path rate: 0.000000
+   'PAPI_L2_DCM'/cs: 1.355619
+
+---------------------------------------------------------------------
+radiosity: 
+  core 4: free lock + 100% q_lock
+
+rcl:       285ms
+mcs:       273ms
+flat:      447ms
+posix:    1130ms
+spinlock: 2000ms
+
+--- manager of core 4
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 2 for core 4
+   false: 67702, total: 229787, cs: 565013, nb-normal 5569801, nb-slow 0
+   false rate: 0.294629
+   use rate: 2.458855
+   slow path rate: 0.000000
+   'PAPI_L2_DCM'/cs: 2.440344
+
+---------------------------------------------------------------------
+radiosity: 2 core: 
+   core 4:  free lock
+   core 28: 100% q_locks
+
+rcl: 295ms
+
+--- manager of core 4
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 2 for core 4
+   false: 0, total: 205828, cs: 261230, event 'PAPI_L2_DCM': 654497
+   false rate: 0.000000
+   use rate: 1.269166
+   'PAPI_L2_DCM'/cs: 2.505443
+--- manager of core 28
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 5 for core 28
+   false: 28796, total: 130049, cs: 302967, event 'PAPI_L2_DCM': 760000
+   false rate: 0.221424
+   use rate: 2.329637
+   'PAPI_L2_DCM'/cs: 2.508524
+
+
+---------------------------------------------------------------------
+radiosity: 2 core: 
+  core 4:  free lock + 50% q_lock
+  core 28: 50% q_locks
+
+rcl: 285ms
+
+--- manager of core 4
+    nb wakeup: 10
+    nb not alive: 2
+---- servicing thread 2 for core 4
+   false: 50789, total: 225303, cs: 428228, event 'PAPI_L2_DCM': 1103662
+   false rate: 0.225425
+   use rate: 1.900676
+   'PAPI_L2_DCM'/cs: 2.577277
+--- manager of core 28
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 5 for core 28
+   false: 16669, total: 74327, cs: 132306, event 'PAPI_L2_DCM': 360669
+   false rate: 0.224266
+   use rate: 1.780053
+   'PAPI_L2_DCM'/cs: 2.726021
+
+---------------------------------------------------------------------
+radiosity: 3 core: 
+  * core 4:  free lock
+  * core 7:  50% q_lock
+  * core 28: 50% q_locks
+
+rcl: 280ms
+
+--- manager of core 4
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 2 for core 4
+   false: 0, total: 205314, cs: 261346
+   false rate: 0.000000
+   use rate: 1.272909
+   'PAPI_L2_DCM'/cs: 2.502820
+
+--- manager of core 7
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 5 for core 7
+   false: 15312, total: 101572, cs: 171924
+   false rate: 0.150750
+   use rate: 1.692632
+   'PAPI_L2_DCM'/cs: 2.672896
+
+--- manager of core 28
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 8 for core 28
+   false: 16182, total: 71285, cs: 128855
+   false rate: 0.227004
+   use rate: 1.807603
+   'PAPI_L2_DCM'/cs: 2.718078
+
+---------------------------------------------------------------------
+radiosity: 3 core: 
+  * core 4:  free lock + 33% q_lock
+  * core 7:  33% q_lock
+  * core 28: 33% q_locks
+
+rcl: 280ms
+
+--- manager of core 4
+    nb wakeup: 12
+    nb not alive: 4
+---- servicing thread 2 for core 4
+   false: 30216, total: 223442, cs: 346240
+   false rate: 0.135230
+   use rate: 1.549574
+   'PAPI_L2_DCM'/cs: 2.561333
+
+--- manager of core 7
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 5 for core 7
+   false: 10522, total: 82616, cs: 124034
+   false rate: 0.127360
+   use rate: 1.501331
+   'PAPI_L2_DCM'/cs: 2.693568
+
+--- manager of core 28
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 8 for core 28
+   false: 11014, total: 55803, cs: 87567
+   false rate: 0.197373
+   use rate: 1.569217
+   'PAPI_L2_DCM'/cs: 2.751859
+
+---------------------------------------------------------------------
+radiosity: 4 core: 
+  * core 4:  free lock
+  * core 7:  33% q_lock
+  * core 28: 33% q_locks
+	* core 31: 33% q_locks
+
+rcl: 280ms
+
+--- manager of core 4
+    nb wakeup: 12
+    nb not alive: 4
+---- servicing thread 2 for core 4
+   false: 0, total: 203982, cs: 260441
+   false rate: 0.000000
+   use rate: 1.276784
+
+--- manager of core 7
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 5 for core 7
+   false: 10941, total: 83812, cs: 124697
+   false rate: 0.130542
+   use rate: 1.487818
+
+--- manager of core 28
+    nb wakeup: 10
+    nb not alive: 2
+---- servicing thread 7 for core 28
+   false: 10389, total: 54182, cs: 82681
+   false rate: 0.191743
+   use rate: 1.525986
+
+--- manager of core 31
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 10 for core 31
+   false: 10891, total: 55944, cs: 89384
+   false rate: 0.194677
+   use rate: 1.597741
+
+les nb not alive sont probablement dus au démarrage assez chaotique. J'ai aussi retiré PAPI car il y a un lock dans papi qui fait une inversion de priorité trop fréquente
+
+---------------------------------------------------------------------
+radiosity: 4 core: 
+  * core 4:  free lock + 25% q_lock
+  * core 7:  25% q_lock
+  * core 28: 25% q_locks
+	* core 31: 25% q_locks
+
+rcl: 280ms
+
+--- manager of core 4
+    nb wakeup: 11
+    nb not alive: 3
+---- servicing thread 2 for core 4
+   false: 24305, total: 218894, cs: 325679
+   false rate: 0.111035
+   use rate: 1.487839
+
+--- manager of core 7
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 5 for core 7
+   false: 7264, total: 72392, cs: 101959
+   false rate: 0.100343
+   use rate: 1.408429
+
+--- manager of core 28
+    nb wakeup: 11
+    nb not alive: 3
+---- servicing thread 7 for core 28
+   false: 7655, total: 46776, cs: 65655
+   false rate: 0.163652
+   use rate: 1.403604
+
+--- manager of core 31
+    nb wakeup: 8
+    nb not alive: 0
+---- servicing thread 10 for core 31
+   false: 7571, total: 46014, cs: 65173
+   false rate: 0.164537
+   use rate: 1.416373
+

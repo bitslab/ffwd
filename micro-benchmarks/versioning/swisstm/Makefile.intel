@@ -1,0 +1,56 @@
+include Makefile.intel.in
+
+INTEL_OBJFILES = $(INTEL_OBJ_DIR)/tid.o $(INTEL_OBJ_DIR)/transaction.o $(INTEL_OBJ_DIR)/privatization_tree.o \
+	$(INTEL_OBJ_DIR)/jmp.o $(INTEL_OBJ_DIR)/itm.o #$(INTEL_OBJ_DIR)/memory.o
+
+all: $(INTEL_OBJ_DIR) $(INTEL_LIB_DIR) $(INTEL_LIB).a #$(MUBENCH)
+
+MUBENCH = $(INTEL_OBJ_DIR)/intset-rbtree-intel
+
+.PHONY:	all clean
+
+###############
+# create dirs #
+###############
+
+$(INTEL_OBJ_DIR):
+	mkdir -p $(INTEL_OBJ_DIR)
+
+$(INTEL_LIB_DIR):
+	mkdir -p $(INTEL_LIB_DIR)
+
+##################
+# create library #
+##################
+
+$(INTEL_LIB).a: $(INTEL_OBJFILES)
+	$(AR) cru $@ $^
+
+$(INTEL_OBJ_DIR)/tid.o: $(SRC_DIR)/stm/tid.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+$(INTEL_OBJ_DIR)/transaction.o: $(SRC_DIR)/stm/transaction.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+$(INTEL_OBJ_DIR)/privatization_tree.o: $(SRC_DIR)/stm/privatization_tree.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+$(INTEL_OBJ_DIR)/itm.o: $(SRC_DIR)/intel/itm.cc
+	$(CPP) $(CPPFLAGS) -Qtm_enabled -c -o $@ $<
+
+#$(INTEL_OBJ_DIR)/memory.o: $(SRC_DIR)/intel/memory.cc
+#	$(CPP) $(CPPFLAGS) -Qtm_enabled -c -o $@ $<
+
+$(INTEL_OBJ_DIR)/jmp.o: $(SRC_DIR)/intel/jmp.s
+	$(AS) -o $@ $<
+
+
+#########
+# clean #
+#########
+
+clean:
+	rm -rf $(INTEL_LIB).a
+	rm -rf $(INTEL_OBJ_DIR)
+	rm -rf intset-rbtree-intel
+

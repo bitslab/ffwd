@@ -1,0 +1,80 @@
+########################################
+# choose memory manager
+MM_CPPFLAGS_epoch = -D MM_EPOCH
+MM_CPPFLAGS_leak = -D MM_LEAK
+MM_CPPFLAGS_txend = -D MM_TXEND
+
+ifeq ($(MM), )
+	MM = txend
+endif
+
+CPPFLAGS += $(MM_CPPFLAGS_${MM})
+
+########################################
+# should application threads perform cleanup
+APP_CLEANUP_CPPFLAGS_yes = -D APP_THREAD_CLEANUP
+APP_CLEANUP_CPPFLAGS_no =
+
+ifeq ($(APP_CLEANUP), )
+	APP_CLEANUP = yes
+endif
+
+CPPFLAGS += $(APP_CLEANUP_CPPFLAGS_${APP_CLEANUP})
+
+########################################
+# should application threads perform abort rollback
+# NOTE: the safe option here is yes
+ROLLBACK_ON_ABORT_CPPFLAGS_yes = -D ROLLBACK_ON_ABORT
+ROLLBACK_ON_ABORT_CPPFLAGS_no =
+
+ifeq ($(ROLLBACK_ON_ABORT), )
+	ROLLBACK_ON_ABORT = yes
+endif
+
+CPPFLAGS += $(ROLLBACK_ON_ABORT_CPPFLAGS_${ROLLBACK_ON_ABORT})
+
+
+########################################
+# contention manager
+CM_CPPFLAGS_timid = -D CM_TIMID
+CM_CPPFLAGS_greedy = -D CM_GREEDY
+
+ifeq ($(CM), )
+	CM = greedy
+endif
+
+CPPFLAGS += $(CM_CPPFLAGS_${CM})
+
+########################################
+# should cleanup use touched orecs tables
+TOUCHED_ORECS_CPPFLAGS_yes = -D USE_TOUCHED_ORECS
+TOUCHED_ORECS_CPPFLAGS_no =
+
+ifeq ($(TOUCHED_ORECS), )
+	TOUCHED_ORECS = no
+endif
+
+CPPFLAGS += $(TOUCHED_ORECS_CPPFLAGS_${TOUCHED_ORECS})
+
+########################################
+# use minimum reader version shortcut
+MINIMUM_READER_VERSION_CPPFLAGS_yes = -D USE_MINIMUM_READER_VERSION
+MINIMUM_READER_VERSION_CPPFLAGS_no =
+
+ifeq ($(MINIMUM_READER_VERSION), )
+	MINIMUM_READER_VERSION = no
+endif
+
+CPPFLAGS += $(MINIMUM_READER_VERSION_CPPFLAGS_${MINIMUM_READER_VERSION})
+
+########################################
+# use thread local counter buffer to reduce contention
+TLCNT_CPPFLAGS_yes = -D TLCNT
+TLCNT_CPPFLAGS_no =
+
+ifeq ($(TLCNT), )
+	TLCNT = no
+endif
+
+CPPFLAGS += $(TLCNT_CPPFLAGS_${TLCNT})
+

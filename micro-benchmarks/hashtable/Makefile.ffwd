@@ -1,0 +1,74 @@
+ROOT ?= ../..
+
+#include $(ROOT)/common/Makefile.common
+ifndef ARCH                                                                                                                       
+	ARCH_NAME = $(shell uname -m)                                                                                                 
+endif
+
+ifeq ($(ARCH_NAME), i386)                                                                                                         
+    ARCH = x86                                                                                                                    
+    CFLAGS += -m32                                                                                                                
+    LDFLAGS += -m32                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), i686)                                                                                                         
+    ARCH = x86                                                                                                                    
+    CFLAGS += -m32                                                                                                                
+    LDFLAGS += -m32                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), x86_64)                                                                                                       
+    ARCH = x86_64                                                                                                                 
+    CFLAGS += -m64                                                                                                                
+    LDFLAGS += -m64                                                                                                               
+endif                                                                                                                             
+                                                                                                                                  
+ifeq ($(ARCH_NAME), sun4v)                                                                                                        
+    ARCH = sparc64                                                                                                                
+    CFLAGS += -DSPARC=1 -DINLINED=1 -mt -fast -m64                                                                                
+    LDFLAGS += -lrt -m64                                                                                                          
+endif
+
+BINDIR = ./bin
+BUILDDIR = ./build
+DS = hashtable
+HASHCLIENTDIR = $(ROOT)/synchrobench/c-cpp/src/hashtables/lockbased-ht
+SIMPLELISTDIR = $(ROOT)/synchrobench/c-cpp/src/linkedlists/simple-list
+LIBAO_INC = $(ROOT)/synchrobench/c-cpp/src/atomic_ops
+SYNCHRO_DIR = $(ROOT)/synchrobench/c-cpp/include
+LIB_FFWD = $(ROOT)/include
+MCMODEL = -mcmodel=large
+LIBS = -lnuma -lpthread
+NPROC=$(shell nproc)
+
+
+CFLAGS += -g -O3 -DFFWD -DT$(NPROC)
+CFLAGS += -DSYNCHRO -DSEQUENTIAL
+CFLAGS += -DNDEBUG
+CFLAGS += -D_REENTRANT -D_GNU_SOURCE
+CFLAGS += -fno-strict-aliasing
+CFLAGS += -I$(LIBAO_INC) -I$(SYNCHRO_DIR) -I$(LIB_FFWD)
+CFLAGS += -std=gnu89
+LDFLAGS += -lpthread -lnuma -lrt -lm
+#LDFLAGS += -lpthread -lnuma -lrt -lm -ldl -lhoard
+
+.PHONY:	all clean
+
+all: ffwd-hashtable
+
+create_dir:
+	mkdir -p $(BINDIR) $(BUILDDIR)
+
+ffwd-hashtable: create_dir $(BUILDDIR)/libffwd.o
+	$(CC) $(CFLAGS) $(BUILDDIR)/libffwd.o $(SIMPLELISTDIR)/intset.c $(SIMPLELISTDIR)/linkedlist.c $(HASHCLIENTDIR)/hashtable-lock.c $(HASHCLIENTDIR)/test.c -o $(BINDIR)/$@ $(LDFLAGS)
+
+$(BUILDDIR)/libffwd.o: $(LIB_FFWD)/libffwd.c
+	gcc $(CFLAGS) -Wall $(MCMODEL) -c -o $(BUILDDIR)/libffwd.o $(LIB_FFWD)/libffwd.c $(LIBS); 
+
+#ffwd-hashtable: create_dir $(BUILDDIR)/libffwd.o slab.o
+#	$(CC) $(CFLAGS) $(BUILDDIR)/libffwd.o $(BUILDDIR)/slab.o $(SIMPLELISTDIR)/intset.c $(SIMPLELISTDIR)/linkedlist.c $(HASHCLIENTDIR)/hashtable-lock.c $(HASHCLIENTDIR)/test.c -o $(BINDIR)/ffwd-hashtable $(LDFLAGS)
+#slab.o: 
+#	$(CC) -g -std=gnu11 -D_ISOC11_SOURCE -D_POSIX_C_SOURCE=200809L -D_BSD_SOURCE -lm -Wall -Wextra -pedantic -c -o $(BUILDDIR)/slab.o slab.c
+
+clean:
+	rm -f $(BINDIR)/ffwd-hashtable $(BUILDDIR)/libffwd.o

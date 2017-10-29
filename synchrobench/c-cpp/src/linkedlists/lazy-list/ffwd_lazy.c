@@ -1,0 +1,189 @@
+/*
+ * File:
+ *   lazy.c
+ * Author(s):
+ *   Vincent Gramoli <vincent.gramoli@epfl.ch>
+ * Description:
+ *   Lazy linked list implementation of an integer set based on Heller et al. algorithm
+ *   "A Lazy Concurrent List-Based Set Algorithm"
+ *   S. Heller, M. Herlihy, V. Luchangco, M. Moir, W.N. Scherer III, N. Shavit
+ *   p.3-16, OPODIS 2005
+ *
+ * Copyright (c) 2009-2010.
+ *
+ * lazy.c is part of Synchrobench
+ * 
+ * Synchrobench is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, version 2
+ * of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include "lazy.h"
+#include "ffwd.h"
+#include "macro.h"
+
+inline int is_marked_ref(long i) {
+	return (int) (i &= LONG_MIN+1);
+}
+
+inline long unset_mark(long i) {
+	i &= LONG_MAX-1;
+	return i;
+}
+
+inline long set_mark(long i) {
+	i = unset_mark(i);
+	i += 1;
+	return i;
+}
+
+inline node_l_t *get_unmarked_ref(node_l_t *n) {
+	return (node_l_t *) unset_mark((long) n);
+}
+
+inline node_l_t *get_marked_ref(node_l_t *n) {
+	return (node_l_t *) set_mark((long) n);
+}
+
+/*
+ * Checking that both curr and pred are both unmarked and that pred's next pointer
+ * points to curr to verify that the entries are adjacent and present in the list.
+ */
+inline int parse_validate(node_l_t *pred, node_l_t *curr) {
+	return (!is_marked_ref((long) pred) && !is_marked_ref((long) curr) && (pred->next == curr));
+}
+
+int parse_find(intset_l_t *set, val_t val) {
+	node_l_t *curr;
+	curr = set->head;
+	while (curr->val < val)
+		curr = get_unmarked_ref(curr->next);
+	return ((curr->val == val) && !is_marked_ref((long) curr));
+}
+
+int parse_insert_intern(node_l_t *pred, node_l_t *curr, val_t val) 
+{
+	node_l_t *newnode;
+	int result = 1;
+	
+#if 0
+	pred = set->head;
+	curr = get_unmarked_ref(pred->next);
+	while (curr->val < val) {
+		pred = curr;
+		curr = get_unmarked_ref(curr->next);
+	}
+#endif
+
+	if(parse_validate(pred, curr))
+	{
+		if (curr->val != val)
+		{
+			//result = (parse_validate(pred, curr) && (curr->val != val));
+			//if (result) {
+			newnode = new_node_l(val, curr, 0);
+			pred->next = newnode;
+			result = 1;
+		}
+		else result = 0;
+	}
+	else result = -1;
+	return result;
+}
+
+int parse_insert(intset_l_t *set, val_t val) 
+{
+	node_l_t *curr, *pred, *newnode;
+	pred = set->head;
+	curr = get_unmarked_ref(pred->next);
+	while (curr->val < val) {
+		pred = curr;
+		curr = get_unmarked_ref(curr->next);
+	}
+	GET_CONTEXT();
+	int return_value; //this is going to hold the function return value from ffwd_exec
+	FFWD_EXEC(0, &parse_insert_intern, return_value, 3, pred, curr, val);
+	return return_value;
+}
+
+/* Unsynchronised version of insert, to be called from main thread */
+int parse_insert_2(intset_l_t *set, val_t val) 
+{
+	node_l_t *curr, *pred, *newnode;
+	int result;
+	
+	pred = set->head;
+	curr = get_unmarked_ref(pred->next);
+	while (curr->val < val) {
+		pred = curr;
+		curr = get_unmarked_ref(curr->next);
+	}
+
+	result = (parse_validate(pred, curr) && (curr->val != val));
+	if (result) {
+		newnode = new_node_l(val, curr, 0);
+		pred->next = newnode;
+	} 
+
+	return result;
+}
+
+/*
+ * Logically remove an element by setting a mark bit to 1 
+ * before removing it physically.
+ *
+ * NB. it is not safe to free the element after physical deletion as a 
+ * pre-empted find operation may currently be parsing the element.
+ * TODO: must implement a stop-the-world garbage collector to correctly 
+ * free the memory.
+ */
+int parse_delete_intern(node_l_t *pred, node_l_t *curr, val_t val) 
+{
+	int result = 1;
+	
+#if 0
+	pred = set->head;
+	curr = get_unmarked_ref(pred->next);
+	while (curr->val < val) {
+		pred = curr;
+		curr = get_unmarked_ref(curr->next);
+	}
+#endif
+
+	if(parse_validate(pred, curr))
+	{
+		if(val == curr->val)
+		{
+			//result = (parse_validate(pred, curr) && (val == curr->val));
+			//if (result) {
+			curr->next = get_marked_ref(curr->next);
+			pred->next = get_unmarked_ref(curr->next);
+			result = 1;
+		}
+		else result = 0;
+	}
+	else result = -1;
+
+	return result;
+}
+
+int parse_delete(intset_l_t *set, val_t val) 
+{
+	node_l_t *pred, *curr;
+	pred = set->head;
+	curr = get_unmarked_ref(pred->next);
+	while (curr->val < val) {
+		pred = curr;
+		curr = get_unmarked_ref(curr->next);
+	}
+	GET_CONTEXT();
+	int return_value; //this is going to hold the function return value from ffwd_exec
+	FFWD_EXEC(0, &parse_delete_intern, return_value, 3, pred, curr, val);
+	return return_value;
+}

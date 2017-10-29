@@ -1,0 +1,120 @@
+include Makefile.tanger.in
+
+TANGER_BCFILES = $(TANGER_OBJ_DIR)/tanger.bc $(TANGER_OBJ_DIR)/tid.bc \
+	$(TANGER_OBJ_DIR)/transaction.bc $(TANGER_OBJ_DIR)/privatization_tree.bc \
+	$(TANGER_OBJ_DIR)/tanger_string.bc $(TANGER_OBJ_DIR)/tanger_stdlib.bc \
+	#$(TANGER_OBJ_DIR)/tanger_stack_area.bc
+TANGER_OBJFILES = $(TANGER_OBJ_DIR)/tanger.o $(TANGER_OBJ_DIR)/tid.o \
+	$(TANGER_OBJ_DIR)/transaction.o $(TANGER_OBJ_DIR)/privatization_tree.o \
+	$(TANGER_OBJ_DIR)/tanger_string.o $(TANGER_OBJ_DIR)/tanger_stdlib.o \
+	#$(TANGER_OBJ_DIR)/tanger_stack_area.o
+
+all: $(TANGER_OBJ_DIR) $(WLPDSTM_LIB_DIR) $(TANGER_LIB).bc $(TANGER_LIB).a intset-rbtree-tanger
+
+MUBENCH = $(TANGER_OBJ_DIR)/intset-rbtree-tanger
+
+.PHONY:	all clean
+
+###############
+# create dirs #
+###############
+
+$(TANGER_OBJ_DIR):
+	mkdir -p $(TANGER_OBJ_DIR)
+
+$(WLPDSTM_LIB_DIR):
+	mkdir -p $(WLPDSTM_LIB_DIR)
+
+###################
+# create bc files #
+###################
+
+$(TANGER_LIB).bc: $(TANGER_BCFILES)
+	$(LLVMLD) -link-as-library -o $@ $^
+
+$(TANGER_OBJ_DIR)/tanger.bc: $(SRC_DIR)/tanger/tanger.cc
+	$(LLVMCPP) $(CPPFLAGS) -emit-llvm -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/tid.bc: $(SRC_DIR)/stm/tid.cc
+	$(LLVMCPP) $(CPPFLAGS) -emit-llvm -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/transaction.bc: $(SRC_DIR)/stm/transaction.cc
+	$(LLVMCPP) $(CPPFLAGS) -emit-llvm -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/privatization_tree.bc: $(SRC_DIR)/stm/privatization_tree.cc
+	$(LLVMCPP) $(CPPFLAGS) -emit-llvm -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/tanger_string.bc: $(SRC_DIR)/tanger/tanger_string.cc
+	$(LLVMCPP) $(CPPFLAGS) -emit-llvm -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/tanger_stdlib.bc: $(SRC_DIR)/tanger/tanger_stdlib.cc
+	$(LLVMCPP) $(CPPFLAGS) -emit-llvm -c -o $@ $<
+
+#$(TANGER_OBJ_DIR)/tanger_stack_area.bc: $(SRC_DIR)/tanger/tanger_stack_area.cc
+#	$(LLVMCPP) $(CPPFLAGS) -emit-llvm -c -o $@ $<
+
+##################
+# create library #
+##################
+
+$(TANGER_LIB).a: $(TANGER_OBJFILES)
+	$(AR) cru $@ $^
+
+$(TANGER_OBJ_DIR)/tanger.o: $(SRC_DIR)/tanger/tanger.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/tid.o: $(SRC_DIR)/stm/tid.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/transaction.o: $(SRC_DIR)/stm/transaction.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/privatization_tree.o: $(SRC_DIR)/stm/privatization_tree.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/tanger_string.o: $(SRC_DIR)/tanger/tanger_string.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+$(TANGER_OBJ_DIR)/tanger_stdlib.o: $(SRC_DIR)/tanger/tanger_stdlib.cc
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+#$(TANGER_OBJ_DIR)/tanger_stack_area.o: $(SRC_DIR)/tanger/tanger_stack_area.cc
+#	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+###########
+# mubench #
+###########
+
+intset-rbtree-tanger: $(MUBENCH)
+	cp $(MUBENCH) .
+
+$(MUBENCH): $(TANGER_OBJ_DIR)/intset-rbtree-tangerstm.bc $(STMLIBDIR)/libtanger-stm.a
+	$(LLC) -f -o $(patsubst %.bc, %.s, $<) $<
+	$(GCC) -o $@ $(patsubst %.bc, %.s, $<) $(NATIVELIBSPRE) $(STMLIBDIR)/libtanger-stm.a $(NATIVELIBS) $(NATIVELINKOPTS) 
+
+# link in .bc parts of STM
+$(TANGER_OBJ_DIR)/intset-rbtree-tangerstm.bc: $(TANGER_OBJ_DIR)/intset-rbtree-tanger.bc
+	$(LLVMLD) -link-as-library -o $@ $< $(STMSUPPORTDIR)/stmsupport.bc
+
+# run pass over combined
+$(TANGER_OBJ_DIR)/intset-rbtree-tanger.bc: $(TANGER_OBJ_DIR)/intset-rbtree-tangerbase.bc $(TANGERPASS) $(TANGER_LIB).bc
+	$(OPT) $(EXTRAPASSES) -load $(TANGERPASS) -internalize -mem2reg -raiseallocs \
+		$(PASSESTORUN) -globaldce $< -o $@.tmp.bc -f $(TANGERPASSOPTS)
+	$(OPT) $(EXTRAPASSES) -load $(TANGERPASS) -deadargelim \
+		$(PASSESTORUNPOST) $@.tmp.bc -o $@ -f $(TANGERPASSOPTS)
+
+$(TANGER_OBJ_DIR)/intset-rbtree-tangerbase.bc: $(TANGER_OBJ_DIR)/intset-rbtree.bc
+	$(LLVMLD) -link-as-library -internalize -o $@ $^ $(BASELINKOPTS)
+
+$(TANGER_OBJ_DIR)/intset-rbtree.bc: $(TANGER_OBJ_DIR)/ $(MUBENCH_SRC_DIR)/intset-rbtree.c
+	$(LLVMGCC) $(INCLUDE) -emit-llvm -c $(CXXFLAGS_MUBENCH) -o $(TANGER_OBJ_DIR)/intset-rbtree.bc $(MUBENCH_SRC_DIR)/intset-rbtree.c
+
+
+#########
+# clean #
+#########
+
+clean:
+	rm -rf $(TANGER_LIB).bc $(TANGER_LIB).a
+	rm -rf $(TANGER_OBJ_DIR)
+	rm -rf intset-rbtree-tanger

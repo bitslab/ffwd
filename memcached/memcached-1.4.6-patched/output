@@ -1,0 +1,586 @@
+thread 0 bound to 0 (with 0)
+build thread on 4
+coucou!
+[ 4/ 1] **       starting manager       ** [ 0 attached,  0 threads,  0 servicing,  0 free]: 'other'/'dead'
+build thread on 4
+[ 4/ 1] ==         create thread        == [ 0 attached,  0 threads,  0 servicing,  0 free]: 'up'/'dead'
+build thread on 4
+coucou!
+[ 4/ 2] ==        starting thread       == [ 0 attached,  1 threads,  1 servicing,  1 free]: 'up'/'dead'
+**** testing ./memcached with lock multircl placed on core 4
+build thread on -1
+build thread on -1
+coucou!
+build thread on -1
+coucou!
+thread 3 bound to 8 (with 2)
+build thread on -1
+coucou!
+thread 4 bound to 12 (with 3)
+build thread on -1
+coucou!
+thread 5 bound to 16 (with 4)
+build thread on -1
+thread 6 bound to 20 (with 5)
+coucou!
+build thread on -1
+coucou!
+build thread on -1
+coucou!
+thread 8 bound to 28 (with 7)
+build thread on -1
+coucou!
+thread 9 bound to 32 (with 8)
+build thread on -1
+coucou!
+thread 10 bound to 36 (with 9)
+coucou!
+build thread on -1
+thread 11 bound to 40 (with 10)
+thread 12 bound to 44 (with 11)
+build thread on -1
+coucou!
+build thread on -1
+thread 13 bound to 3 (with 12)
+coucou!
+build thread on -1
+coucou!
+thread 14 bound to 7 (with 13)
+build thread on -1
+thread 15 bound to 11 (with 14)
+coucou!
+build thread on -1
+coucou!
+thread 16 bound to 15 (with 15)
+build thread on -1
+coucou!
+thread 17 bound to 19 (with 16)
+thread 18 bound to 23 (with 17)
+build thread on -1
+coucou!
+build thread on -1
+coucou!
+thread 19 bound to 27 (with 18)
+build thread on -1
+coucou!
+thread 20 bound to 31 (with 19)
+build thread on -1
+coucou!
+thread 21 bound to 35 (with 20)
+coucou!
+thread 7 bound to 24 (with 6)
+thread 22 bound to 39 (with 21)
+thread 23 bound to 43 (with 22)
+build thread on -1
+coucou!
+thread 24 bound to 47 (with 23)
+[ 4/ 2] ==         create thread        == [ 1 attached,  1 threads,  1 servicing,  0 free]: 'up'/'alive'
+coucou!
+[ 4/25] ==        starting backup       == [ 1 attached,  2 threads,  2 servicing,  1 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/26] ==        starting thread       == [ 1 attached,  2 threads,  2 servicing,  1 free]: 'up'/'alive'
+[ 4/26] ==         create thread        == [ 1 attached,  2 threads,  2 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/27] ==        starting thread       == [ 1 attached,  3 threads,  3 servicing,  1 free]: 'up'/'alive'
+[ 4/27] ==         create thread        == [ 1 attached,  3 threads,  3 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/28] ==        starting thread       == [ 1 attached,  4 threads,  4 servicing,  1 free]: 'up'/'alive'
+[ 4/28] ==         create thread        == [ 1 attached,  4 threads,  4 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/29] ==        starting thread       == [ 1 attached,  5 threads,  5 servicing,  1 free]: 'up'/'alive'
+[ 4/29] ==         create thread        == [ 1 attached,  5 threads,  5 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/30] ==        starting thread       == [ 1 attached,  6 threads,  6 servicing,  1 free]: 'up'/'alive'
+[ 4/30] ==         create thread        == [ 1 attached,  6 threads,  6 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/31] ==        starting thread       == [ 1 attached,  7 threads,  7 servicing,  1 free]: 'up'/'alive'
+[ 4/31] ==         create thread        == [ 1 attached,  7 threads,  7 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+[ 4/25] ==         create thread        == [ 1 attached,  8 threads,  8 servicing,  1 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/32] ==        starting thread       == [ 1 attached,  9 threads,  9 servicing,  2 free]: 'up'/'alive'
+coucou!
+[ 4/33] ==        starting thread       == [ 1 attached,  9 threads,  9 servicing,  1 free]: 'up'/'alive'
+[ 4/33] ==         create thread        == [ 1 attached,  9 threads,  9 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+[ 4/25] ==         create thread        == [ 1 attached, 10 threads, 10 servicing,  1 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/34] ==        starting thread       == [ 1 attached, 11 threads, 11 servicing,  2 free]: 'up'/'alive'
+coucou!
+[ 4/35] ==        starting thread       == [ 1 attached, 11 threads, 11 servicing,  1 free]: 'up'/'alive'
+[ 4/35] ==         create thread        == [ 1 attached, 11 threads, 11 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+[ 4/25] ==         create thread        == [ 1 attached, 12 threads, 12 servicing,  1 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/36] ==        starting thread       == [ 1 attached, 13 threads, 13 servicing,  2 free]: 'up'/'alive'
+coucou!
+[ 4/37] ==        starting thread       == [ 1 attached, 13 threads, 13 servicing,  1 free]: 'up'/'alive'
+[ 4/37] ==         create thread        == [ 1 attached, 13 threads, 13 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/38] ==        starting thread       == [ 1 attached, 14 threads, 14 servicing,  1 free]: 'up'/'alive'
+[ 4/38] ==         create thread        == [ 1 attached, 14 threads, 14 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/39] ==        starting thread       == [ 1 attached, 15 threads, 15 servicing,  1 free]: 'up'/'alive'
+[ 4/39] ==         create thread        == [ 1 attached, 15 threads, 15 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/40] ==        starting thread       == [ 1 attached, 16 threads, 16 servicing,  1 free]: 'up'/'alive'
+[ 4/40] ==         create thread        == [ 1 attached, 16 threads, 16 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/41] ==        starting thread       == [ 1 attached, 17 threads, 17 servicing,  1 free]: 'up'/'alive'
+[ 4/41] ==         create thread        == [ 1 attached, 17 threads, 17 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/42] ==        starting thread       == [ 1 attached, 18 threads, 18 servicing,  1 free]: 'up'/'alive'
+[ 4/42] ==         create thread        == [ 1 attached, 18 threads, 18 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/43] ==        starting thread       == [ 1 attached, 19 threads, 19 servicing,  1 free]: 'up'/'alive'
+[ 4/43] ==         create thread        == [ 1 attached, 19 threads, 19 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/44] ==        starting thread       == [ 1 attached, 20 threads, 20 servicing,  1 free]: 'up'/'alive'
+[ 4/44] ==         create thread        == [ 1 attached, 20 threads, 20 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/45] ==        starting thread       == [ 1 attached, 21 threads, 21 servicing,  1 free]: 'up'/'alive'
+[ 4/45] ==         create thread        == [ 1 attached, 21 threads, 21 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/46] ==        starting thread       == [ 1 attached, 22 threads, 22 servicing,  1 free]: 'up'/'alive'
+[ 4/46] ==         create thread        == [ 1 attached, 22 threads, 22 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/47] ==        starting thread       == [ 1 attached, 23 threads, 23 servicing,  1 free]: 'up'/'alive'
+[ 4/47] ==         create thread        == [ 1 attached, 23 threads, 23 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/48] ==        starting thread       == [ 1 attached, 24 threads, 24 servicing,  1 free]: 'up'/'alive'
+[ 4/48] ==         create thread        == [ 1 attached, 24 threads, 24 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/49] ==        starting thread       == [ 1 attached, 25 threads, 25 servicing,  1 free]: 'up'/'alive'
+[ 4/49] ==         create thread        == [ 1 attached, 25 threads, 25 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/50] ==        starting thread       == [ 1 attached, 26 threads, 26 servicing,  1 free]: 'up'/'alive'
+[ 4/50] ==         create thread        == [ 1 attached, 26 threads, 26 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/51] ==        starting thread       == [ 1 attached, 27 threads, 27 servicing,  1 free]: 'up'/'alive'
+[ 4/51] ==         create thread        == [ 1 attached, 27 threads, 27 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/52] ==        starting thread       == [ 1 attached, 28 threads, 28 servicing,  1 free]: 'up'/'alive'
+[ 4/52] ==         create thread        == [ 1 attached, 28 threads, 28 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/53] ==        starting thread       == [ 1 attached, 29 threads, 29 servicing,  1 free]: 'up'/'alive'
+[ 4/53] ==         create thread        == [ 1 attached, 29 threads, 29 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/54] ==        starting thread       == [ 1 attached, 30 threads, 30 servicing,  1 free]: 'up'/'alive'
+[ 4/54] ==         create thread        == [ 1 attached, 30 threads, 30 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/55] ==        starting thread       == [ 1 attached, 31 threads, 31 servicing,  1 free]: 'up'/'alive'
+[ 4/55] ==         create thread        == [ 1 attached, 31 threads, 31 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/56] ==        starting thread       == [ 1 attached, 32 threads, 32 servicing,  1 free]: 'up'/'alive'
+[ 4/56] ==         create thread        == [ 1 attached, 32 threads, 32 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/57] ==        starting thread       == [ 1 attached, 33 threads, 33 servicing,  1 free]: 'up'/'alive'
+[ 4/57] ==         create thread        == [ 1 attached, 33 threads, 33 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/58] ==        starting thread       == [ 1 attached, 34 threads, 34 servicing,  1 free]: 'up'/'alive'
+[ 4/58] ==         create thread        == [ 1 attached, 34 threads, 34 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/59] ==        starting thread       == [ 1 attached, 35 threads, 35 servicing,  1 free]: 'up'/'alive'
+[ 4/59] ==         create thread        == [ 1 attached, 35 threads, 35 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/60] ==        starting thread       == [ 1 attached, 36 threads, 36 servicing,  1 free]: 'up'/'alive'
+[ 4/60] ==         create thread        == [ 1 attached, 36 threads, 36 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/61] ==        starting thread       == [ 1 attached, 37 threads, 37 servicing,  1 free]: 'up'/'alive'
+[ 4/61] ==         create thread        == [ 1 attached, 37 threads, 37 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/62] ==        starting thread       == [ 1 attached, 38 threads, 38 servicing,  1 free]: 'up'/'alive'
+[ 4/62] ==         create thread        == [ 1 attached, 38 threads, 38 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/63] ==        starting thread       == [ 1 attached, 39 threads, 39 servicing,  1 free]: 'up'/'alive'
+[ 4/63] ==         create thread        == [ 1 attached, 39 threads, 39 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/64] ==        starting thread       == [ 1 attached, 40 threads, 40 servicing,  1 free]: 'up'/'alive'
+[ 4/64] ==         create thread        == [ 1 attached, 40 threads, 40 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/65] ==        starting thread       == [ 1 attached, 41 threads, 41 servicing,  1 free]: 'up'/'alive'
+[ 4/65] ==         create thread        == [ 1 attached, 41 threads, 41 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/66] ==        starting thread       == [ 1 attached, 42 threads, 42 servicing,  1 free]: 'up'/'alive'
+[ 4/66] ==         create thread        == [ 1 attached, 42 threads, 42 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/67] ==        starting thread       == [ 1 attached, 43 threads, 43 servicing,  1 free]: 'up'/'alive'
+[ 4/67] ==         create thread        == [ 1 attached, 43 threads, 43 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/68] ==        starting thread       == [ 1 attached, 44 threads, 44 servicing,  1 free]: 'up'/'alive'
+[ 4/68] ==         create thread        == [ 1 attached, 44 threads, 44 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/69] ==        starting thread       == [ 1 attached, 45 threads, 45 servicing,  1 free]: 'up'/'alive'
+[ 4/69] ==         create thread        == [ 1 attached, 45 threads, 45 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/70] ==        starting thread       == [ 1 attached, 46 threads, 46 servicing,  1 free]: 'up'/'alive'
+[ 4/70] ==         create thread        == [ 1 attached, 46 threads, 46 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/71] ==        starting thread       == [ 1 attached, 47 threads, 47 servicing,  1 free]: 'up'/'alive'
+[ 4/71] ==         create thread        == [ 1 attached, 47 threads, 47 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/72] ==        starting thread       == [ 1 attached, 48 threads, 48 servicing,  1 free]: 'up'/'alive'
+[ 4/72] ==         create thread        == [ 1 attached, 48 threads, 48 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/73] ==        starting thread       == [ 1 attached, 49 threads, 49 servicing,  1 free]: 'up'/'alive'
+[ 4/73] ==         create thread        == [ 1 attached, 49 threads, 49 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/74] ==        starting thread       == [ 1 attached, 50 threads, 50 servicing,  1 free]: 'up'/'alive'
+[ 4/74] ==         create thread        == [ 1 attached, 50 threads, 50 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/75] ==        starting thread       == [ 1 attached, 51 threads, 51 servicing,  1 free]: 'up'/'alive'
+[ 4/75] ==         create thread        == [ 1 attached, 51 threads, 51 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/76] ==        starting thread       == [ 1 attached, 52 threads, 52 servicing,  1 free]: 'up'/'alive'
+[ 4/76] ==         create thread        == [ 1 attached, 52 threads, 52 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/77] ==        starting thread       == [ 1 attached, 53 threads, 53 servicing,  1 free]: 'up'/'alive'
+[ 4/77] ==         create thread        == [ 1 attached, 53 threads, 53 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/78] ==        starting thread       == [ 1 attached, 54 threads, 54 servicing,  1 free]: 'up'/'alive'
+[ 4/78] ==         create thread        == [ 1 attached, 54 threads, 54 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/79] ==        starting thread       == [ 1 attached, 55 threads, 55 servicing,  1 free]: 'up'/'alive'
+[ 4/79] ==         create thread        == [ 1 attached, 55 threads, 55 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/80] ==        starting thread       == [ 1 attached, 56 threads, 56 servicing,  1 free]: 'up'/'alive'
+[ 4/80] ==         create thread        == [ 1 attached, 56 threads, 56 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/81] ==        starting thread       == [ 1 attached, 57 threads, 57 servicing,  1 free]: 'up'/'alive'
+[ 4/81] ==         create thread        == [ 1 attached, 57 threads, 57 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/82] ==        starting thread       == [ 1 attached, 58 threads, 58 servicing,  1 free]: 'up'/'alive'
+[ 4/82] ==         create thread        == [ 1 attached, 58 threads, 58 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/83] ==        starting thread       == [ 1 attached, 59 threads, 59 servicing,  1 free]: 'up'/'alive'
+[ 4/83] ==         create thread        == [ 1 attached, 59 threads, 59 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/84] ==        starting thread       == [ 1 attached, 60 threads, 60 servicing,  1 free]: 'up'/'alive'
+[ 4/84] ==         create thread        == [ 1 attached, 60 threads, 60 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/85] ==        starting thread       == [ 1 attached, 61 threads, 61 servicing,  1 free]: 'up'/'alive'
+[ 4/85] ==         create thread        == [ 1 attached, 61 threads, 61 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/86] ==        starting thread       == [ 1 attached, 62 threads, 62 servicing,  1 free]: 'up'/'alive'
+[ 4/86] ==         create thread        == [ 1 attached, 62 threads, 62 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/87] ==        starting thread       == [ 1 attached, 63 threads, 63 servicing,  1 free]: 'up'/'alive'
+[ 4/87] ==         create thread        == [ 1 attached, 63 threads, 63 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/88] ==        starting thread       == [ 1 attached, 64 threads, 64 servicing,  1 free]: 'up'/'alive'
+[ 4/88] ==         create thread        == [ 1 attached, 64 threads, 64 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/89] ==        starting thread       == [ 1 attached, 65 threads, 65 servicing,  1 free]: 'up'/'alive'
+[ 4/89] ==         create thread        == [ 1 attached, 65 threads, 65 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/90] ==        starting thread       == [ 1 attached, 66 threads, 66 servicing,  1 free]: 'up'/'alive'
+[ 4/90] ==         create thread        == [ 1 attached, 66 threads, 66 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/91] ==        starting thread       == [ 1 attached, 67 threads, 67 servicing,  1 free]: 'up'/'alive'
+[ 4/91] ==         create thread        == [ 1 attached, 67 threads, 67 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/92] ==        starting thread       == [ 1 attached, 68 threads, 68 servicing,  1 free]: 'up'/'alive'
+[ 4/92] ==         create thread        == [ 1 attached, 68 threads, 68 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/93] ==        starting thread       == [ 1 attached, 69 threads, 69 servicing,  1 free]: 'up'/'alive'
+[ 4/93] ==         create thread        == [ 1 attached, 69 threads, 69 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/94] ==        starting thread       == [ 1 attached, 70 threads, 70 servicing,  1 free]: 'up'/'alive'
+[ 4/94] ==         create thread        == [ 1 attached, 70 threads, 70 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/95] ==        starting thread       == [ 1 attached, 71 threads, 71 servicing,  1 free]: 'up'/'alive'
+[ 4/95] ==         create thread        == [ 1 attached, 71 threads, 71 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/96] ==        starting thread       == [ 1 attached, 72 threads, 72 servicing,  1 free]: 'up'/'alive'
+[ 4/96] ==         create thread        == [ 1 attached, 72 threads, 72 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/97] ==        starting thread       == [ 1 attached, 73 threads, 73 servicing,  1 free]: 'up'/'alive'
+[ 4/97] ==         create thread        == [ 1 attached, 73 threads, 73 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/98] ==        starting thread       == [ 1 attached, 74 threads, 74 servicing,  1 free]: 'up'/'alive'
+[ 4/98] ==         create thread        == [ 1 attached, 74 threads, 74 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/99] ==        starting thread       == [ 1 attached, 75 threads, 75 servicing,  1 free]: 'up'/'alive'
+[ 4/99] ==         create thread        == [ 1 attached, 75 threads, 75 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/100] ==        starting thread       == [ 1 attached, 76 threads, 76 servicing,  1 free]: 'up'/'alive'
+[ 4/100] ==         create thread        == [ 1 attached, 76 threads, 76 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/101] ==        starting thread       == [ 1 attached, 77 threads, 77 servicing,  1 free]: 'up'/'alive'
+[ 4/101] ==         create thread        == [ 1 attached, 77 threads, 77 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/102] ==        starting thread       == [ 1 attached, 78 threads, 78 servicing,  1 free]: 'up'/'alive'
+[ 4/102] ==         create thread        == [ 1 attached, 78 threads, 78 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/103] ==        starting thread       == [ 1 attached, 79 threads, 79 servicing,  1 free]: 'up'/'alive'
+[ 4/103] ==         create thread        == [ 1 attached, 79 threads, 79 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/104] ==        starting thread       == [ 1 attached, 80 threads, 80 servicing,  1 free]: 'up'/'alive'
+[ 4/104] ==         create thread        == [ 1 attached, 80 threads, 80 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/105] ==        starting thread       == [ 1 attached, 81 threads, 81 servicing,  1 free]: 'up'/'alive'
+[ 4/105] ==         create thread        == [ 1 attached, 81 threads, 81 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/106] ==        starting thread       == [ 1 attached, 82 threads, 82 servicing,  1 free]: 'up'/'alive'
+[ 4/106] ==         create thread        == [ 1 attached, 82 threads, 82 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/107] ==        starting thread       == [ 1 attached, 83 threads, 83 servicing,  1 free]: 'up'/'alive'
+[ 4/107] ==         create thread        == [ 1 attached, 83 threads, 83 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/108] ==        starting thread       == [ 1 attached, 84 threads, 84 servicing,  1 free]: 'up'/'alive'
+[ 4/108] ==         create thread        == [ 1 attached, 84 threads, 84 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/109] ==        starting thread       == [ 1 attached, 85 threads, 85 servicing,  1 free]: 'up'/'alive'
+[ 4/109] ==         create thread        == [ 1 attached, 85 threads, 85 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/110] ==        starting thread       == [ 1 attached, 86 threads, 86 servicing,  1 free]: 'up'/'alive'
+[ 4/110] ==         create thread        == [ 1 attached, 86 threads, 86 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/111] ==        starting thread       == [ 1 attached, 87 threads, 87 servicing,  1 free]: 'up'/'alive'
+[ 4/111] ==         create thread        == [ 1 attached, 87 threads, 87 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/112] ==        starting thread       == [ 1 attached, 88 threads, 88 servicing,  1 free]: 'up'/'alive'
+[ 4/112] ==         create thread        == [ 1 attached, 88 threads, 88 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/113] ==        starting thread       == [ 1 attached, 89 threads, 89 servicing,  1 free]: 'up'/'alive'
+[ 4/113] ==         create thread        == [ 1 attached, 89 threads, 89 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/114] ==        starting thread       == [ 1 attached, 90 threads, 90 servicing,  1 free]: 'up'/'alive'
+[ 4/114] ==         create thread        == [ 1 attached, 90 threads, 90 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/115] ==        starting thread       == [ 1 attached, 91 threads, 91 servicing,  1 free]: 'up'/'alive'
+[ 4/115] ==         create thread        == [ 1 attached, 91 threads, 91 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/116] ==        starting thread       == [ 1 attached, 92 threads, 92 servicing,  1 free]: 'up'/'alive'
+[ 4/116] ==         create thread        == [ 1 attached, 92 threads, 92 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/117] ==        starting thread       == [ 1 attached, 93 threads, 93 servicing,  1 free]: 'up'/'alive'
+[ 4/117] ==         create thread        == [ 1 attached, 93 threads, 93 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/118] ==        starting thread       == [ 1 attached, 94 threads, 94 servicing,  1 free]: 'up'/'alive'
+[ 4/118] ==         create thread        == [ 1 attached, 94 threads, 94 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/119] ==        starting thread       == [ 1 attached, 95 threads, 95 servicing,  1 free]: 'up'/'alive'
+[ 4/119] ==         create thread        == [ 1 attached, 95 threads, 95 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/120] ==        starting thread       == [ 1 attached, 96 threads, 96 servicing,  1 free]: 'up'/'alive'
+[ 4/120] ==         create thread        == [ 1 attached, 96 threads, 96 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/121] ==        starting thread       == [ 1 attached, 97 threads, 97 servicing,  1 free]: 'up'/'alive'
+[ 4/121] ==         create thread        == [ 1 attached, 97 threads, 97 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/122] ==        starting thread       == [ 1 attached, 98 threads, 98 servicing,  1 free]: 'up'/'alive'
+[ 4/122] ==         create thread        == [ 1 attached, 98 threads, 98 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/123] ==        starting thread       == [ 1 attached, 99 threads, 99 servicing,  1 free]: 'up'/'alive'
+[ 4/123] ==         create thread        == [ 1 attached, 99 threads, 99 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/124] ==        starting thread       == [ 1 attached, 100 threads, 100 servicing,  1 free]: 'up'/'alive'
+[ 4/124] ==         create thread        == [ 1 attached, 100 threads, 100 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/125] ==        starting thread       == [ 1 attached, 101 threads, 101 servicing,  1 free]: 'up'/'alive'
+[ 4/125] ==         create thread        == [ 1 attached, 101 threads, 101 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/126] ==        starting thread       == [ 1 attached, 102 threads, 102 servicing,  1 free]: 'up'/'alive'
+[ 4/126] ==         create thread        == [ 1 attached, 102 threads, 102 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/127] ==        starting thread       == [ 1 attached, 103 threads, 103 servicing,  1 free]: 'up'/'alive'
+[ 4/127] ==         create thread        == [ 1 attached, 103 threads, 103 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/128] ==        starting thread       == [ 1 attached, 104 threads, 104 servicing,  1 free]: 'up'/'alive'
+[ 4/128] ==         create thread        == [ 1 attached, 104 threads, 104 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/129] ==        starting thread       == [ 1 attached, 105 threads, 105 servicing,  1 free]: 'up'/'alive'
+[ 4/129] ==         create thread        == [ 1 attached, 105 threads, 105 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/130] ==        starting thread       == [ 1 attached, 106 threads, 106 servicing,  1 free]: 'up'/'alive'
+[ 4/130] ==         create thread        == [ 1 attached, 106 threads, 106 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/131] ==        starting thread       == [ 1 attached, 107 threads, 107 servicing,  1 free]: 'up'/'alive'
+[ 4/131] ==         create thread        == [ 1 attached, 107 threads, 107 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/132] ==        starting thread       == [ 1 attached, 108 threads, 108 servicing,  1 free]: 'up'/'alive'
+[ 4/132] ==         create thread        == [ 1 attached, 108 threads, 108 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/133] ==        starting thread       == [ 1 attached, 109 threads, 109 servicing,  1 free]: 'up'/'alive'
+[ 4/133] ==         create thread        == [ 1 attached, 109 threads, 109 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/134] ==        starting thread       == [ 1 attached, 110 threads, 110 servicing,  1 free]: 'up'/'alive'
+[ 4/134] ==         create thread        == [ 1 attached, 110 threads, 110 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/135] ==        starting thread       == [ 1 attached, 111 threads, 111 servicing,  1 free]: 'up'/'alive'
+[ 4/135] ==         create thread        == [ 1 attached, 111 threads, 111 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/136] ==        starting thread       == [ 1 attached, 112 threads, 112 servicing,  1 free]: 'up'/'alive'
+[ 4/136] ==         create thread        == [ 1 attached, 112 threads, 112 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/137] ==        starting thread       == [ 1 attached, 113 threads, 113 servicing,  1 free]: 'up'/'alive'
+[ 4/137] ==         create thread        == [ 1 attached, 113 threads, 113 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/138] ==        starting thread       == [ 1 attached, 114 threads, 114 servicing,  1 free]: 'up'/'alive'
+[ 4/138] ==         create thread        == [ 1 attached, 114 threads, 114 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/139] ==        starting thread       == [ 1 attached, 115 threads, 115 servicing,  1 free]: 'up'/'alive'
+[ 4/139] ==         create thread        == [ 1 attached, 115 threads, 115 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/140] ==        starting thread       == [ 1 attached, 116 threads, 116 servicing,  1 free]: 'up'/'alive'
+[ 4/140] ==         create thread        == [ 1 attached, 116 threads, 116 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/141] ==        starting thread       == [ 1 attached, 117 threads, 117 servicing,  1 free]: 'up'/'alive'
+[ 4/141] ==         create thread        == [ 1 attached, 117 threads, 117 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/142] ==        starting thread       == [ 1 attached, 118 threads, 118 servicing,  1 free]: 'up'/'alive'
+[ 4/142] ==         create thread        == [ 1 attached, 118 threads, 118 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/143] ==        starting thread       == [ 1 attached, 119 threads, 119 servicing,  1 free]: 'up'/'alive'
+[ 4/143] ==         create thread        == [ 1 attached, 119 threads, 119 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/144] ==        starting thread       == [ 1 attached, 120 threads, 120 servicing,  1 free]: 'up'/'alive'
+[ 4/144] ==         create thread        == [ 1 attached, 120 threads, 120 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/145] ==        starting thread       == [ 1 attached, 121 threads, 121 servicing,  1 free]: 'up'/'alive'
+[ 4/145] ==         create thread        == [ 1 attached, 121 threads, 121 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/146] ==        starting thread       == [ 1 attached, 122 threads, 122 servicing,  1 free]: 'up'/'alive'
+[ 4/146] ==         create thread        == [ 1 attached, 122 threads, 122 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/147] ==        starting thread       == [ 1 attached, 123 threads, 123 servicing,  1 free]: 'up'/'alive'
+[ 4/147] ==         create thread        == [ 1 attached, 123 threads, 123 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/148] ==        starting thread       == [ 1 attached, 124 threads, 124 servicing,  1 free]: 'up'/'alive'
+[ 4/148] ==         create thread        == [ 1 attached, 124 threads, 124 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/149] ==        starting thread       == [ 1 attached, 125 threads, 125 servicing,  1 free]: 'up'/'alive'
+[ 4/149] ==         create thread        == [ 1 attached, 125 threads, 125 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/150] ==        starting thread       == [ 1 attached, 126 threads, 126 servicing,  1 free]: 'up'/'alive'
+[ 4/150] ==         create thread        == [ 1 attached, 126 threads, 126 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/151] ==        starting thread       == [ 1 attached, 127 threads, 127 servicing,  1 free]: 'up'/'alive'
+[ 4/151] ==         create thread        == [ 1 attached, 127 threads, 127 servicing,  0 free]: 'up'/'alive'
+build thread on 4
+coucou!
+[ 4/152] ==        starting thread       == [ 1 attached, 128 threads, 128 servicing,  1 free]: 'up'/'alive'
