@@ -2,7 +2,7 @@ CC = gcc
 NPROC = $(shell nproc)
 CFLAGSX86 = -pipe -O3 -ftree-vectorize -ftree-vectorizer-verbose=0 -msse3 -march=native -mtune=native -finline-functions -lpthread -DN_THREADS=$(nthreads) -DUSE_CPUS=$(NPROC) -D_GNU_SOURCE
 
-FFWD_DIR =../../include
+FFWD_DIR =../../libffwd
 LDLIB = -I$(FFWD_DIR)
 
 OS =$(shell uname -s)

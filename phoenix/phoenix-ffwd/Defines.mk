@@ -30,7 +30,7 @@
 # Query the shell to compile the code correctly for different architectures.
 OSTYPE = $(shell uname)
 LIBLOCK_PATH = $(HOME)/../../liblock
-FFWD_DIR =../../include
+FFWD_DIR =../../libffwd
 LDLIB = -I$(HOME)/$(FFWD_DIR)
 NPROC=$(shell nproc)
 

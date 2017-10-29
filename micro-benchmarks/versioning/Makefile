@@ -2,7 +2,7 @@ CC := gcc
 LD := gcc
 
 MAKE := make
-FFWD_DIR=../../include
+FFWD_DIR=../../libffwd
 LDLIB=-I$(FFWD_DIR)
 NPROC=$(shell nproc)
 
