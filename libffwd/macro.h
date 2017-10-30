@@ -1,3 +1,6 @@
+// Thanks to Paul Fultz for his tutorial on preprocessor macros at:
+// https://github.com/pfultz2/Cloak/wiki/C-Preprocessor-tricks,-tips,-and-idioms
+
 #define PRIMITIVE_CAT(a, ...) a ## __VA_ARGS__
 #define IIF(c) PRIMITIVE_CAT(IIF_, c)
 #define IIF_0(t, ...) __VA_ARGS__
@@ -7,6 +10,7 @@
 #define COMPL_0 1
 #define COMPL_1 0
 
+// The DEC macro is used for REPEAT macro
 #define DEC(x) PRIMITIVE_CAT(DEC_, x)
 #define DEC_0 0
 #define DEC_1 0
@@ -229,10 +233,18 @@
 #define SERVER_CODE(cid, cflag, ...) SERVER_CODE_IMP(cid, cflag, __VA_ARGS__)
 
 #define CHIP_IMP(id, macro_to_call, ...) macro_to_call(ADD2(id), __VA_ARGS__)
-#define CHIP_IMP15_1(id, macro_to_call, ...) macro_to_call(ADD2_half1(id), __VA_ARGS__)
-#define CHIP_IMP15_2(id, macro_to_call, ...) macro_to_call(ADD2_half2(id), __VA_ARGS__)
 #define UNROLL(id, macro_to_call, ...) macro_to_call(ADD2(id), __VA_ARGS__)
 
+// These two macros (CHIP_IMP15_1/CHIP_IMP15_2) are called by the REPEAT call in server_func().
+// CHIP_IMP15_1/CHIP_IMP15_2 call the macro passed to them as the second argument; 
+// the output of ADD2_half1(id)/ADD2_half2(id) macro calls are going to be the thread ids in a socket
+// id variable is coming from the REPEAT macro and it is the value of "count" in each iteration
+#define CHIP_IMP15_1(id, macro_to_call, ...) macro_to_call(ADD2_half1(id), __VA_ARGS__)
+#define CHIP_IMP15_2(id, macro_to_call, ...) macro_to_call(ADD2_half2(id), __VA_ARGS__)
+
+// The repeat macro is going to call the "macro" passed as the second argument 
+// and decrement the count until it is 0 (calls "macro" "count" times). The rest of the arguments passed
+// to the REAPET macro are treated as __VA_ARGS__ and are passed to "macro".
 #define REPEAT(count, macro, ...) \
     WHEN(count) \
     ( \
